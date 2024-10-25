@@ -26,13 +26,15 @@ import java.util.List;
 public abstract class TooltipFix {
     @Unique
     private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy");// #6
-
-    @Shadow
-    public abstract int getScaledWindowWidth();
-
     @Shadow
     @Final
     private MatrixStack matrices;
+    @Shadow
+    @Final
+    private VertexConsumerProvider.Immediate vertexConsumers;
+
+    @Shadow
+    public abstract int getScaledWindowWidth();
 
     @Shadow
     public abstract void draw();
@@ -40,14 +42,10 @@ public abstract class TooltipFix {
     @Shadow
     public abstract int getScaledWindowHeight();
 
-    @Shadow
-    @Final
-    private VertexConsumerProvider.Immediate vertexConsumers;
-
     @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
             at = @At(value = "HEAD"), cancellable = true)
     public void drawTooltip(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
-        if(disabled) return;
+        if (disabled) return;
         ci.cancel();
         if (components.isEmpty()) return;
         DrawContext self = (DrawContext) (Object) this;

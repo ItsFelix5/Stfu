@@ -14,11 +14,6 @@ public class ShutInsecureIndicators {
         cir.setReturnValue(null);
     }
 
-    @Inject(method = "getIcon", at = @At("HEAD"), cancellable = true)
-    private void shutIcon(CallbackInfoReturnable<MessageIndicator> cir) {
-        cir.setReturnValue(null);
-    }
-
     @Mixin(ChatHudLine.Visible.class)
     private static class Visible {
         @Inject(method = "indicator", at = @At("HEAD"), cancellable = true)

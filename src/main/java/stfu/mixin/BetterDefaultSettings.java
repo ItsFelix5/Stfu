@@ -18,9 +18,6 @@ abstract class BetterDefaultSettings {
     @Shadow
     @Final
     private SimpleOption<Boolean> realmsNotifications;
-    @Shadow
-    @Final
-    private SimpleOption<Boolean> narratorHotkey;
 
     @Inject(method = "load", at = @At("HEAD"))
     private void changeOptions(CallbackInfo ci) {
@@ -32,6 +29,5 @@ abstract class BetterDefaultSettings {
         t.joinedFirstServer = true;
         operatorItemsTab.setValue(true);
         realmsNotifications.setValue(false);
-        narratorHotkey.setValue(false);
     }
 }

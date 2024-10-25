@@ -22,16 +22,16 @@ import java.util.List;
 
 @Mixin(ChatHud.class)
 public abstract class ShutChat {
-    @Shadow @Final private List<ChatHudLine> messages;
-
-    @Shadow @Final private List<ChatHudLine.Visible> visibleMessages;
-
-    @Shadow protected abstract void refresh();
-
     @Unique
     private static final Style OCCURRENCES = Style.EMPTY.withColor(Formatting.GRAY);
+    @Shadow
+    @Final
+    private List<ChatHudLine> messages;
 
-    @ModifyExpressionValue(method = {"addToMessageHistory", "addVisibleMessage", "addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V"}, at =
+    @Shadow
+    protected abstract void refresh();
+
+    @ModifyExpressionValue(method = {"addToMessageHistory", "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V"}, at =
     @At(value = "CONSTANT", args = "intValue=100"))
     private int moreHistory(int original) {
         return Options.maxChatHistory.getValue();
@@ -64,31 +64,31 @@ public abstract class ShutChat {
                 isSeparator = false;
                 break;
             }
-        if(isSeparator) return message;
+        if (isSeparator) return message;
 
         // Find matching messages
         int matches = 0;
-        for(ChatHudLine other : Options.compactChat.getValue() == Options.CompactChat.ONLY_CONSECUTIVE? List.of(messages.getFirst()) : messages) {
+        for (ChatHudLine other : Options.compactChat.getValue() == Options.CompactChat.ONLY_CONSECUTIVE ? List.of(messages.getFirst()) : messages) {
             Text content = other.content();
-            if(!content.getContent().equals(message.getContent()) || !content.getStyle().equals(message.getStyle())) continue;
+            if (!content.getContent().equals(message.getContent()) || !content.getStyle().equals(message.getStyle())) continue;
 
             // Check siblings without occurrences count
             List<Text> siblings = content.getSiblings();
             String o = null;
-            if(!siblings.isEmpty()) {
+            if (!siblings.isEmpty()) {
                 Text last = siblings.getLast();
-                if(last.getStyle() == OCCURRENCES) {
+                if (last.getStyle() == OCCURRENCES) {
                     String raw = last.getString();
-                    if(raw != null && raw.startsWith(" (") && raw.endsWith(")")) {
+                    if (raw != null && raw.startsWith(" (") && raw.endsWith(")")) {
                         o = raw.substring(2, raw.length() - 1);
                         siblings.removeLast();
                     }
                 }
             }
-            if(!siblings.equals(message.getSiblings())) continue;
+            if (!siblings.equals(message.getSiblings())) continue;
 
             // Increment occurrences count
-            if(o == null) matches = 2;
+            if (o == null) matches = 2;
             else try {
                 matches = Integer.parseInt(o) + 1;
             } catch (NumberFormatException e) {
@@ -100,10 +100,10 @@ public abstract class ShutChat {
             break; // Trust the previous message
         }
         // Append occurrences count
-        if(matches > 1) try {
-            ((MutableText)message).append(Text.literal(" ("+matches+")").setStyle(OCCURRENCES));
+        if (matches > 1) try {
+            ((MutableText) message).append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
         } catch (UnsupportedOperationException e) {// MutableText is not always mutable? in this case use copy to assure it is backed by an arraylist
-            return message.copy().append(Text.literal(" ("+matches+")").setStyle(OCCURRENCES));
+            return message.copy().append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
         }
         return message;
     }

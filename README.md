@@ -30,3 +30,5 @@ Yes, of course as long as it stays on modrinth or curseforge!
 No, you can't redistribute this mod without my permission. You can only link to this page.
 #### Why is this mod called "Stfu"?
 This is because the mod was originally created to remove the annoying new world advice and the narrator jumpscares.
+#### Can you port this to (Neo)Forge?
+No, but might be able to use [Sinytra Connector](https://modrinth.com/mod/connector).
