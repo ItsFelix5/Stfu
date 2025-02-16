@@ -9,7 +9,7 @@
 #### Current changes:
 * Improved performance and loading times
 * Removed custom world "advice", the tutorial, the multiplayer warning, chat signing warnings and telemetry
-* Disabled realms notifications and the narrator by default and allowed rebinding the narrator key
+* Disabled realms notifications and the narrator on startup and allowed rebinding the narrator key
 * Allowed toggling all kinds of toasts and opening the inventory in portals
 * Enabled the operator item tab by default
 * Removed the chat command length limit

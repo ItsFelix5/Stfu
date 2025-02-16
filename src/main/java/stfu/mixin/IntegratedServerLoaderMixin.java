@@ -22,7 +22,7 @@ abstract class IntegratedServerLoaderMixin {
     }
 
     @Redirect(method = "checkBackupAndStart", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/SaveProperties;getLifecycle()Lcom/mojang/serialization/Lifecycle;"))
-    private Lifecycle StableLifeCycle(SaveProperties saveProperties) {
+    private Lifecycle checkBackupAndStart(SaveProperties saveProperties) {
         return Lifecycle.stable();
     }
 }

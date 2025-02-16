@@ -16,6 +16,7 @@ public class KeyBindingWidgetMixin {
 
     @WrapOperation(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;equals(Lnet/minecraft/client/option/KeyBinding;)Z"))
     private boolean shutReusedModifierKeys(KeyBinding instance, KeyBinding other, Operation<Boolean> original) {
-        return original.call(instance, other) && !other.getCategory().equals(KeyBinding.CREATIVE_CATEGORY);
+        return original.call(instance, other) && !other.getCategory().equals(KeyBinding.CREATIVE_CATEGORY)
+                && !(instance.getCategory().equals(other.getCategory()) && instance.isDefault() && other.isDefault());
     }
 }
