@@ -34,7 +34,7 @@ public abstract class MinecraftClientMixin {
 
     @ModifyVariable(at = @At("HEAD"), method = "setScreen", ordinal = 0, argsOnly = true)
     public Screen setScreen(Screen screen) {
-        if(Config.HANDLER.instance().disableLoadingTerrain) {
+        if(Config.get().disableLoadingTerrain) {
             if (screen instanceof ReconfiguringScreen) screen = new EmptyScreen.Configuration(getNetworkHandler().getConnection());
             else if (screen instanceof DownloadingTerrainScreen) {
                 if(world == null) screen = new EmptyScreen();

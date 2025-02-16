@@ -21,9 +21,14 @@ public class Config  {
                     .build())
             .build();
 
+    public static Config get() {
+        return HANDLER.instance();
+    }
+
     private static final String category = "options";
     private static final String chat = "chat";
     private static final String loading = "loading";
+    private static final String performance = "performance";
 
     @AutoGen(category = category, group = chat)
     @IntSlider(min = 10, max = 5000, step = 10)

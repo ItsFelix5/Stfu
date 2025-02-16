@@ -13,6 +13,6 @@ import stfu.Config;
 public class SplashMixin {
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceReload;throwException()V"))
     private void removeOverlay(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if(Config.HANDLER.instance().disableFade) MinecraftClient.getInstance().setOverlay(null);
+        if(Config.get().disableFade) MinecraftClient.getInstance().setOverlay(null);
     }
 }

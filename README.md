@@ -1,5 +1,5 @@
 # Stfu
-### A mod to fix some annoyances!
+### A mod to fix some annoyances and speed up your game!
 <span>
 <a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_fabricapi.svg"></a>
 <a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_modmenu.svg"></a>
@@ -17,7 +17,7 @@
 * Fixed tooltips running off the screen and model gaps
 * Added options that speed up minecraft/world (re)loading
 * Made it possible to see your health and hunger when riding something and to bind a button to multiple keybinds
-* Improved performance
+* Improved performance and loading times
 
 ### Faq
 #### I have a suggestion for this mod!

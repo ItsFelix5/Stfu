@@ -17,6 +17,6 @@ public abstract class SpriteMixin {
 
     @ModifyReturnValue(method = "getAnimationFrameDelta", at = @At("RETURN"))
     private float getAnimationFrameDelta(float original) {
-        return Config.HANDLER.instance().fixModelGaps && atlasId.equals(blockAtlas)? 0 : original;
+        return Config.get().fixModelGaps && atlasId.equals(blockAtlas)? 0 : original;
     }
 }

@@ -3,6 +3,7 @@
   "yacl3.config.stfu:config.category.options": "Options",
   "yacl3.config.stfu:config.category.options.group.chat": "Chat Settings",
   "yacl3.config.stfu:config.category.options.group.loading": "Loading",
+  "yacl3.config.stfu:config.category.options.group.performance": "Performance",
 
   "yacl3.config.stfu:config.maxChatHistory": "Max Chat History",
   "yacl3.config.stfu:config.maxChatHistory.desc": "The maximum number of messages to keep in chat history.",
