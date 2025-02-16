@@ -80,6 +80,36 @@ public class Config  {
     @SerialEntry
     public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
 
+    @AutoGen(category = category, group = performance)
+    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @SerialEntry
+    public boolean disableYield = false;
+
+    @AutoGen(category = category)
+    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @SerialEntry
+    public boolean nightVisionFlicker = true;
+
+    @AutoGen(category = category, group = performance)
+    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @SerialEntry
+    public boolean disableParticles = false;
+
+    @AutoGen(category = category, group = performance)
+    @IntSlider(min = 1, max = 10, step = 1)
+    @SerialEntry
+    public int renderThreadPriority = (Runtime.getRuntime().availableProcessors() > 4) ? 8 : 5;
+
+    @AutoGen(category = category, group = performance)
+    @IntSlider(min = 1, max = 10, step = 1)
+    @SerialEntry
+    public int serverThreadPriority = (Runtime.getRuntime().availableProcessors() > 4) ? 8 : 5;
+
+    @AutoGen(category = category, group = performance)
+    @IntSlider(min = 1, max = 10, step = 1)
+    @SerialEntry
+    public int ioThreadPriority = 1;
+
     public enum AdminChat implements NameableEnum {
         ENABLED,
         ONLY_PLAYERS,

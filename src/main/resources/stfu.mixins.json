@@ -15,14 +15,17 @@
     "ChatScreenMixin",
     "DrawContextMixin",
     "GameOptionMixin",
+    "GameRendererMixin",
     "GeneratedItemModelMixin",
     "HudMixin",
     "IntegratedServerLoaderMixin",
     "KeyBindingMixin",
     "KeyBindingWidgetMixin",
     "KeyboardMixin",
+    "MainMixin",
     "MinecraftClientMixin",
     "MinecraftServerMixin",
+    "ParticleManagerMixin",
     "PlayNetworkHandlerMixin",
     "SplashMixin",
     "SpriteMixin",
@@ -30,6 +33,7 @@
     "TextFieldWidgetMixin",
     "ThreadExecutorMixin",
     "TitleScreenMixin",
-    "UtilMixin"
+    "UtilMixin",
+    "WorldRendererMixin"
   ]
 }

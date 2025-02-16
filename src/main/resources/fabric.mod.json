@@ -33,6 +33,7 @@
     "morechathistory": "*",
     "better-mount-hud": "*",
     "fadeless": "*",
-    "threadtweak": "*"
+    "threadtweak": "*",
+    "badoptimizations": "*"
   }
 }

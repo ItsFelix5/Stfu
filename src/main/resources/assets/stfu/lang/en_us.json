@@ -36,10 +36,40 @@
   "yacl3.config.stfu:config.disableFade.desc": "Disable the 2 second fade animation when the game or resources (re)load.",
 
   "yacl3.config.stfu:config.disableLoadingTerrain": "Disable Loading Terrain Screen",
-  "yacl3.config.stfu:config.disableLoadingTerrain.desc": "Hide the loading terrain screen to speed up world loading. This creates a small flicker and lag spike when loading.",
+  "yacl3.config.stfu:config.disableLoadingTerrain.desc.1": "Hide the loading terrain screen to speed up world loading.",
+  "yacl3.config.stfu:config.disableLoadingTerrain.desc.2": "This creates a small flicker and lag spike when loading.",
 
   "yacl3.config.stfu:config.fixModelGaps": "Fix Gaps In Models",
-  "yacl3.config.stfu:config.fixModelGaps.desc": "Changes the item model generation code to prevent gaps.\nThis may or may not cause problems on macos.\nRequires a reload to take effect.",
+  "yacl3.config.stfu:config.fixModelGaps.desc.1": "Changes the item model generation code to prevent gaps.",
+  "yacl3.config.stfu:config.fixModelGaps.desc.2": "This may or may not cause problems on macos.",
+  "yacl3.config.stfu:config.fixModelGaps.desc.3": "Requires a reload to take effect.",
+
+  "yacl3.config.stfu:config.disableYield": "Disable Yielding After Render",
+  "yacl3.config.stfu:config.disableYield.desc.1": "When minecraft is done rendering a frame, it tells you CPU to go do something else.",
+  "yacl3.config.stfu:config.disableYield.desc.2": "By disabling this your frames may get smoother but your CPU usage will be higher and other things could slow down.",
+  "yacl3.config.stfu:config.disableYield.desc.3": "The time yielding takes can be observed in the pie chart.",
+
+  "yacl3.config.stfu:config.nightVisionFlicker": "Night Vision Flicker",
+  "yacl3.config.stfu:config.nightVisionFlicker.desc": "When night vision runs out the entire world flickers for a few seconds, this allows you to disable this.",
+
+  "yacl3.config.stfu:config.lightMapUpdateTime": "Light Map Update Time",
+  "yacl3.config.stfu:config.lightMapUpdateTime.desc.1": "Normally Minecraft updates the worlds light every tick.",
+  "yacl3.config.stfu:config.lightMapUpdateTime.desc.2": "This setting allows you to choose the amount of daytime (in ticks) has to pass before this is recalculated during sun rise/set.",
+  "yacl3.config.stfu:config.lightMapUpdateTime.desc.3": "Increasing this causes a small flicker in the light to sometimes happen, decreasing slightly reduces performance.",
+  "yacl3.config.stfu:config.lightMapUpdateTime.desc.4": "If any other factor updates the light the lightmap gets updated anyways.",
+
+  "yacl3.config.stfu:config.disableParticles": "Disable Particles",
+  "yacl3.config.stfu:config.disableParticles.desc.1": "No particles.",
+  "yacl3.config.stfu:config.disableParticles.desc.2": "This improves performance.",
+
+  "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
+  "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering.",
+
+  "yacl3.config.stfu:config.serverThreadPriority": "Server Thread Priority",
+  "yacl3.config.stfu:config.serverThreadPriority.desc": "Thread priority for the integrated server.",
+
+  "yacl3.config.stfu:config.ioThreadPriority": "Worker Thread Priority",
+  "yacl3.config.stfu:config.ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations.",
 
   "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
 }
