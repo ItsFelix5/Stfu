@@ -39,6 +39,9 @@
   "yacl3.config.stfu:config.disableLoadingTerrain.desc.1": "Hide the loading terrain screen to speed up world loading.",
   "yacl3.config.stfu:config.disableLoadingTerrain.desc.2": "This creates a small flicker and lag spike when loading.",
 
+  "yacl3.config.stfu:config.disableWorldAdvice": "Disable Custom World Advice",
+  "yacl3.config.stfu:config.disableWorldAdvice.desc": "Skip the warning screen for experimental settings and some datapacks.",
+
   "yacl3.config.stfu:config.fixModelGaps": "Fix Gaps In Models",
   "yacl3.config.stfu:config.fixModelGaps.desc.1": "Changes the item model generation code to prevent gaps.",
   "yacl3.config.stfu:config.fixModelGaps.desc.2": "This may or may not cause problems on macos.",

@@ -76,6 +76,11 @@ public class Config  {
     @SerialEntry
     public boolean disableLoadingTerrain = true;
 
+    @AutoGen(category = category, group = loading)
+    @Boolean
+    @SerialEntry
+    public boolean disableWorldAdvice = false;
+
     @AutoGen(category = category)
     @Boolean
     @SerialEntry
