@@ -7,17 +7,20 @@
 </span>
 
 #### Current changes:
+* Improved performance and loading times
 * Removed custom world "advice", the tutorial, the multiplayer warning, chat signing warnings and telemetry
 * Disabled realms notifications and the narrator by default and allowed rebinding the narrator key
-* Allowed toggling all kinds of toasts
+* Allowed toggling all kinds of toasts and opening the inventory in portals
 * Enabled the operator item tab by default
 * Removed the chat command length limit
 * Added options to hide advancement broadcasts and command block output and compact chat spam
-* Added an option to increase the maximum amount of chat messages
+* Added an option to increase the maximum amount of chat messages, to hide particles and stop block animations
 * Fixed tooltips running off the screen and model gaps
 * Added options that speed up minecraft/world (re)loading
 * Made it possible to see your health and hunger when riding something and to bind a button to multiple keybinds
-* Improved performance and loading times
+* Other things I forgot
+
+Looking for more client mods? Check out [Camera Tweaks](https://modrinth.com/mod/cameratweaks)!
 
 ### Faq
 #### I have a suggestion for this mod!
@@ -35,4 +38,4 @@ No, you can't redistribute this mod without my permission. You can only link to 
 #### Why is this mod called "Stfu"?
 This is because the mod was originally created to remove the annoying new world advice and the narrator jumpscares.
 #### Can you port this to (Neo)Forge?
-No, but you might be able to use [Sinytra Connector](https://modrinth.com/mod/connector).
+No.

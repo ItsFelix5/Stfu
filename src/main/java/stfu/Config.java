@@ -4,6 +4,7 @@ import dev.isxander.yacl3.api.NameableEnum;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
 import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
@@ -36,17 +37,17 @@ public class Config  {
     public int maxChatHistory = 100;
 
     @AutoGen(category = category, group = chat)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean announceAdvancements = true;
 
     @AutoGen(category = category)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean advancementToasts = true;
 
     @AutoGen(category = category)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean recipeToasts = false;
 
@@ -61,39 +62,44 @@ public class Config  {
     public CompactChat compactChat = CompactChat.ONLY_CONSECUTIVE;
 
     @AutoGen(category = category, group = loading)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean disableWidgetFade = true;
 
     @AutoGen(category = category, group = loading)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean disableFade = false;
 
     @AutoGen(category = category, group = loading)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean disableLoadingTerrain = true;
 
     @AutoGen(category = category)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
 
     @AutoGen(category = category, group = performance)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean disableYield = false;
 
     @AutoGen(category = category)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean nightVisionFlicker = true;
 
     @AutoGen(category = category, group = performance)
-    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @Boolean
     @SerialEntry
     public boolean disableParticles = false;
+
+    @AutoGen(category = category, group = performance)
+    @Boolean
+    @SerialEntry
+    public boolean animateTextures = true;
 
     @AutoGen(category = category, group = performance)
     @IntSlider(min = 1, max = 10, step = 1)

@@ -19,10 +19,21 @@ import stfu.EmptyScreen;
 public abstract class MinecraftClientMixin {
     @Shadow @Nullable public ClientWorld world;
     @Shadow public abstract ClientPlayNetworkHandler getNetworkHandler();
+    @Shadow protected abstract boolean shouldTick();
 
     @Redirect(method = "render(Z)V", at = @At(value = "INVOKE", target = "java/lang/Thread.yield()V"))
     private void removeYield(){
         if(!Config.get().disableYield) Thread.yield();
+    }
+
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;shouldTick()Z", ordinal = 0))
+    private boolean shouldTickTextures(MinecraftClient instance){
+        return Config.get().animateTextures && shouldTick();
+    }
+
+    @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;shouldTick()Z", ordinal = 1))
+    private boolean shouldTickParticles(MinecraftClient instance){
+        return !Config.get().disableParticles && shouldTick();
     }
 
     @ModifyVariable(at = @At("HEAD"), method = "setScreen", ordinal = 0, argsOnly = true)

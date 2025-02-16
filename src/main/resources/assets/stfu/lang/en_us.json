@@ -62,6 +62,9 @@
   "yacl3.config.stfu:config.disableParticles.desc.1": "No particles.",
   "yacl3.config.stfu:config.disableParticles.desc.2": "This improves performance.",
 
+  "yacl3.config.stfu:config.animateTextures": "Animate Textures",
+  "yacl3.config.stfu:config.animateTextures.desc": "If you disable this blocks like the nether portal will stop animating.",
+
   "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
   "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering.",
 
