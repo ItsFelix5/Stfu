@@ -26,100 +26,113 @@ public class Config  {
         return HANDLER.instance();
     }
 
-    private static final String category = "options";
+    private static final String basic = "basic";
+    private static final String advanced = "advanced";
     private static final String chat = "chat";
     private static final String loading = "loading";
     private static final String performance = "performance";
 
-    @AutoGen(category = category, group = chat)
+    @AutoGen(category = basic, group = chat)
     @IntSlider(min = 10, max = 5000, step = 10)
     @SerialEntry
     public int maxChatHistory = 100;
 
-    @AutoGen(category = category, group = chat)
+    @AutoGen(category = basic, group = chat)
     @Boolean
     @SerialEntry
     public boolean announceAdvancements = true;
 
-    @AutoGen(category = category)
+    @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean advancementToasts = true;
 
-    @AutoGen(category = category)
+    @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean recipeToasts = false;
 
-    @AutoGen(category = category, group = chat)
+    @AutoGen(category = basic, group = chat)
     @EnumCycler
     @SerialEntry
     public AdminChat adminChat = AdminChat.ENABLED;
 
-    @AutoGen(category = category, group = chat)
+    @AutoGen(category = basic, group = chat)
     @EnumCycler
     @SerialEntry
     public CompactChat compactChat = CompactChat.ONLY_CONSECUTIVE;
 
-    @AutoGen(category = category, group = loading)
+    @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
     public boolean disableWidgetFade = true;
 
-    @AutoGen(category = category, group = loading)
+    @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
     public boolean disableFade = false;
 
-    @AutoGen(category = category, group = loading)
+    @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
     public boolean disableLoadingTerrain = true;
 
-    @AutoGen(category = category, group = loading)
+    @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
     public boolean disableWorldAdvice = false;
 
-    @AutoGen(category = category)
+    @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
 
-    @AutoGen(category = category, group = performance)
-    @Boolean
-    @SerialEntry
-    public boolean disableYield = false;
-
-    @AutoGen(category = category)
+    @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean nightVisionFlicker = true;
 
-    @AutoGen(category = category, group = performance)
+    @AutoGen(category = basic, group = performance)
     @Boolean
     @SerialEntry
     public boolean disableParticles = false;
 
-    @AutoGen(category = category, group = performance)
+    @AutoGen(category = basic, group = performance)
     @Boolean
     @SerialEntry
     public boolean animateTextures = true;
 
-    @AutoGen(category = category, group = performance)
+
+
+    @AutoGen(category = advanced)
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
     public int renderThreadPriority = (Runtime.getRuntime().availableProcessors() > 4) ? 8 : 5;
 
-    @AutoGen(category = category, group = performance)
+    @AutoGen(category = advanced)
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
     public int serverThreadPriority = (Runtime.getRuntime().availableProcessors() > 4) ? 8 : 5;
 
-    @AutoGen(category = category, group = performance)
+    @AutoGen(category = advanced)
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
     public int ioThreadPriority = 1;
+
+    @AutoGen(category = advanced)
+    @IntSlider(min = 1, max = 100, step = 1)
+    @SerialEntry
+    public int lightmapUpdateDelay = 10;
+
+    @AutoGen(category = advanced)
+    @IntSlider(min = 1, max = 100, step = 1)
+    @SerialEntry
+    public int skyUpdateDelay = 15;
+
+    @AutoGen(category = advanced)
+    @Boolean
+    @SerialEntry
+    public boolean debugUtilities = false;
 
     public enum AdminChat implements NameableEnum {
         ENABLED,

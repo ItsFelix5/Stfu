@@ -5,3 +5,6 @@ accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/
 accessible class net/minecraft/client/render/model/json/GeneratedItemModel$Frame
 accessible class net/minecraft/client/render/model/json/GeneratedItemModel$Side
 accessible method net/minecraft/client/render/model/json/GeneratedItemModel$Side isVertical ()Z
+accessible field net/minecraft/client/render/LightmapTextureManager dirty Z
+accessible field net/minecraft/client/render/GameRenderer skyDarkness F
+accessible field net/minecraft/client/render/WorldRenderer frustum Lnet/minecraft/client/render/Frustum;

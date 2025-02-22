@@ -1,9 +1,10 @@
 {
   "yacl3.config.stfu:config.title": "STFU",
-  "yacl3.config.stfu:config.category.options": "Options",
-  "yacl3.config.stfu:config.category.options.group.chat": "Chat Settings",
-  "yacl3.config.stfu:config.category.options.group.loading": "Loading",
-  "yacl3.config.stfu:config.category.options.group.performance": "Performance",
+  "yacl3.config.stfu:config.category.basic": "Basic",
+  "yacl3.config.stfu:config.category.advanced": "Advanced",
+  "yacl3.config.stfu:config.category.basic.group.chat": "Chat Settings",
+  "yacl3.config.stfu:config.category.basic.group.loading": "Loading",
+  "yacl3.config.stfu:config.category.basic.group.performance": "Performance",
 
   "yacl3.config.stfu:config.maxChatHistory": "Max Chat History",
   "yacl3.config.stfu:config.maxChatHistory.desc": "The maximum number of messages to keep in chat history.",
@@ -47,11 +48,6 @@
   "yacl3.config.stfu:config.fixModelGaps.desc.2": "This may or may not cause problems on macos.",
   "yacl3.config.stfu:config.fixModelGaps.desc.3": "Requires a reload to take effect.",
 
-  "yacl3.config.stfu:config.disableYield": "Disable Yielding After Render",
-  "yacl3.config.stfu:config.disableYield.desc.1": "When minecraft is done rendering a frame, it tells you CPU to go do something else.",
-  "yacl3.config.stfu:config.disableYield.desc.2": "By disabling this your frames may get smoother but your CPU usage will be higher and other things could slow down.",
-  "yacl3.config.stfu:config.disableYield.desc.3": "The time yielding takes can be observed in the pie chart.",
-
   "yacl3.config.stfu:config.nightVisionFlicker": "Night Vision Flicker",
   "yacl3.config.stfu:config.nightVisionFlicker.desc": "When night vision runs out the entire world flickers for a few seconds, this allows you to disable this.",
 
@@ -69,13 +65,22 @@
   "yacl3.config.stfu:config.animateTextures.desc": "If you disable this blocks like the nether portal will stop animating.",
 
   "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
-  "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering.",
+  "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering. BIGGER IS NOT NECESSARILY BETTER!",
 
   "yacl3.config.stfu:config.serverThreadPriority": "Server Thread Priority",
-  "yacl3.config.stfu:config.serverThreadPriority.desc": "Thread priority for the integrated server.",
+  "yacl3.config.stfu:config.serverThreadPriority.desc": "Thread priority for the integrated server. BIGGER IS NOT NECESSARILY BETTER!",
 
   "yacl3.config.stfu:config.ioThreadPriority": "Worker Thread Priority",
-  "yacl3.config.stfu:config.ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations.",
+  "yacl3.config.stfu:config.ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. BIGGER IS NOT NECESSARILY BETTER!",
+
+  "yacl3.config.stfu:config.lightmapUpdateDelay": "Lightmap update delay",
+  "yacl3.config.stfu:config.lightmapUpdateDelay.desc": "Time in ticks until the lightmap updates during sunrise/set.",
+
+  "yacl3.config.stfu:config.skyUpdateDelay": "Sky Color Update Delay",
+  "yacl3.config.stfu:config.skyUpdateDelay.desc": "Time in ticks until the sky color updates during sunrise/set.",
+
+  "yacl3.config.stfu:config.debugUtilities": "Enable Debug Utilities",
+  "yacl3.config.stfu:config.debugUtilities.desc": "Enable some of mojang's debug utilities (mostly extra logs and keybinds), requires restart.",
 
   "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
 }

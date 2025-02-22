@@ -3,9 +3,6 @@
   "minVersion": "0.8",
   "package": "stfu.mixin",
   "compatibilityLevel": "JAVA_21",
-  "injectors": {
-    "defaultRequire": 1
-  },
   "client": [
     "AccessibilityOptionsMixin",
     "BiomeMixin",
@@ -14,15 +11,18 @@
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
+    "ClientWorldMixin",
     "DrawContextMixin",
     "GameOptionMixin",
     "GameRendererMixin",
     "GeneratedItemModelMixin",
     "HudMixin",
     "IntegratedServerLoaderMixin",
+    "IntegratedServerMixin",
     "KeyBindingMixin",
     "KeyBindingWidgetMixin",
     "KeyboardMixin",
+    "LightmapTextureManagerMixin",
     "MainMixin",
     "MinecraftClientMixin",
     "MinecraftServerMixin",
@@ -35,6 +35,11 @@
     "ThreadExecutorMixin",
     "TitleScreenMixin",
     "UtilMixin",
+    "WorldMixin",
     "WorldRendererMixin"
-  ]
+  ],
+  "plugin": "stfu.MixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
