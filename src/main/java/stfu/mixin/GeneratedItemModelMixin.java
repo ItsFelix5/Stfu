@@ -14,7 +14,7 @@ import java.util.List;
 public class GeneratedItemModelMixin {
     @ModifyReturnValue(method = "addSubComponents", at = @At("RETURN"))
     private List<ModelElement> addSubComponents(List<ModelElement> original) {
-        if(Config.get().fixModelGaps) for (var e : original) {
+        if(Config.conf.fixModelGaps) for (var e : original) {
             if (e.faces.size() == 1) {
                 float fromX = e.from.x(), fromY = e.from.y();
                 float toX = e.to.x(), toY = e.to.y();
@@ -60,7 +60,7 @@ public class GeneratedItemModelMixin {
         int verticalX = side.isVertical() ? x : y;
         int verticalY = side.isVertical() ? y : x;
         for (GeneratedItemModel.Frame frame : cubes) {
-            if (frame.getSide() == side && frame.getLevel() == verticalY && (!Config.get().fixModelGaps || frame.getMax() == verticalX - 1)) {
+            if (frame.getSide() == side && frame.getLevel() == verticalY && (!Config.conf.fixModelGaps || frame.getMax() == verticalX - 1)) {
                 frame.expand(verticalX);
                 return;
             }

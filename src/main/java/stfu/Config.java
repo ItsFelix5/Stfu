@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class Config  {
-    public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
+    public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
             .id(Identifier.of("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("stfu.json5"))
@@ -22,9 +22,7 @@ public class Config  {
                     .build())
             .build();
 
-    public static Config get() {
-        return HANDLER.instance();
-    }
+    public static final Config conf = HANDLER.instance();
 
     private static final String basic = "basic";
     private static final String advanced = "advanced";

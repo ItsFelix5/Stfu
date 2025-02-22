@@ -16,7 +16,7 @@ import stfu.Config;
 abstract class IntegratedServerLoaderMixin {
     @Inject(method = "tryLoad", at = @At("HEAD"), cancellable = true)
     private static void tryLoad(MinecraftClient client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci) {
-        if(Config.get().disableWorldAdvice) {
+        if(Config.conf.disableWorldAdvice) {
             loader.run();
             ci.cancel();
         }
@@ -24,7 +24,7 @@ abstract class IntegratedServerLoaderMixin {
 
     @Redirect(method = "checkBackupAndStart", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/SaveProperties;getLifecycle()Lcom/mojang/serialization/Lifecycle;"))
     private Lifecycle checkBackupAndStart(SaveProperties saveProperties) {
-        if(Config.get().disableWorldAdvice) return Lifecycle.stable();
+        if(Config.conf.disableWorldAdvice) return Lifecycle.stable();
         return saveProperties.getLifecycle();
     }
 }

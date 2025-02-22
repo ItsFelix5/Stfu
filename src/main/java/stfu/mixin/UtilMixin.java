@@ -12,6 +12,6 @@ public abstract class UtilMixin {
     @WrapOperation(method = {"method_27956", "method_28123"}, at = @At(value = "INVOKE", target = "Ljava/lang/Thread;setName(Ljava/lang/String;)V"))
     private static void wrapUncaughtExceptionHandler(Thread instance, String name, Operation<Void> original) {
         original.call(instance, name);
-        instance.setPriority(Config.get().ioThreadPriority);
+        instance.setPriority(Config.conf.ioThreadPriority);
     }
 }

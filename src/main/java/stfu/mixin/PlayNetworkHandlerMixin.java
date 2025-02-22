@@ -14,7 +14,7 @@ import stfu.Config;
 @Mixin(ClientPlayNetworkHandler.class)
 abstract class PlayNetworkHandlerMixin {
     @Redirect(method = "onGameJoin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;displayedUnsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
-    private boolean youAlreadyShowedItTrustMe(ClientPlayNetworkHandler instance) {
+    private boolean onGameJoin(ClientPlayNetworkHandler instance) {
         return true;
     }
 
@@ -23,11 +23,11 @@ abstract class PlayNetworkHandlerMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/network/packet/s2c/play/RecipeBookAddS2CPacket$Entry;shouldShowNotification()Z")
     )
     private boolean disableRecipeToasts(RecipeBookAddS2CPacket.Entry instance) {
-        return Config.get().recipeToasts && instance.shouldShowNotification();
+        return Config.conf.recipeToasts && instance.shouldShowNotification();
     }
 
     @Inject(method = "onAdvancements", at = @At("HEAD"), cancellable = true)
     private void disableAdvancementToasts(AdvancementUpdateS2CPacket packet, CallbackInfo ci) {
-        if(!Config.get().advancementToasts) ci.cancel();
+        if(!Config.conf.advancementToasts) ci.cancel();
     }
 }
