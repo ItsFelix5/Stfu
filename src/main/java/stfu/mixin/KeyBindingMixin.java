@@ -3,9 +3,10 @@ package stfu.mixin;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.KeybindHolder;
 
 import java.util.HashSet;
@@ -14,21 +15,15 @@ import java.util.Set;
 
 @Mixin(KeyBinding.class)
 public class KeyBindingMixin {
-    /**
-     * @author ItsFelix5
-     * @reason To allow multiple keybindings to be bound to the same key
-     */
-    @Overwrite
-    public static void onKeyPressed(InputUtil.Key key) {
+    @Inject(method = "onKeyPressed", at = @At("HEAD"), order = 1001, cancellable = true)
+    private static void onKeyPressed(InputUtil.Key key, CallbackInfo ci) {
+        ci.cancel();
         KeybindHolder.KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.timesPressed++);
     }
 
-    /**
-     * @author ItsFelix5
-     * @reason To allow multiple keybindings to be bound to the same key
-     */
-    @Overwrite
-    public static void setKeyPressed(InputUtil.Key key, boolean pressed) {
+    @Inject(method = "setKeyPressed", at = @At("HEAD"), order = 1001, cancellable = true)
+    private static void setKeyPressed(InputUtil.Key key, boolean pressed, CallbackInfo ci) {
+        ci.cancel();
         KeybindHolder.KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.setPressed(pressed));
     }
 
