@@ -18,7 +18,6 @@
     "GeneratedItemModelMixin",
     "HudMixin",
     "IntegratedServerLoaderMixin",
-    "IntegratedServerMixin",
     "KeyBindingMixin",
     "KeyBindingWidgetMixin",
     "KeyboardMixin",
