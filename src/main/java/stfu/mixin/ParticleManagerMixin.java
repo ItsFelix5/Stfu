@@ -26,7 +26,7 @@ import static stfu.Main.client;
 public class ParticleManagerMixin {
     @Shadow @Final private Map<ParticleTextureSheet, Queue<Particle>> particles;
 
-    @Inject(method = "renderParticles*", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderParticles", at = @At("HEAD"), cancellable = true)
     private void renderParticles(CallbackInfo ci) {
         if(particles.isEmpty()) ci.cancel();
     }
@@ -56,10 +56,9 @@ public class ParticleManagerMixin {
         if(Config.conf.disableParticles) ci.cancel();
     }
 
-
-    @WrapWithCondition(method = "renderParticles(Lnet/minecraft/client/render/Camera;FLnet/minecraft/client/render/VertexConsumerProvider$Immediate;Lnet/minecraft/client/particle/ParticleTextureSheet;Ljava/util/Queue;)V", at = @At(value = "INVOKE", target = "net/minecraft/client/particle/Particle.render(Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/Camera;F)V"))
-    private static boolean renderParticles(Particle instance, VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-        Frustum frustum = client.worldRenderer.getCapturedFrustum();
+    @WrapWithCondition(method = "renderParticles", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/Particle;buildGeometry(Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/Camera;F)V"))
+    private boolean renderParticles(Particle instance, VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
+        Frustum frustum = client.worldRenderer.capturedFrustum;
         if(frustum == null) frustum = client.worldRenderer.frustum;
         return frustum.isVisible(instance.getBoundingBox());
     }

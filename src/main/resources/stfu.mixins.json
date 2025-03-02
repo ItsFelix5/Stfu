@@ -34,8 +34,7 @@
     "ThreadExecutorMixin",
     "TitleScreenMixin",
     "UtilMixin",
-    "WorldMixin",
-    "WorldRendererMixin"
+    "WorldMixin"
   ],
   "plugin": "stfu.MixinPlugin",
   "injectors": {

@@ -1,7 +1,7 @@
 package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.client.render.model.json.GeneratedItemModel;
+import net.minecraft.client.render.model.json.ItemModelGenerator;
 import net.minecraft.client.render.model.json.ModelElement;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -10,7 +10,7 @@ import stfu.Config;
 
 import java.util.List;
 
-@Mixin(GeneratedItemModel.class)
+@Mixin(ItemModelGenerator.class)
 public class GeneratedItemModelMixin {
     @ModifyReturnValue(method = "addSubComponents", at = @At("RETURN"))
     private List<ModelElement> addSubComponents(List<ModelElement> original) {
@@ -56,16 +56,16 @@ public class GeneratedItemModelMixin {
      * @reason To fix model gaps
      */
     @Overwrite
-    private void buildCube(List<GeneratedItemModel.Frame> cubes, GeneratedItemModel.Side side, int x, int y) {
+    private void buildCube(List<ItemModelGenerator.Frame> cubes, ItemModelGenerator.Side side, int x, int y) {
         int verticalX = side.isVertical() ? x : y;
         int verticalY = side.isVertical() ? y : x;
-        for (GeneratedItemModel.Frame frame : cubes) {
+        for (ItemModelGenerator.Frame frame : cubes) {
             if (frame.getSide() == side && frame.getLevel() == verticalY && (!Config.conf.fixModelGaps || frame.getMax() == verticalX - 1)) {
                 frame.expand(verticalX);
                 return;
             }
         }
 
-        cubes.add(new GeneratedItemModel.Frame(side, verticalX, verticalY));
+        cubes.add(new ItemModelGenerator.Frame(side, verticalX, verticalY));
     }
 }

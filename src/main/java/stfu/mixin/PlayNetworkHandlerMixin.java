@@ -2,7 +2,7 @@ package stfu.mixin;
 
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.AdvancementUpdateS2CPacket;
-import net.minecraft.network.packet.s2c.play.RecipeBookAddS2CPacket;
+import net.minecraft.recipe.Recipe;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,11 +19,11 @@ abstract class PlayNetworkHandlerMixin {
     }
 
     @Redirect(
-            method = "onRecipeBookAdd",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/network/packet/s2c/play/RecipeBookAddS2CPacket$Entry;shouldShowNotification()Z")
+            method = "method_34011",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/recipe/Recipe;showNotification()Z")
     )
-    private boolean disableRecipeToasts(RecipeBookAddS2CPacket.Entry instance) {
-        return Config.conf.recipeToasts && instance.shouldShowNotification();
+    private boolean disableRecipeToasts(Recipe<?> instance) {
+        return Config.conf.recipeToasts && instance.showNotification();
     }
 
     @Inject(method = "onAdvancements", at = @At("HEAD"), cancellable = true)

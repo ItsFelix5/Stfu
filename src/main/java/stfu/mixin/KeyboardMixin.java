@@ -1,5 +1,6 @@
 package stfu.mixin;
 
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.Keyboard;
 import org.lwjgl.glfw.GLFW;
@@ -18,7 +19,7 @@ public abstract class KeyboardMixin {
 
     @ModifyConstant(method = "onKey", constant = @Constant(intValue = GLFW.GLFW_KEY_B))
     private int shutNarrator(int key) {
-        return Main.NARRATOR_KEY.boundKey.getCode();
+        return KeyBindingHelper.getBoundKeyOf(Main.NARRATOR_KEY).getCode();
     }
 
     @Inject(method = "processF3", at = @At("RETURN"), cancellable = true)

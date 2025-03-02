@@ -8,10 +8,8 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static stfu.Main.client;
 
@@ -34,10 +32,10 @@ public abstract class HudMixin {
         return 0;
     }
 
-    @Inject(method = "getAirBubbleY", at = @At(value = "RETURN"), cancellable = true)
-    private void moveAirUp(int heartCount, int top, CallbackInfoReturnable<Integer> cir) {
+    @ModifyVariable(method = "renderStatusBars", at = @At("STORE"), ordinal = 13)
+    private int moveAirUp(int r) {
         LivingEntity entity = getRiddenEntity();
-        if (entity != null) cir.setReturnValue(cir.getReturnValue() - getHeartCount(entity));
+        return r - (entity != null ? getHeartCount(entity) : 0);
     }
 
     @Redirect(method = "renderMainHud", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getJumpingMount()Lnet/minecraft/entity/JumpingMount;"))
