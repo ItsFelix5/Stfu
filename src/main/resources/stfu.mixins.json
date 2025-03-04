@@ -7,7 +7,6 @@
     "AccessibilityOptionsMixin",
     "BiomeMixin",
     "ChatLineMixin",
-    "ChatLineMixin$Visible",
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",

@@ -9,21 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChatHudLine.class)
 public class ChatLineMixin {
-    @Inject(method = "indicator", at = @At("HEAD"), cancellable = true)
-    private void shutIndicator(CallbackInfoReturnable<MessageIndicator> cir) {
-        cir.setReturnValue(null);
-    }
-
     @Inject(method = "getIcon", at = @At("HEAD"), cancellable = true)
     private void shutIcon(CallbackInfoReturnable<MessageIndicator> cir) {
         cir.setReturnValue(null);
-    }
-
-    @Mixin(ChatHudLine.Visible.class)
-    private static class Visible {
-        @Inject(method = "indicator", at = @At("HEAD"), cancellable = true)
-        private void shutIndicator(CallbackInfoReturnable<MessageIndicator> cir) {
-            cir.setReturnValue(null);
-        }
     }
 }

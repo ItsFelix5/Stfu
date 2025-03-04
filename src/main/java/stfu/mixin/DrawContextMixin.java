@@ -39,7 +39,7 @@ public abstract class DrawContextMixin {
             at = @At("HEAD"))
     private void wrapComponents(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, @Nullable Identifier texture, CallbackInfo ci) {
         if (components.isEmpty()) return;
-        int maxWidth = getScaledWindowWidth() - 7;
+        int maxWidth = getScaledWindowWidth() - 12;
         for (int i = 0; i < components.size(); i++) {
             if(!(components.get(i) instanceof OrderedTextTooltipComponent component)) continue;
             MutableText text = Text.empty();
@@ -59,7 +59,7 @@ public abstract class DrawContextMixin {
         int x = Math.max(6, Math.min(vector2ic.x(), screenWidth - width - 6));
         int y = Math.max(6, Math.min(vector2ic.y(), screenHeight - height - 6));
         if (x == 6 && y != 6) {
-            x = Math.clamp(mouseX - width / 2, 6, screenWidth - width - 6);
+            x = Math.clamp(mouseX - width / 2, 6, screenWidth - 6);
             y = mouseY - height - 12;
 
             if (y < 6) y = mouseY + 12;
