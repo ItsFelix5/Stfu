@@ -7,7 +7,7 @@
 </span>
 
 #### Current changes:
-* Improved performance and loading times
+* Improved performance and loading times of a lot of things
 * Allowed disabling custom world advice, the tutorial, the multiplayer warning, chat signing warnings and telemetry
 * Disabled realms notifications and the narrator on startup and allowed rebinding the narrator key
 * Allowed toggling all kinds of toasts and opening the inventory in portals

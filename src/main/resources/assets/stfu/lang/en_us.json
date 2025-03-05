@@ -4,7 +4,7 @@
   "yacl3.config.stfu:config.category.advanced": "Advanced",
   "yacl3.config.stfu:config.category.basic.group.chat": "Chat Settings",
   "yacl3.config.stfu:config.category.basic.group.loading": "Loading",
-  "yacl3.config.stfu:config.category.basic.group.performance": "Performance",
+  "yacl3.config.stfu:config.category.basic.group.rendering": "Rendering",
 
   "yacl3.config.stfu:config.maxChatHistory": "Max Chat History",
   "yacl3.config.stfu:config.maxChatHistory.desc": "The maximum number of messages to keep in chat history.",
@@ -63,6 +63,9 @@
 
   "yacl3.config.stfu:config.animateTextures": "Animate Textures",
   "yacl3.config.stfu:config.animateTextures.desc": "If you disable this blocks like the nether portal will stop animating.",
+
+  "yacl3.config.stfu:config.textShadow": "Text Shadows",
+  "yacl3.config.stfu:config.textShadow.desc": "If text should have shadows, disabling this will improve performance.",
 
   "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
   "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering. BIGGER IS NOT NECESSARILY BETTER!",
