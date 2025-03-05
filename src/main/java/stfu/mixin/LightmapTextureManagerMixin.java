@@ -30,7 +30,7 @@ public class LightmapTextureManagerMixin {
     private boolean isDirty() {
         // Time
         long timeDiff = Math.abs(lastTimeOfDay - lastUpdate);
-        if(timeDiff >= 1870 || (timeDiff >= Config.conf.lightmapUpdateDelay && (lastTimeOfDay < 731 || (lastTimeOfDay > 11270 && lastTimeOfDay < 13140) || lastTimeOfDay > 22861))) return true;
+        if(timeDiff >= 1870 || (timeDiff >= Config.get().lightmapUpdateDelay && (lastTimeOfDay < 731 || (lastTimeOfDay > 11270 && lastTimeOfDay < 13140) || lastTimeOfDay > 22861))) return true;
 
         // Conduit Power
         if((client.player.isSubmergedInWater() && client.player.hasStatusEffect(StatusEffects.CONDUIT_POWER)) != hadConduitPower) {
@@ -44,7 +44,7 @@ public class LightmapTextureManagerMixin {
             hadNightVision = nightVision == null;
             return true;
         }
-        if(Config.conf.nightVisionFlicker && nightVision != null && nightVision.isDurationBelow(200)) return true;
+        if(Config.get().nightVisionFlicker && nightVision != null && nightVision.isDurationBelow(200)) return true;
 
         // Gamma
         if(!client.options.getGamma().getValue().equals(lastGamma)) {

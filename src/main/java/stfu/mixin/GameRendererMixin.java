@@ -21,6 +21,6 @@ public class GameRendererMixin {
 
     @Redirect(method = "getNightVisionStrength", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/effect/StatusEffectInstance;isDurationBelow(I)Z"))
     private static boolean getNightVisionStrength(StatusEffectInstance instance, int duration) {
-        return Config.conf.nightVisionFlicker && instance.isDurationBelow(duration);
+        return Config.get().nightVisionFlicker && instance.isDurationBelow(duration);
     }
 }

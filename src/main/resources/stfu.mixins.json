@@ -6,12 +6,14 @@
   "client": [
     "AccessibilityOptionsMixin",
     "BiomeMixin",
+    "BlockEntityRenderDispatcherMixin",
     "ChatLineMixin",
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
     "ClientWorldMixin",
     "DrawContextMixin",
+    "EntityRenderDispatcherMixin",
     "GameOptionMixin",
     "GameRendererMixin",
     "GeneratedItemModelMixin",
@@ -33,11 +35,16 @@
     "ThreadExecutorMixin",
     "TitleScreenMixin",
     "UtilMixin",
+    "WeatherRenderingMixin",
     "WorldMixin",
     "WorldRendererMixin"
   ],
   "plugin": "stfu.MixinPlugin",
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "mixins": [
+    "BlockEntityTypeMixin",
+    "EntityTypeMixin"
+  ]
 }

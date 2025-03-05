@@ -13,7 +13,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Config  {
+public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
             .id(Identifier.of("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
@@ -22,13 +22,15 @@ public class Config  {
                     .build())
             .build();
 
-    public static final Config conf = HANDLER.instance();
+    public static Config get(){
+        return HANDLER.instance();
+    }
 
     private static final String basic = "basic";
     private static final String advanced = "advanced";
     private static final String chat = "chat";
     private static final String loading = "loading";
-    private static final String performance = "performance";
+    private static final String rendering = "rendering";
 
     @AutoGen(category = basic, group = chat)
     @IntSlider(min = 10, max = 5000, step = 10)
@@ -90,15 +92,20 @@ public class Config  {
     @SerialEntry
     public boolean nightVisionFlicker = true;
 
-    @AutoGen(category = basic, group = performance)
+    @AutoGen(category = basic, group = rendering)
     @Boolean
     @SerialEntry
     public boolean disableParticles = false;
 
-    @AutoGen(category = basic, group = performance)
+    @AutoGen(category = basic, group = rendering)
     @Boolean
     @SerialEntry
     public boolean animateTextures = true;
+
+    @AutoGen(category = basic, group = rendering)
+    @Boolean
+    @SerialEntry
+    public boolean renderWeather = true;
 
 
 

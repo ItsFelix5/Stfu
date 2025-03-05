@@ -8,3 +8,6 @@ accessible method net/minecraft/client/render/model/json/GeneratedItemModel$Side
 accessible field net/minecraft/client/render/LightmapTextureManager dirty Z
 accessible field net/minecraft/client/render/GameRenderer skyDarkness F
 accessible field net/minecraft/client/render/WorldRenderer frustum Lnet/minecraft/client/render/Frustum;
+accessible field net/minecraft/client/render/entity/EntityRenderers RENDERER_FACTORIES Ljava/util/Map;
+accessible field net/minecraft/client/render/entity/EntityRenderers PLAYER_RENDERER_FACTORIES Ljava/util/Map;
+accessible field net/minecraft/client/render/block/entity/BlockEntityRendererFactories FACTORIES Ljava/util/Map;

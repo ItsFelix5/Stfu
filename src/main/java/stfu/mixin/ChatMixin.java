@@ -34,7 +34,7 @@ public abstract class ChatMixin {
     @ModifyExpressionValue(method = {"addToMessageHistory", "addVisibleMessage", "addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V"}, at =
     @At(value = "CONSTANT", args = "intValue=100"))
     private int moreHistory(int original) {
-        return Config.conf.maxChatHistory;
+        return Config.get().maxChatHistory;
     }
 
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;)V", at = @At("HEAD"), cancellable = true)
@@ -42,9 +42,9 @@ public abstract class ChatMixin {
         if (!(message instanceof MutableText mutable && mutable.getContent() instanceof TranslatableTextContent translatable)) return;
 
         if (translatable.getKey().startsWith("chat.type.advancement")) {
-            if (!Config.conf.announceAdvancements) ci.cancel();
+            if (!Config.get().announceAdvancements) ci.cancel();
         } else if (translatable.getKey().equals("chat.type.admin")) {
-            Config.AdminChat adminChat = Config.conf.adminChat;
+            Config.AdminChat adminChat = Config.get().adminChat;
             if (adminChat == Config.AdminChat.DISABLED || (adminChat == Config.AdminChat.ONLY_PLAYERS && translatable.getArgs()[0].equals("@")))
                 ci.cancel();
         }
@@ -56,7 +56,7 @@ public abstract class ChatMixin {
             argsOnly = true
     )
     private Text compact(Text message) {
-        if (Config.conf.compactChat == Config.CompactChat.NEVER || messages.isEmpty()) return message;
+        if (Config.get().compactChat == Config.CompactChat.NEVER || messages.isEmpty()) return message;
         // Skip common separators
         boolean isSeparator = true;
         for (char c : message.getString().trim().toCharArray())
@@ -68,7 +68,7 @@ public abstract class ChatMixin {
 
         // Find matching messages
         int matches = 0;
-        for (ChatHudLine other : Config.conf.compactChat == Config.CompactChat.ONLY_CONSECUTIVE ? List.of(messages.getFirst()) : messages) {
+        for (ChatHudLine other : Config.get().compactChat == Config.CompactChat.ONLY_CONSECUTIVE ? List.of(messages.getFirst()) : messages) {
             Text content = other.content();
             if (!content.getContent().equals(message.getContent()) || !content.getStyle().equals(message.getStyle())) continue;
 

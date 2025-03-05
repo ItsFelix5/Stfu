@@ -10,7 +10,7 @@ import stfu.Config;
 public class MinecraftServerMixin {
     @Redirect(method = "startServer", at = @At(value = "INVOKE", target = "Ljava/lang/Runtime;availableProcessors()I"))
     private static int startServer(Runtime instance) {
-        Thread.currentThread().setPriority(Config.conf.serverThreadPriority);
+        Thread.currentThread().setPriority(Config.get().serverThreadPriority);
         return 0;
     }
 }

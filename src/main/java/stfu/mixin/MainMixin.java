@@ -11,7 +11,7 @@ import stfu.Config;
 public class MainMixin {
     @Redirect(method = "main", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/crash/CrashReport;initCrashReport()V"))
     private static void initCrashReport() {
-        Thread.currentThread().setPriority(Config.conf.renderThreadPriority);
+        Thread.currentThread().setPriority(Config.get().renderThreadPriority);
         CrashMemoryReserve.reserveMemory();
     }
 }
