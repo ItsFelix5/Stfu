@@ -22,6 +22,6 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         Config.HANDLER.load();
-        if(Config.conf.debugUtilities) SharedConstants.isDevelopment = true;
+        if(Config.get().debugUtilities) SharedConstants.isDevelopment = true;
     }
 }

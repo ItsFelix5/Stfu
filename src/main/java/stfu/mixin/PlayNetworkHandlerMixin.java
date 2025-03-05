@@ -23,11 +23,11 @@ abstract class PlayNetworkHandlerMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/recipe/Recipe;showNotification()Z")
     )
     private boolean disableRecipeToasts(Recipe<?> instance) {
-        return Config.conf.recipeToasts && instance.showNotification();
+        return Config.get().recipeToasts && instance.showNotification();
     }
 
     @Inject(method = "onAdvancements", at = @At("HEAD"), cancellable = true)
     private void disableAdvancementToasts(AdvancementUpdateS2CPacket packet, CallbackInfo ci) {
-        if(!Config.conf.advancementToasts) ci.cancel();
+        if(!Config.get().advancementToasts) ci.cancel();
     }
 }

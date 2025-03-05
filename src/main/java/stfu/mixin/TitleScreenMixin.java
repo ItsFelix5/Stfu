@@ -10,6 +10,6 @@ import stfu.Config;
 public class TitleScreenMixin {
     @ModifyVariable(method = "<init>(ZLnet/minecraft/client/gui/LogoDrawer;)V", argsOnly = true, ordinal = 0, at = @At("HEAD"))
     private static boolean shutLoadFade(boolean bl) {
-        return !Config.conf.disableWidgetFade && bl;
+        return !Config.get().disableWidgetFade && bl;
     }
 }

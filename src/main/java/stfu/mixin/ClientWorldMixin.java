@@ -65,7 +65,7 @@ public abstract class ClientWorldMixin extends World {
             lastUpdate = time;
             biomeColor = color;
             return;
-        } else if(Main.skyDirty || Math.abs(time - lastUpdate) >= 1802 || ((time < 133 || (time > 11868 && time < 13670) || time > 22331) && Math.abs(time - lastUpdate) >= Config.conf.skyUpdateDelay)) {
+        } else if(Main.skyDirty || Math.abs(time - lastUpdate) >= 1802 || ((time < 133 || (time > 11868 && time < 13670) || time > 22331) && Math.abs(time - lastUpdate) >= Config.get().skyUpdateDelay)) {
             Main.skyDirty = false;
             lastUpdate = time;
 

@@ -21,8 +21,10 @@ public class Config  {
                     .setJson5(true)
                     .build())
             .build();
-
-    public static final Config conf = HANDLER.instance();
+    
+    public static Config get() {
+        return HANDLER.instance();
+    }
 
     private static final String basic = "basic";
     private static final String advanced = "advanced";
