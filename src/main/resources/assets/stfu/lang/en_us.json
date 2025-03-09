@@ -64,9 +64,6 @@
   "yacl3.config.stfu:config.animateTextures": "Animate Textures",
   "yacl3.config.stfu:config.animateTextures.desc": "If you disable this blocks like the nether portal will stop animating.",
 
-  "yacl3.config.stfu:config.textShadow": "Text Shadows",
-  "yacl3.config.stfu:config.textShadow.desc": "If text should have shadows, disabling this will improve performance.",
-
   "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
   "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering. BIGGER IS NOT NECESSARILY BETTER!",
 

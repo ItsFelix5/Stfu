@@ -31,7 +31,6 @@
     "SpriteMixin",
     "TelemetryMixin",
     "TextFieldWidgetMixin",
-    "TextRendererMixin",
     "ThreadExecutorMixin",
     "TitleScreenMixin",
     "UtilMixin",

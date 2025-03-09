@@ -102,12 +102,6 @@ public class Config  {
     @SerialEntry
     public boolean animateTextures = true;
 
-    @AutoGen(category = basic, group = rendering)
-    @Boolean
-    @SerialEntry
-    public boolean textShadow = true;
-
-
 
     @AutoGen(category = advanced)
     @IntSlider(min = 1, max = 10, step = 1)
