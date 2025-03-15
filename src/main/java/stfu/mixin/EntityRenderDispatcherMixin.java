@@ -15,12 +15,16 @@ import net.minecraft.client.util.SkinTextures;
 import net.minecraft.entity.Entity;
 import net.minecraft.resource.ResourceManager;
 import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import stfu.Holder;
 
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
-@Mixin(EntityRenderDispatcher.class)
+@Mixin(value = EntityRenderDispatcher.class, priority = 999)
 public class EntityRenderDispatcherMixin {
     @Shadow @Final private ItemModelManager itemModelManager;
     @Shadow @Final private MapRenderer mapRenderer;
@@ -32,22 +36,15 @@ public class EntityRenderDispatcherMixin {
     @Unique private EntityRenderer<AbstractClientPlayerEntity, ?> SLIM;
     @Unique private EntityRenderer<AbstractClientPlayerEntity, ?> WIDE;
 
-    /**
-     * @author Stfu
-     * @reason Optimization
-     */
-    @Overwrite
-    public <T extends Entity> EntityRenderer<? super T, ?> getRenderer(T entity) {
-        if(entity instanceof AbstractClientPlayerEntity player) return (EntityRenderer<? super T, ?>) (player.getSkinTextures().model() == SkinTextures.Model.SLIM? SLIM:WIDE);
-        return ((Holder<EntityRenderer<? super T, ?>>) entity.getType()).stfu$get();
+    @Inject(method = "getRenderer", at = @At("HEAD"), cancellable = true)
+    public <T extends Entity> void getRenderer(T entity, CallbackInfoReturnable<EntityRenderer<? super T, ?>> cir) {
+        if(entity instanceof AbstractClientPlayerEntity player) cir.setReturnValue((EntityRenderer<? super T, ?>) (player.getSkinTextures().model() == SkinTextures.Model.SLIM? SLIM:WIDE));
+        cir.setReturnValue(((Holder<EntityRenderer<? super T, ?>>) entity.getType()).stfu$get());
     }
 
-    /**
-     * @author Stfu
-     * @reason Optimization
-     */
-    @Overwrite
-    public void reload(ResourceManager manager) {
+    @Inject(method = "reload", at = @At("HEAD"), cancellable = true)
+    public void reload(ResourceManager manager, CallbackInfo ci) {
+        ci.cancel();
         EntityRendererFactory.Context context = new EntityRendererFactory.Context(
                 (EntityRenderDispatcher) (Object) this,
                 itemModelManager,
