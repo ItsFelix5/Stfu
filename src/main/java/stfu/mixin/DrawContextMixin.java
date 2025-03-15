@@ -57,7 +57,7 @@ public abstract class DrawContextMixin {
         int x = Math.max(6, Math.min(vector2ic.x(), screenWidth - width - 6));
         int y = Math.max(6, Math.min(vector2ic.y(), screenHeight - height - 6));
         if (x == 6 && y != 6) {
-            x = Math.clamp(mouseX - width / 2, 6, screenWidth - width - 6);
+            x = Math.clamp(mouseX - width / 2, 6, screenWidth - 6);
             y = mouseY - height - 12;
 
             if (y < 6) y = mouseY + 12;
