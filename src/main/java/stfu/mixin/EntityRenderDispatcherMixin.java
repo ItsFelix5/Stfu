@@ -39,7 +39,7 @@ public class EntityRenderDispatcherMixin {
     @Inject(method = "getRenderer", at = @At("HEAD"), cancellable = true)
     public <T extends Entity> void getRenderer(T entity, CallbackInfoReturnable<EntityRenderer<? super T, ?>> cir) {
         if(entity instanceof AbstractClientPlayerEntity player) cir.setReturnValue((EntityRenderer<? super T, ?>) (player.getSkinTextures().model() == SkinTextures.Model.SLIM? SLIM:WIDE));
-        cir.setReturnValue(((Holder<EntityRenderer<? super T, ?>>) entity.getType()).stfu$get());
+        else cir.setReturnValue(((Holder<EntityRenderer<? super T, ?>>) entity.getType()).stfu$get());
     }
 
     @Inject(method = "reload", at = @At("HEAD"), cancellable = true)
