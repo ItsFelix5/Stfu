@@ -59,7 +59,7 @@ public abstract class ClientWorldMixin extends World {
 
         int color = getBiomeAccess().getBiomeForNoiseGen(BlockPos.ofFloored(cameraPos.subtract(2, 2, 2))).value().getSkyColor();
         long time = client.world.getTimeOfDay() % 24000;
-        if(biomeColor != color || getBiomeAccess().getBiomeForNoiseGen(BlockPos.ofFloored(cameraPos.add(3, 3, 3))).value().getSkyColor() != color || Main.skyDirty
+        if(skyColor == null || biomeColor != color || getBiomeAccess().getBiomeForNoiseGen(BlockPos.ofFloored(cameraPos.add(3, 3, 3))).value().getSkyColor() != color || Main.skyDirty
                 || Math.abs(time - lastUpdate) >= 1802 || ((time < 133 || (time > 11868 && time < 13670) || time > 22331) && Math.abs(time - lastUpdate) >= Config.get().skyUpdateDelay)) {
             Main.skyDirty = false;
             lastUpdate = time;
@@ -71,6 +71,6 @@ public abstract class ClientWorldMixin extends World {
 
     @Inject(method = "getSkyColor", at = @At("RETURN"))
     private void setSkyColor(Vec3d cameraPos, float tickDelta, CallbackInfoReturnable<Vec3d> cir) {
-            skyColor = cir.getReturnValue();
+        skyColor = cir.getReturnValue();
     }
 }
