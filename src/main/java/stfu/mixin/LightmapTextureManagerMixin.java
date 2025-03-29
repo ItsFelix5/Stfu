@@ -28,6 +28,8 @@ public class LightmapTextureManagerMixin {
     @SuppressWarnings("DataFlowIssue")
     @Unique
     private boolean isDirty() {
+        if(Config.get().lightmapUpdateDelay == 0) return true;
+
         // Time
         long timeDiff = Math.abs(lastTimeOfDay - lastUpdate);
         if(timeDiff >= 1870 || (timeDiff >= Config.get().lightmapUpdateDelay && (lastTimeOfDay < 731 || (lastTimeOfDay > 11270 && lastTimeOfDay < 13140) || lastTimeOfDay > 22861))) return true;

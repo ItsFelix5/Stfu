@@ -125,12 +125,12 @@ public class Config {
     public int ioThreadPriority = 1;
 
     @AutoGen(category = advanced)
-    @IntSlider(min = 1, max = 100, step = 1)
+    @IntSlider(min = 0, max = 100, step = 1)
     @SerialEntry
     public int lightmapUpdateDelay = 10;
 
     @AutoGen(category = advanced)
-    @IntSlider(min = 1, max = 100, step = 1)
+    @IntSlider(min = 0, max = 100, step = 1)
     @SerialEntry
     public int skyUpdateDelay = 15;
 

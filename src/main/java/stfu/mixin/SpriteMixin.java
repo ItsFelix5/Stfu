@@ -15,8 +15,8 @@ public abstract class SpriteMixin {
     @Shadow @Final private Identifier atlasId;
     @Unique private static final Identifier blockAtlas = Identifier.ofVanilla("textures/atlas/blocks.png");
 
-    @ModifyReturnValue(method = "getAnimationFrameDelta", at = @At("RETURN"))
-    private float getAnimationFrameDelta(float original) {
+    @ModifyReturnValue(method = "getUvScaleDelta", at = @At("RETURN"))
+    private float getUvScaleDelta(float original) {
         return Config.get().fixModelGaps && atlasId.equals(blockAtlas)? 0 : original;
     }
 }

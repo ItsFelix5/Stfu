@@ -11,3 +11,6 @@ accessible field net/minecraft/client/render/WorldRenderer frustum Lnet/minecraf
 accessible field net/minecraft/client/render/entity/EntityRenderers RENDERER_FACTORIES Ljava/util/Map;
 accessible field net/minecraft/client/render/entity/EntityRenderers PLAYER_RENDERER_FACTORIES Ljava/util/Map;
 accessible field net/minecraft/client/render/block/entity/BlockEntityRendererFactories FACTORIES Ljava/util/Map;
+accessible field net/minecraft/client/render/model/json/ModelElement from Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/render/model/json/ModelElement to Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/render/model/json/ModelElement faces Ljava/util/Map;

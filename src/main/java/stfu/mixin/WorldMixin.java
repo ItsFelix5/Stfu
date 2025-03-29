@@ -12,19 +12,19 @@ import static stfu.Main.client;
 
 @Mixin(World.class)
 public class WorldMixin {
-    @Shadow protected float rainGradientPrev;
+    @Shadow protected float lastRainGradient;
     @Shadow protected float rainGradient;
 
-    @Shadow protected float thunderGradientPrev;
+    @Shadow protected float lastThunderGradient;
     @Shadow protected float thunderGradient;
 
     @Inject(method = "setRainGradient", at = @At(value = "FIELD", target = "Lnet/minecraft/world/World;rainGradient:F"))
     private void setRainGradient(float gradient, CallbackInfo ci) {
-        if(rainGradientPrev != rainGradient) Main.skyDirty = client.gameRenderer.getLightmapTextureManager().dirty = true;
+        if(lastRainGradient != rainGradient) Main.skyDirty = client.gameRenderer.getLightmapTextureManager().dirty = true;
     }
 
     @Inject(method = "setThunderGradient", at = @At(value = "FIELD", target = "Lnet/minecraft/world/World;thunderGradient:F"))
     private void setThunderGradient(float gradient, CallbackInfo ci) {
-        if(thunderGradientPrev != thunderGradient) Main.skyDirty = client.gameRenderer.getLightmapTextureManager().dirty = true;
+        if(lastThunderGradient != thunderGradient) Main.skyDirty = client.gameRenderer.getLightmapTextureManager().dirty = true;
     }
 }
