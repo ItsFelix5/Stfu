@@ -74,10 +74,12 @@
   "yacl3.config.stfu:config.ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. BIGGER IS NOT NECESSARILY BETTER!",
 
   "yacl3.config.stfu:config.lightmapUpdateDelay": "Lightmap update delay",
-  "yacl3.config.stfu:config.lightmapUpdateDelay.desc": "Time in ticks until the lightmap updates during sunrise/set.",
+  "yacl3.config.stfu:config.lightmapUpdateDelay.desc.1": "Time in ticks until the lightmap updates during sunrise/set.",
+  "yacl3.config.stfu:config.lightmapUpdateDelay.desc.2": "Setting this to 0 disables this optimization.",
 
   "yacl3.config.stfu:config.skyUpdateDelay": "Sky Color Update Delay",
-  "yacl3.config.stfu:config.skyUpdateDelay.desc": "Time in ticks until the sky color updates during sunrise/set.",
+  "yacl3.config.stfu:config.skyUpdateDelay.desc.1": "Time in ticks until the sky color updates during sunrise/set.",
+  "yacl3.config.stfu:config.skyUpdateDelay.desc.2": "Setting this to 0 disables this optimization.",
 
   "yacl3.config.stfu:config.debugUtilities": "Enable Debug Utilities",
   "yacl3.config.stfu:config.debugUtilities.desc": "Enable some of mojang's debug utilities (mostly extra logs and keybinds), requires restart.",

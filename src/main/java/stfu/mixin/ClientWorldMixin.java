@@ -55,7 +55,7 @@ public abstract class ClientWorldMixin extends World {
 
     @Inject(method = "getSkyColor", at = @At(value = "HEAD"), cancellable = true)
     public void getSkyColor(Vec3d cameraPos, float tickDelta, CallbackInfoReturnable<Vec3d> cir) {
-        if(client.world == null) return;
+        if(client.world == null || Config.get().skyUpdateDelay == 0) return;
 
         int color = getBiomeAccess().getBiomeForNoiseGen(BlockPos.ofFloored(cameraPos.subtract(2, 2, 2))).value().getSkyColor();
         long time = client.world.getTimeOfDay() % 24000;
