@@ -2,27 +2,26 @@ package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipPositioner;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.text.StringVisitable;
+import net.minecraft.text.Style;
+import net.minecraft.util.Language;
 import org.joml.Vector2i;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.DisableIf;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static stfu.Main.client;
 
 @Mixin(DrawContext.class)
 @DisableIf({"legacy", "legendarytooltips"})
@@ -31,25 +30,27 @@ public abstract class DrawContextMixin {
 
     @ModifyVariable(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
             at = @At("HEAD"), index = 2, argsOnly = true)
-    private List<TooltipComponent> makeComponentsMutable(List<TooltipComponent> components) {
-        return new ArrayList<>(components);
-    }
+    private List<TooltipComponent> wrapLines(List<TooltipComponent> original) {
+        ArrayList<StringVisitable> components = new ArrayList<>();
 
-    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
-            at = @At("HEAD"))
-    private void wrapComponents(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, @Nullable Identifier texture, CallbackInfo ci) {
-        if (components.isEmpty()) return;
         int maxWidth = getScaledWindowWidth() - 12;
-        for (int i = 0; i < components.size(); i++) {
-            if(!(components.get(i) instanceof OrderedTextTooltipComponent component)) continue;
-            MutableText text = Text.empty();
-            component.text.accept((index, style, codePoint) -> {
-                text.append(Text.literal(new String(Character.toChars(codePoint))).setStyle(style));
-                return true;
-            });
-            components.remove(i);
-            components.addAll(i, textRenderer.wrapLines(text, maxWidth).stream().map(TooltipComponent::of).toList());
+        for (TooltipComponent tooltipComponent : original) {
+            if (!(tooltipComponent instanceof OrderedTextTooltipComponent component)) continue;
+            client.textRenderer.getTextHandler().wrapLines(new StringVisitable() {
+                @Override
+                public <T> Optional<T> visit(Visitor<T> visitor) {
+                    return visit((s, t)->visitor.accept(t), Style.EMPTY);
+                }
+
+                @Override
+                public <T> Optional<T> visit(StyledVisitor<T> visitor, Style s) {
+                    component.text.accept((index, style, codePoint) -> visitor.accept(style.withParent(s), new String(Character.toChars(codePoint))).isEmpty());
+                    return Optional.empty();
+                }
+            }, maxWidth, Style.EMPTY, (t, lastLineWrapped) -> components.add(t));
         }
+
+        return components.stream().map(t->TooltipComponent.of(Language.getInstance().reorder(t))).toList();
     }
 
     @WrapOperation(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
