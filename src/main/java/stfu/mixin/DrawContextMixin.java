@@ -31,11 +31,13 @@ public abstract class DrawContextMixin {
     @ModifyVariable(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
             at = @At("HEAD"), index = 2, argsOnly = true)
     private List<TooltipComponent> wrapLines(List<TooltipComponent> original) {
-        ArrayList<StringVisitable> components = new ArrayList<>();
+        ArrayList<TooltipComponent> components = new ArrayList<>();
 
-        int maxWidth = getScaledWindowWidth() - 12;
         for (TooltipComponent tooltipComponent : original) {
-            if (!(tooltipComponent instanceof OrderedTextTooltipComponent component)) continue;
+            if (!(tooltipComponent instanceof OrderedTextTooltipComponent component)) {
+                components.add(tooltipComponent);
+                continue;
+            }
             client.textRenderer.getTextHandler().wrapLines(new StringVisitable() {
                 @Override
                 public <T> Optional<T> visit(Visitor<T> visitor) {
@@ -47,10 +49,10 @@ public abstract class DrawContextMixin {
                     component.text.accept((index, style, codePoint) -> visitor.accept(style.withParent(s), new String(Character.toChars(codePoint))).isEmpty());
                     return Optional.empty();
                 }
-            }, maxWidth, Style.EMPTY, (t, lastLineWrapped) -> components.add(t));
+            }, getScaledWindowWidth() - 12, Style.EMPTY, (t, lastLineWrapped) -> components.add(TooltipComponent.of(Language.getInstance().reorder(t))));
         }
 
-        return components.stream().map(t->TooltipComponent.of(Language.getInstance().reorder(t))).toList();
+        return components;
     }
 
     @WrapOperation(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
