@@ -1,13 +1,13 @@
 # Stfu
 ### A mod to fix some annoyances and speed up your game!
 <span>
-<a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_fabricapi.svg"></a>
-<a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_modmenu.svg"></a>
-<a href="https://modrinth.com/mod/yacl"><img alt="Requires YACL" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_YACL.svg"></a>
+<a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/Stfu/refs/heads/1.21.5/.github/badges/requires_fabricapi.svg"></a>
+<a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/Stfu/refs/heads/1.21.5/.github/badges/requires_modmenu.svg"></a>
+<a href="https://modrinth.com/mod/yacl"><img alt="Requires YACL" src="https://raw.githubusercontent.com/ItsFelix5/Stfu/refs/heads/1.21.5/.github/badges/requires_YACL.svg"></a>
 </span>
 
 #### Current changes:
-* Improved performance and loading times of a lot of things
+* Improved performance and loading times
 * Allowed disabling custom world advice, the tutorial, the multiplayer warning, chat signing warnings and telemetry
 * Disabled realms notifications and the narrator on startup and allowed rebinding the narrator key
 * Allowed toggling all kinds of toasts and opening the inventory in portals

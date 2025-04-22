@@ -75,8 +75,6 @@ public class LightmapTextureManagerMixin {
 
         if(isDirty()) {
             lastUpdate = client.world.getTimeOfDay() % 24000;
-
-            this.flickerIntensity = (this.flickerIntensity + (float)((Math.random() - Math.random()) * Math.random() * Math.random() * 0.1)) * 0.9F;
             this.dirty = true;
         }
         lastTimeOfDay = client.world.getTimeOfDay() % 24000;
@@ -85,5 +83,6 @@ public class LightmapTextureManagerMixin {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
      private void tick(CallbackInfo ci) {
          ci.cancel();
+         this.flickerIntensity = (this.flickerIntensity + (float) (Math.random() - Math.random()) * (float) Math.random() * (float) Math.random() * 0.1F) * 0.9F;
      }
 }
