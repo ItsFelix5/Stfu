@@ -42,11 +42,9 @@ public class EntityRenderDispatcherMixin {
     @Inject(method = "reload", at = @At(value = "TAIL"))
     public void reload(ResourceManager manager, CallbackInfo ci, @Local EntityRendererFactory.Context context) {
         renderers.forEach((type,renderer)->((Holder<EntityRenderer<?, ?>>) type).stfu$set(renderer));
-        renderers = null;
         modelRenderers.forEach((model,renderer)->{
             if(model == SkinTextures.Model.SLIM) SLIM = renderer;
             else WIDE = renderer;
         });
-        modelRenderers = null;
     }
 }

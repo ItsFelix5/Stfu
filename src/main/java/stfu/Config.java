@@ -92,6 +92,11 @@ public class Config {
     @SerialEntry
     public boolean nightVisionFlicker = true;
 
+    @AutoGen(category = basic)
+    @Boolean
+    @SerialEntry
+    public boolean lightFlicker = true;
+
     @AutoGen(category = basic, group = rendering)
     @Boolean
     @SerialEntry

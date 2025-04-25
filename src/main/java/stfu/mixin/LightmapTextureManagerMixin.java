@@ -83,6 +83,6 @@ public class LightmapTextureManagerMixin {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
      private void tick(CallbackInfo ci) {
          ci.cancel();
-        this.flickerIntensity = (this.flickerIntensity + (float)((Math.random() - Math.random()) * Math.random() * Math.random() * 0.1)) * 0.9F;
+        if(Config.get().lightFlicker) this.flickerIntensity = (this.flickerIntensity + (float)((Math.random() - Math.random()) * Math.random() * Math.random() * 0.1)) * 0.9F;
      }
 }

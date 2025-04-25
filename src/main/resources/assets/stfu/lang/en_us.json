@@ -51,6 +51,9 @@
   "yacl3.config.stfu:config.nightVisionFlicker": "Night Vision Flicker",
   "yacl3.config.stfu:config.nightVisionFlicker.desc": "When night vision runs out the entire world flickers for a few seconds, this allows you to disable this.",
 
+  "yacl3.config.stfu:config.lightFlicker": "Light Flicker",
+  "yacl3.config.stfu:config.lightFlicker.desc": "In vanilla block light has a very subtle flicker, disable this if you don't want that.",
+
   "yacl3.config.stfu:config.lightMapUpdateTime": "Light Map Update Time",
   "yacl3.config.stfu:config.lightMapUpdateTime.desc.1": "Normally Minecraft updates the worlds light every tick.",
   "yacl3.config.stfu:config.lightMapUpdateTime.desc.2": "This setting allows you to choose the amount of daytime (in ticks) has to pass before this is recalculated during sun rise/set.",
