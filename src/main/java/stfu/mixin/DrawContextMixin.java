@@ -6,6 +6,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipPositioner;
+import net.minecraft.text.OrderedText;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Style;
 import net.minecraft.util.Language;
@@ -38,6 +39,7 @@ public abstract class DrawContextMixin {
                 components.add(tooltipComponent);
                 continue;
             }
+            final int length = components.size();
             client.textRenderer.getTextHandler().wrapLines(new StringVisitable() {
                 @Override
                 public <T> Optional<T> visit(Visitor<T> visitor) {
@@ -50,6 +52,7 @@ public abstract class DrawContextMixin {
                     return Optional.empty();
                 }
             }, getScaledWindowWidth() - 12, Style.EMPTY, (t, lastLineWrapped) -> components.add(TooltipComponent.of(Language.getInstance().reorder(t))));
+            if(components.size() == length) components.add(TooltipComponent.of(OrderedText.empty()));
         }
 
         return components;
