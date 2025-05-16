@@ -36,6 +36,8 @@ processResources {
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
+
+    from "third_party_credit"
 }
 
 loom {
