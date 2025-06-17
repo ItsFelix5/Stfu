@@ -23,7 +23,9 @@ jobs:
           cache-read-only: false
 
       - name: Build
-        run: ./gradlew build
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build
 
       - name: Upload
         uses: Kir-Antipov/mc-publish@v3.3
