@@ -24,6 +24,8 @@ public abstract class HudMixin {
     @Shadow
     protected abstract int getHeartCount(@Nullable LivingEntity entity);
 
+    @Shadow protected abstract boolean shouldShowJumpBar();
+
     @ModifyVariable(method = "renderMountHealth", at = @At(value = "STORE"), ordinal = 2)
     private int higherMountHealth(int y) {
         return client.interactionManager.hasStatusBars() ? y - 10 : y;
@@ -40,23 +42,8 @@ public abstract class HudMixin {
         if (entity != null) cir.setReturnValue(cir.getReturnValue() - getHeartCount(entity));
     }
 
-    @Redirect(method = "renderMainHud", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getJumpingMount()Lnet/minecraft/entity/JumpingMount;"))
+    @Redirect(method = "getCurrentBarType", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getJumpingMount()Lnet/minecraft/entity/JumpingMount;"))
     private JumpingMount showXp(ClientPlayerEntity player) {
-        return !client.interactionManager.hasExperienceBar() || client.options.jumpKey.isPressed()
-                || player.getMountJumpStrength() > 0 ? player.getJumpingMount() : null;
-    }
-
-    @Redirect(method = "renderMainHud", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;shouldRenderExperience()Z"))
-    private boolean renderXp(InGameHud instance) {
-        return client.interactionManager.hasExperienceBar();
-    }
-
-    @Redirect(method = "renderExperienceLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;shouldRenderExperience()Z"))
-    private boolean renderXpLevel(InGameHud instance) {
-        return client.interactionManager.hasExperienceBar() &&
-                ((client.player.getJumpingMount() != null
-                        && !client.options.jumpKey.isPressed()
-                        && client.player.getMountJumpStrength() <= 0)
-                        || client.player.getJumpingMount() == null);
+        return this.shouldShowJumpBar() ? player.getJumpingMount() : null;
     }
 }

@@ -18,7 +18,6 @@
 * Fixed tooltips running off the screen and model gaps
 * Added options that speed up minecraft/world (re)loading
 * Made it possible to see your health and hunger when riding something and to bind a button to multiple keybinds
-* Other things I forgot
 
 Looking for more client mods? Check out [Camera Tweaks](https://modrinth.com/mod/cameratweaks)!
 

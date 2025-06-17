@@ -29,7 +29,7 @@ import static stfu.Main.client;
 public abstract class DrawContextMixin {
     @Shadow public abstract int getScaledWindowWidth();
 
-    @ModifyVariable(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
+    @ModifyVariable(method = "drawTooltipImmediately(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
             at = @At("HEAD"), index = 2, argsOnly = true)
     private List<TooltipComponent> wrapLines(List<TooltipComponent> original) {
         ArrayList<TooltipComponent> components = new ArrayList<>();
@@ -58,7 +58,7 @@ public abstract class DrawContextMixin {
         return components;
     }
 
-    @WrapOperation(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
+    @WrapOperation(method = "drawTooltipImmediately(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/tooltip/TooltipPositioner;getPosition(IIIIII)Lorg/joml/Vector2ic;"))
     private Vector2ic reposition(TooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
         Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, mouseX, mouseY, width, height);

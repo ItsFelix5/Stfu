@@ -1,0 +1,35 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup jdk
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      - name: Build
+        run: ./gradlew build
+
+      - name: Upload
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: Rg9WdvvR
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          curseforge-id: 1111802
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

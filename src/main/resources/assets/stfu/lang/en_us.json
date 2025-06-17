@@ -80,13 +80,16 @@
   "yacl3.config.stfu:config.ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. BIGGER IS NOT NECESSARILY BETTER!",
 
   "yacl3.config.stfu:config.lightmapUpdateDelay": "Lightmap update delay",
-  "yacl3.config.stfu:config.lightmapUpdateDelay.desc": "Time in ticks until the lightmap updates during sunrise/set.",
+  "yacl3.config.stfu:config.lightmapUpdateDelay.desc.1": "Time in ticks until the lightmap updates during sunrise/set.",
+  "yacl3.config.stfu:config.lightmapUpdateDelay.desc.2": "Set this to 0 if you experience issues with brightness caused by other mods not updating.",
 
   "yacl3.config.stfu:config.skyUpdateDelay": "Sky Color Update Delay",
   "yacl3.config.stfu:config.skyUpdateDelay.desc": "Time in ticks until the sky color updates during sunrise/set.",
 
   "yacl3.config.stfu:config.debugUtilities": "Enable Debug Utilities",
-  "yacl3.config.stfu:config.debugUtilities.desc": "Enable some of mojang's debug utilities (mostly extra logs and keybinds), requires restart.",
+  "yacl3.config.stfu:config.debugUtilities.desc.1": "Enable some of mojang's debug utilities (mostly extra logs and keybinds).",
+  "yacl3.config.stfu:config.debugUtilities.desc.2": "THIS IS VERY UNSTABLE AND BUGS RELATED TO THIS WILL NOT BE FIXED.",
+  "yacl3.config.stfu:config.debugUtilities.desc.3": "Requires a restart.",
 
   "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
 }
