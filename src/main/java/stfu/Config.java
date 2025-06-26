@@ -52,6 +52,11 @@ public class Config {
     @SerialEntry
     public boolean recipeToasts = false;
 
+    @AutoGen(category = basic)
+    @Boolean
+    @SerialEntry
+    public boolean combineBars = false;
+
     @AutoGen(category = basic, group = chat)
     @EnumCycler
     @SerialEntry
@@ -85,7 +90,7 @@ public class Config {
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
-    public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
+    public boolean fixModelGaps = true;
 
     @AutoGen(category = basic)
     @Boolean

@@ -14,3 +14,4 @@ accessible field net/minecraft/client/render/block/entity/BlockEntityRendererFac
 accessible field net/minecraft/client/render/model/json/ModelElement from Lorg/joml/Vector3fc;
 accessible field net/minecraft/client/render/model/json/ModelElement to Lorg/joml/Vector3fc;
 accessible field net/minecraft/client/render/model/json/ModelElement faces Ljava/util/Map;
+accessible class net/minecraft/client/gui/hud/InGameHud$BarType

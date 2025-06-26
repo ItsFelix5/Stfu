@@ -37,14 +37,10 @@
     "UtilMixin",
     "WeatherRenderingMixin",
     "WorldMixin",
-    "WorldRendererMixin"
-  ],
-  "plugin": "stfu.MixinPlugin",
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "mixins": [
+    "WorldRendererMixin",
     "BlockEntityTypeMixin",
-    "EntityTypeMixin"
-  ]
+    "EntityTypeMixin",
+    "NetworkUtilsMixin"
+  ],
+  "plugin": "stfu.MixinPlugin"
 }

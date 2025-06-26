@@ -18,6 +18,9 @@
   "yacl3.config.stfu:config.recipeToasts": "Recipe Toasts",
   "yacl3.config.stfu:config.recipeToasts.desc": "If minecraft shows a toast when you unlock new recipes.",
 
+  "yacl3.config.stfu:config.combineBars": "Combine Bars",
+  "yacl3.config.stfu:config.combineBars.desc": "Combine the experience and locator bars.",
+
   "yacl3.config.stfu:config.adminChat": "Admin Chat",
   "yacl3.config.stfu:config.adminChat.desc": "Whether you receive a message when an admin or command block runs a command.",
   "yacl3.config.stfu:config.adminChat.enabled": "Enabled",
@@ -45,7 +48,6 @@
 
   "yacl3.config.stfu:config.fixModelGaps": "Fix Gaps In Models",
   "yacl3.config.stfu:config.fixModelGaps.desc.1": "Changes the item model generation code to prevent gaps.",
-  "yacl3.config.stfu:config.fixModelGaps.desc.2": "This may or may not cause problems on macos.",
   "yacl3.config.stfu:config.fixModelGaps.desc.3": "Requires a reload to take effect.",
 
   "yacl3.config.stfu:config.nightVisionFlicker": "Night Vision Flicker",
