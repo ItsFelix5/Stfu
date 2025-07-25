@@ -28,13 +28,21 @@
   "recommends": {
     "modmenu": "*"
   },
-  "breaks" : {
-    "memoryleakfix": "*",
-    "modelfix": "*",
-    "morechathistory": "*",
-    "better-mount-hud": "*",
-    "fadeless": "*",
-    "threadtweak": "*",
-    "badoptimizations": "*"
+  "custom": {
+    "mc-publish": {
+      "modrinth": "Rg9WdvvR",
+      "curseforge": 1111802,
+      "loaders": ["fabric", "quilt"],
+      "dependencies": [
+        "fabric(required){modrinth:fabric-api}{curseforge:fabric-api}",
+        "yet_another_config_lib_v3(required){modrinth:yacl}{curseforge:yacl}",
+        "modmenu(recommended)"
+      ]
+    },
+    "badoptimizations:incompatibilities": [
+      "enable_sky_color_caching",
+      "enable_lightmap_caching",
+      "enable_sky_angle_caching_in_worldrenderer"
+    ]
   }
 }

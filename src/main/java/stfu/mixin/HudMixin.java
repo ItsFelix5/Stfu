@@ -72,7 +72,7 @@ public abstract class HudMixin {
             else if (player.networkHandler.getWaypointHandler().hasWaypoint()) context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, Identifier.ofVanilla("hud/locator_bar_background"), centerX, centerY, 182, 5);
             else if (shouldShowJumpBar()) context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, Identifier.ofVanilla("hud/jump_bar_background"), centerX, centerY, 182, 5);
 
-            if (nextLevelExperience > 0 && player.experienceProgress > 0) context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, Identifier.ofVanilla("hud/experience_bar_progress"),
+            if (nextLevelExperience > 0 && player.experienceProgress > 0 && client.interactionManager.hasExperienceBar()) context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, Identifier.ofVanilla("hud/experience_bar_progress"),
                     182, 5, 0, 0, centerX, centerY, (int) (player.experienceProgress * 183), 5);
 
             if (mount != null) {

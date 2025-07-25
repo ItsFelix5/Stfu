@@ -27,11 +27,14 @@ jobs:
           chmod +x ./gradlew
           ./gradlew build
 
+      - name: Get Minecraft Version
+        run: echo "MC_VERSION=$(grep '^MC_VERSION=' gradle.properties | cut -d '=' -f2-)" >> $GITHUB_ENV
+
       - name: Upload
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          modrinth-id: Rg9WdvvR
+          version: ${{ github.event.release.tag_name }}-${{ github.ref_name }}
+          game-versions: ${{ env.MC_VERSION }}
+          game-version-filter: none
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          curseforge-id: 1111802
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

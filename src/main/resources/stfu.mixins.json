@@ -6,14 +6,12 @@
   "client": [
     "AccessibilityOptionsMixin",
     "BiomeMixin",
-    "BlockEntityRenderDispatcherMixin",
     "ChatLineMixin",
     "ChatMixin",
     "ChatScreenMixin",
     "ClientPlayerEntityMixin",
     "ClientWorldMixin",
     "DrawContextMixin",
-    "EntityRenderDispatcherMixin",
     "GameOptionMixin",
     "GameRendererMixin",
     "GeneratedItemModelMixin",
@@ -38,8 +36,6 @@
     "WeatherRenderingMixin",
     "WorldMixin",
     "WorldRendererMixin",
-    "BlockEntityTypeMixin",
-    "EntityTypeMixin",
     "NetworkUtilsMixin"
   ],
   "plugin": "stfu.MixinPlugin"
