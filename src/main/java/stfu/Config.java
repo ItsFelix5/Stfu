@@ -9,7 +9,6 @@ import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -76,11 +75,6 @@ public class Config {
     @Boolean
     @SerialEntry
     public boolean disableFade = false;
-
-    @AutoGen(category = basic, group = loading)
-    @Boolean
-    @SerialEntry
-    public boolean disableLoadingTerrain = true;
 
     @AutoGen(category = basic, group = loading)
     @Boolean
