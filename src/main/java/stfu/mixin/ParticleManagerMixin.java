@@ -28,7 +28,7 @@ public class ParticleManagerMixin {
 
     @Inject(method = "renderParticles", at = @At("HEAD"), cancellable = true)
     private void renderParticles(CallbackInfo ci) {
-        if(particles.isEmpty()) ci.cancel();
+        if(particles.isEmpty() || Config.get().disableParticles) ci.cancel();
     }
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)

@@ -27,7 +27,7 @@ body:
           required: true
     - type: input
       attributes:
-          label: Minecraft version
+          label: Stfu version
       validations:
           required: true
     - type: textarea

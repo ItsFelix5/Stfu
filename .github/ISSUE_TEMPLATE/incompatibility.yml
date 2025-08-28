@@ -14,7 +14,7 @@ body:
                 required: true
               - label: I have checked the mod is up to date
                 required: true
-              - label: I have checked this is not a mod that has similar features
+              - label: I have checked this is not a mod that has similar features. If a fabric window told you this mod is incompatible, this is the case.
                 required: true
     - type: dropdown
       attributes:
@@ -32,7 +32,7 @@ body:
           required: true
     - type: input
       attributes:
-          label: Minecraft version
+          label: Stfu version
       validations:
           required: true
     - type: textarea

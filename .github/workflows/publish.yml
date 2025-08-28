@@ -1,0 +1,40 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup jdk
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: false
+
+      - name: Build
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build
+
+      - name: Get Minecraft Version
+        run: echo "MC_VERSION=$(grep '^MC_VERSION=' gradle.properties | cut -d '=' -f2-)" >> $GITHUB_ENV
+
+      - name: Upload
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          version: ${{ github.event.release.tag_name }}-${{ github.ref_name }}
+          game-versions: ${{ env.MC_VERSION }}
+          game-version-filter: none
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}

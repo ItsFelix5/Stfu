@@ -18,6 +18,9 @@
   "yacl3.config.stfu:config.recipeToasts": "Recipe Toasts",
   "yacl3.config.stfu:config.recipeToasts.desc": "If minecraft shows a toast when you unlock new recipes.",
 
+  "yacl3.config.stfu:config.combineBars": "Combine Bars",
+  "yacl3.config.stfu:config.combineBars.desc": "Combine the experience and locator bars.",
+
   "yacl3.config.stfu:config.adminChat": "Admin Chat",
   "yacl3.config.stfu:config.adminChat.desc": "Whether you receive a message when an admin or command block runs a command.",
   "yacl3.config.stfu:config.adminChat.enabled": "Enabled",
@@ -45,11 +48,13 @@
 
   "yacl3.config.stfu:config.fixModelGaps": "Fix Gaps In Models",
   "yacl3.config.stfu:config.fixModelGaps.desc.1": "Changes the item model generation code to prevent gaps.",
-  "yacl3.config.stfu:config.fixModelGaps.desc.2": "This may or may not cause problems on macos.",
   "yacl3.config.stfu:config.fixModelGaps.desc.3": "Requires a reload to take effect.",
 
   "yacl3.config.stfu:config.nightVisionFlicker": "Night Vision Flicker",
   "yacl3.config.stfu:config.nightVisionFlicker.desc": "When night vision runs out the entire world flickers for a few seconds, this allows you to disable this.",
+
+  "yacl3.config.stfu:config.lightFlicker": "Light Flicker",
+  "yacl3.config.stfu:config.lightFlicker.desc": "In vanilla block light has a very subtle flicker, disable this if you don't want that.",
 
   "yacl3.config.stfu:config.lightMapUpdateTime": "Light Map Update Time",
   "yacl3.config.stfu:config.lightMapUpdateTime.desc.1": "Normally Minecraft updates the worlds light every tick.",
@@ -64,6 +69,9 @@
   "yacl3.config.stfu:config.animateTextures": "Animate Textures",
   "yacl3.config.stfu:config.animateTextures.desc": "If you disable this blocks like the nether portal will stop animating.",
 
+  "yacl3.config.stfu:config.renderWeather": "Render Weather",
+  "yacl3.config.stfu:config.renderWeather.desc": "Render Weather.",
+
   "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
   "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering. BIGGER IS NOT NECESSARILY BETTER!",
 
@@ -75,14 +83,15 @@
 
   "yacl3.config.stfu:config.lightmapUpdateDelay": "Lightmap update delay",
   "yacl3.config.stfu:config.lightmapUpdateDelay.desc.1": "Time in ticks until the lightmap updates during sunrise/set.",
-  "yacl3.config.stfu:config.lightmapUpdateDelay.desc.2": "Setting this to 0 disables this optimization.",
+  "yacl3.config.stfu:config.lightmapUpdateDelay.desc.2": "Set this to 0 if you experience issues with brightness caused by other mods not updating.",
 
   "yacl3.config.stfu:config.skyUpdateDelay": "Sky Color Update Delay",
-  "yacl3.config.stfu:config.skyUpdateDelay.desc.1": "Time in ticks until the sky color updates during sunrise/set.",
-  "yacl3.config.stfu:config.skyUpdateDelay.desc.2": "Setting this to 0 disables this optimization.",
+  "yacl3.config.stfu:config.skyUpdateDelay.desc": "Time in ticks until the sky color updates during sunrise/set.",
 
   "yacl3.config.stfu:config.debugUtilities": "Enable Debug Utilities",
-  "yacl3.config.stfu:config.debugUtilities.desc": "Enable some of mojang's debug utilities (mostly extra logs and keybinds), requires restart.",
+  "yacl3.config.stfu:config.debugUtilities.desc.1": "Enable some of mojang's debug utilities (mostly extra logs and keybinds).",
+  "yacl3.config.stfu:config.debugUtilities.desc.2": "THIS IS VERY UNSTABLE AND BUGS RELATED TO THIS WILL NOT BE FIXED.",
+  "yacl3.config.stfu:config.debugUtilities.desc.3": "Requires a restart.",
 
   "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
 }

@@ -9,11 +9,10 @@ import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Config  {
+public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
             .id(Identifier.of("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
@@ -21,8 +20,8 @@ public class Config  {
                     .setJson5(true)
                     .build())
             .build();
-    
-    public static Config get() {
+
+    public static Config get(){
         return HANDLER.instance();
     }
 
@@ -52,6 +51,11 @@ public class Config  {
     @SerialEntry
     public boolean recipeToasts = false;
 
+    @AutoGen(category = basic)
+    @Boolean
+    @SerialEntry
+    public boolean combineBars = false;
+
     @AutoGen(category = basic, group = chat)
     @EnumCycler
     @SerialEntry
@@ -75,22 +79,22 @@ public class Config  {
     @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
-    public boolean disableLoadingTerrain = true;
-
-    @AutoGen(category = basic, group = loading)
-    @Boolean
-    @SerialEntry
     public boolean disableWorldAdvice = false;
 
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
-    public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
+    public boolean fixModelGaps = true;
 
     @AutoGen(category = basic)
     @Boolean
     @SerialEntry
     public boolean nightVisionFlicker = true;
+
+    @AutoGen(category = basic)
+    @Boolean
+    @SerialEntry
+    public boolean lightFlicker = true;
 
     @AutoGen(category = basic, group = rendering)
     @Boolean
@@ -101,6 +105,12 @@ public class Config  {
     @Boolean
     @SerialEntry
     public boolean animateTextures = true;
+
+    @AutoGen(category = basic, group = rendering)
+    @Boolean
+    @SerialEntry
+    public boolean renderWeather = true;
+
 
 
     @AutoGen(category = advanced)

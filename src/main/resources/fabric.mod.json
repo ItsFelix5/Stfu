@@ -7,8 +7,9 @@
   "icon": "assets/stfu/icon.png",
   "authors": ["ItsFelix5"],
   "contact": {
-    "website": "https://modrinth.com/project/shuttfup",
-    "repo": "https://github.com/ItsFelix5/stfu"
+    "homepage": "https://modrinth.com/mod/shuttfup",
+    "issues": "https://github.com/ItsFelix5/stfu/issues",
+    "sources": "https://github.com/ItsFelix5/stfu"
   },
   "entrypoints": {
     "main": ["stfu.Main"],
@@ -22,18 +23,26 @@
     "fabricloader": "*",
     "minecraft": "*",
     "fabric": "*",
-    "yet_another_config_lib_v3": ">=3.6.2"
+    "yet_another_config_lib_v3": "*"
   },
   "recommends": {
-    "modmenu": ">=13.0.0"
+    "modmenu": "*"
   },
-  "breaks" : {
-    "memoryleakfix": "*",
-    "modelfix": "*",
-    "morechathistory": "*",
-    "better-mount-hud": "*",
-    "fadeless": "*",
-    "threadtweak": "*",
-    "badoptimizations": "*"
+  "custom": {
+    "mc-publish": {
+      "modrinth": "Rg9WdvvR",
+      "curseforge": 1111802,
+      "loaders": ["fabric", "quilt"],
+      "dependencies": [
+        "fabric(required){modrinth:fabric-api}{curseforge:fabric-api}",
+        "yet_another_config_lib_v3(required){modrinth:yacl}{curseforge:yacl}",
+        "modmenu(recommended)"
+      ]
+    },
+    "badoptimizations:incompatibilities": [
+      "enable_sky_color_caching",
+      "enable_lightmap_caching",
+      "enable_sky_angle_caching_in_worldrenderer"
+    ]
   }
 }

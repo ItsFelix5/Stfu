@@ -22,7 +22,6 @@ public class LightmapTextureManagerMixin {
     @Unique private long lastUpdate;
     @Unique private boolean hadConduitPower;
     @Unique private float lastSkyDarkness;
-    @Unique private boolean appliedDarkness;
     @Unique private double lastGamma;
 
     @SuppressWarnings("DataFlowIssue")
@@ -55,10 +54,7 @@ public class LightmapTextureManagerMixin {
         }
 
         // Darkness
-        if ((client.options.getDarknessEffectScale().getValue() > 0 && client.player.hasStatusEffect(StatusEffects.DARKNESS)) != appliedDarkness) {
-            appliedDarkness = !appliedDarkness;
-            return true;
-        }
+        if (client.player.hasStatusEffect(StatusEffects.DARKNESS) && client.options.getDarknessEffectScale().getValue() > 0) return true;
 
         // Sky Darkness (Boss Events)
         if(client.gameRenderer.skyDarkness != lastSkyDarkness){
@@ -83,6 +79,6 @@ public class LightmapTextureManagerMixin {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
      private void tick(CallbackInfo ci) {
          ci.cancel();
-         this.flickerIntensity = (this.flickerIntensity + (float) (Math.random() - Math.random()) * (float) Math.random() * (float) Math.random() * 0.1F) * 0.9F;
+        if(Config.get().lightFlicker) this.flickerIntensity = (this.flickerIntensity + (float)((Math.random() - Math.random()) * Math.random() * Math.random() * 0.1)) * 0.9F;
      }
 }

@@ -1,10 +1,17 @@
 accessWidener v2 named
 accessible field net/minecraft/client/gui/tooltip/OrderedTextTooltipComponent text Lnet/minecraft/text/OrderedText;
 accessible field net/minecraft/client/option/KeyBinding timesPressed I
-accessible class net/minecraft/client/render/model/json/ItemModelGenerator$Frame
-accessible class net/minecraft/client/render/model/json/ItemModelGenerator$Side
-accessible method net/minecraft/client/render/model/json/ItemModelGenerator$Side isVertical ()Z
+accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/client/util/InputUtil$Key;
+accessible class net/minecraft/client/render/model/json/GeneratedItemModel$Frame
+accessible class net/minecraft/client/render/model/json/GeneratedItemModel$Side
+accessible method net/minecraft/client/render/model/json/GeneratedItemModel$Side isVertical ()Z
 accessible field net/minecraft/client/render/LightmapTextureManager dirty Z
 accessible field net/minecraft/client/render/GameRenderer skyDarkness F
 accessible field net/minecraft/client/render/WorldRenderer frustum Lnet/minecraft/client/render/Frustum;
-accessible field net/minecraft/client/render/WorldRenderer capturedFrustum Lnet/minecraft/client/render/Frustum;
+accessible field net/minecraft/client/render/entity/EntityRenderers RENDERER_FACTORIES Ljava/util/Map;
+accessible field net/minecraft/client/render/entity/EntityRenderers PLAYER_RENDERER_FACTORIES Ljava/util/Map;
+accessible field net/minecraft/client/render/block/entity/BlockEntityRendererFactories FACTORIES Ljava/util/Map;
+accessible field net/minecraft/client/render/model/json/ModelElement from Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/render/model/json/ModelElement to Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/render/model/json/ModelElement faces Ljava/util/Map;
+accessible class net/minecraft/client/gui/hud/InGameHud$BarType

@@ -1,8 +1,9 @@
 package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.client.render.model.json.ItemModelGenerator;
+import net.minecraft.client.render.model.json.GeneratedItemModel;
 import net.minecraft.client.render.model.json.ModelElement;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
@@ -10,11 +11,11 @@ import stfu.Config;
 
 import java.util.List;
 
-@Mixin(ItemModelGenerator.class)
+@Mixin(GeneratedItemModel.class)
 public class GeneratedItemModelMixin {
     @ModifyReturnValue(method = "addSubComponents", at = @At("RETURN"))
-    private List<ModelElement> addSubComponents(List<ModelElement> original) {
-        if(Config.get().fixModelGaps) for (var e : original) {
+    private static List<ModelElement> addSubComponents(List<ModelElement> original) {
+        if(Config.get().fixModelGaps) for (ModelElement e : original) {
             if (e.faces.size() == 1) {
                 float fromX = e.from.x(), fromY = e.from.y();
                 float toX = e.to.x(), toY = e.to.y();
@@ -44,8 +45,8 @@ public class GeneratedItemModelMixin {
                         toY -= 0.002F;
                     }
                 }
-                e.from.set(fromX, fromY, e.from.z() - 0.002F);
-                e.to.set(toX, toY, e.to.z() + 0.002F);
+                ((Vector3f) e.from).set(fromX, fromY, e.from.z() - 0.002F);
+                ((Vector3f) e.to).set(toX, toY, e.to.z() + 0.002F);
             }
         }
         return original;
@@ -56,16 +57,16 @@ public class GeneratedItemModelMixin {
      * @reason To fix model gaps
      */
     @Overwrite
-    private void buildCube(List<ItemModelGenerator.Frame> cubes, ItemModelGenerator.Side side, int x, int y) {
+    private static void buildCube(List<GeneratedItemModel.Frame> cubes, GeneratedItemModel.Side side, int x, int y) {
         int verticalX = side.isVertical() ? x : y;
         int verticalY = side.isVertical() ? y : x;
-        for (ItemModelGenerator.Frame frame : cubes) {
+        for (GeneratedItemModel.Frame frame : cubes) {
             if (frame.getSide() == side && frame.getLevel() == verticalY && (!Config.get().fixModelGaps || frame.getMax() == verticalX - 1)) {
                 frame.expand(verticalX);
                 return;
             }
         }
 
-        cubes.add(new ItemModelGenerator.Frame(side, verticalX, verticalY));
+        cubes.add(new GeneratedItemModel.Frame(side, verticalX, verticalY));
     }
 }
