@@ -51,11 +51,6 @@ public class Config {
     @SerialEntry
     public boolean recipeToasts = false;
 
-    @AutoGen(category = basic)
-    @Boolean
-    @SerialEntry
-    public boolean combineBars = false;
-
     @AutoGen(category = basic, group = chat)
     @EnumCycler
     @SerialEntry
@@ -91,11 +86,6 @@ public class Config {
     @SerialEntry
     public boolean nightVisionFlicker = true;
 
-    @AutoGen(category = basic)
-    @Boolean
-    @SerialEntry
-    public boolean lightFlicker = true;
-
     @AutoGen(category = basic, group = rendering)
     @Boolean
     @SerialEntry
@@ -105,11 +95,6 @@ public class Config {
     @Boolean
     @SerialEntry
     public boolean animateTextures = true;
-
-    @AutoGen(category = basic, group = rendering)
-    @Boolean
-    @SerialEntry
-    public boolean renderWeather = true;
 
 
 
@@ -127,16 +112,6 @@ public class Config {
     @IntSlider(min = 1, max = 10, step = 1)
     @SerialEntry
     public int ioThreadPriority = 1;
-
-    @AutoGen(category = advanced)
-    @IntSlider(min = 0, max = 100, step = 1)
-    @SerialEntry
-    public int lightmapUpdateDelay = 10;
-
-    @AutoGen(category = advanced)
-    @IntSlider(min = 0, max = 100, step = 1)
-    @SerialEntry
-    public int skyUpdateDelay = 15;
 
     @AutoGen(category = advanced)
     @Boolean

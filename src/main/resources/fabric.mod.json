@@ -38,11 +38,6 @@
         "yet_another_config_lib_v3(required){modrinth:yacl}{curseforge:yacl}",
         "modmenu(recommended)"
       ]
-    },
-    "badoptimizations:incompatibilities": [
-      "enable_sky_color_caching",
-      "enable_lightmap_caching",
-      "enable_sky_angle_caching_in_worldrenderer"
-    ]
+    }
   }
 }
