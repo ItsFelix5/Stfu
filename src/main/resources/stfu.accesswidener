@@ -7,6 +7,6 @@ accessible class net/minecraft/client/render/model/json/ItemModelGenerator$Side
 accessible method net/minecraft/client/render/model/json/ItemModelGenerator$Side isVertical ()Z
 accessible field net/minecraft/client/render/WorldRenderer capturedFrustum Lnet/minecraft/client/render/Frustum;
 accessible field net/minecraft/client/render/WorldRenderer frustum Lnet/minecraft/client/render/Frustum;
-accessible field net/minecraft/client/render/model/json/ModelElement from Lorg/joml/Vector3fc;
-accessible field net/minecraft/client/render/model/json/ModelElement to Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/render/model/json/ModelElement from Lorg/joml/Vector3f;
+accessible field net/minecraft/client/render/model/json/ModelElement to Lorg/joml/Vector3f;
 accessible field net/minecraft/client/render/model/json/ModelElement faces Ljava/util/Map;
