@@ -79,6 +79,11 @@ public class Config {
     @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
+    public boolean disableSplash = false;
+
+    @AutoGen(category = basic, group = loading)
+    @Boolean
+    @SerialEntry
     public boolean disableWorldAdvice = false;
 
     @AutoGen(category = basic)
@@ -137,11 +142,6 @@ public class Config {
     @IntSlider(min = 0, max = 100, step = 1)
     @SerialEntry
     public int skyUpdateDelay = 15;
-
-    @AutoGen(category = advanced)
-    @Boolean
-    @SerialEntry
-    public boolean debugUtilities = false;
 
     public enum AdminChat implements NameableEnum {
         ENABLED,

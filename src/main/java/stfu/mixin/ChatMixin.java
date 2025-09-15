@@ -100,9 +100,10 @@ public abstract class ChatMixin {
             break; // Trust the previous message
         }
         // Append occurrences count
-        if (matches > 1) try {
-            ((MutableText) message).append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
-        } catch (UnsupportedOperationException e) {// MutableText is not always mutable? in this case use copy to assure it is backed by an arraylist
+        if (matches > 1) {
+            if(message instanceof MutableText mutable) try {
+                return mutable.append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
+            } catch (UnsupportedOperationException ignored) {} // MutableText is not always mutable? in this case use copy to assure it is backed by an arraylist
             return message.copy().append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
         }
         return message;

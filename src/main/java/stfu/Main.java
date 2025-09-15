@@ -2,6 +2,7 @@ package stfu;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -14,7 +15,7 @@ public class Main implements ModInitializer {
             "options.narrator_hotkey",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
-            "key.categories.misc"
+            KeyBinding.Category.MISC
     ));
 
     public static boolean skyDirty = true;
@@ -22,6 +23,6 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         Config.HANDLER.load();
-        if(Config.get().debugUtilities) SharedConstants.isDevelopment = true;
+        SharedConstants.isDevelopment = FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 }

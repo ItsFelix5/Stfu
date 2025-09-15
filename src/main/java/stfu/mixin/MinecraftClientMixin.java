@@ -2,6 +2,7 @@ package stfu.mixin;
 
 import com.mojang.blaze3d.platform.GLX;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.TimeSupplier;
@@ -36,6 +37,11 @@ public abstract class MinecraftClientMixin {
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;shouldTick()Z", ordinal = 1))
     private boolean shouldTickParticles(MinecraftClient instance){
         return !Config.get().disableParticles && shouldTick();
+    }
+
+    @Redirect(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;overlay:Lnet/minecraft/client/gui/screen/Overlay;"))
+    private Overlay overlay(MinecraftClient instance){
+        return null;
     }
 
     @Inject(method = "joinWorld", at = @At("HEAD"))

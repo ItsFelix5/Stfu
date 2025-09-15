@@ -10,14 +10,14 @@
 * Improved performance and loading times
 * Allowed disabling custom world advice, the tutorial, the multiplayer warning, chat signing warnings, telemetry and night vision/block light flicker
 * Disabled realms notifications and the narrator on startup and allowed rebinding the narrator key
-* Allowed toggling all kinds of toasts and opening the inventory in portals
+* Allowed toggling all kinds of toasts
 * Enabled the operator item tab by default
 * Removed the chat command length limit
 * Added options to hide advancement broadcasts and command block output, compact chat spam and combine HUD bars
 * Added an option to increase the maximum amount of chat messages, to hide particles and stop block animations
 * Fixed tooltips running off the screen and model gaps
 * Added options that speed up minecraft/world (re)loading
-* Made it possible to see your health and hunger when riding something and to bind a button to multiple keybinds
+* Made it possible to get rid of the reload screen
 * Set the default LAN port to 25565
 
 Looking for more client mods? Check out [Camera Tweaks](https://modrinth.com/mod/cameratweaks)!

@@ -9,15 +9,11 @@ import net.minecraft.client.gui.hud.bar.Bar;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.JumpingMount;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import stfu.Config;
 
@@ -25,6 +21,9 @@ import static stfu.Main.client;
 
 @Mixin(InGameHud.class)
 public abstract class HudMixin {
+    @Shadow
+    protected abstract boolean shouldShowJumpBar();
+
     @Inject(method = "getCurrentBarType", at = @At("HEAD"), cancellable = true)
     private void getCurrentBarType(CallbackInfoReturnable<InGameHud.BarType> cir) {
         if(Config.get().combineBars) cir.setReturnValue(InGameHud.BarType.LOCATOR);

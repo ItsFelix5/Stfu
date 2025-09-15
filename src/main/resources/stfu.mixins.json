@@ -9,7 +9,6 @@
     "ChatLineMixin",
     "ChatMixin",
     "ChatScreenMixin",
-    "ClientPlayerEntityMixin",
     "ClientWorldMixin",
     "DrawContextMixin",
     "GameOptionMixin",
@@ -17,13 +16,13 @@
     "GeneratedItemModelMixin",
     "HudMixin",
     "IntegratedServerLoaderMixin",
-    "KeyBindingMixin",
-    "KeyBindingWidgetMixin",
     "KeyboardMixin",
     "LightmapTextureManagerMixin",
     "MainMixin",
     "MinecraftClientMixin",
     "MinecraftServerMixin",
+    "MouseMixin",
+    "NetworkUtilsMixin",
     "ParticleManagerMixin",
     "PlayNetworkHandlerMixin",
     "SplashMixin",
@@ -35,8 +34,7 @@
     "UtilMixin",
     "WeatherRenderingMixin",
     "WorldMixin",
-    "WorldRendererMixin",
-    "NetworkUtilsMixin"
+    "WorldRendererMixin"
   ],
   "plugin": "stfu.MixinPlugin"
 }
