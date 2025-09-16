@@ -24,6 +24,8 @@
     "MainMixin",
     "MinecraftClientMixin",
     "MinecraftServerMixin",
+    "MouseMixin",
+    "NetworkUtilsMixin",
     "ParticleManagerMixin",
     "PlayNetworkHandlerMixin",
     "SplashMixin",
@@ -35,8 +37,7 @@
     "UtilMixin",
     "WeatherRenderingMixin",
     "WorldMixin",
-    "WorldRendererMixin",
-    "NetworkUtilsMixin"
+    "WorldRendererMixin"
   ],
   "plugin": "stfu.MixinPlugin"
 }

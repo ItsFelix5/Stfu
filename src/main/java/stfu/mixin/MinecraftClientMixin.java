@@ -3,6 +3,7 @@ package stfu.mixin;
 import com.mojang.blaze3d.platform.GLX;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
+import net.minecraft.client.gui.screen.Overlay;
 import net.minecraft.client.gui.screen.ReconfiguringScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -55,6 +56,11 @@ public abstract class MinecraftClientMixin {
             }
         }
         return screen;
+    }
+
+    @Redirect(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;overlay:Lnet/minecraft/client/gui/screen/Overlay;"))
+    private Overlay overlay(MinecraftClient instance){
+        return null;
     }
 
     @Inject(method = "joinWorld", at = @At("HEAD"))

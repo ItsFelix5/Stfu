@@ -9,15 +9,11 @@ import net.minecraft.client.gui.hud.bar.Bar;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.JumpingMount;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import stfu.Config;
 
@@ -26,32 +22,7 @@ import static stfu.Main.client;
 @Mixin(InGameHud.class)
 public abstract class HudMixin {
     @Shadow
-    @Nullable
-    protected abstract LivingEntity getRiddenEntity();
-    @Shadow
-    protected abstract int getHeartCount(@Nullable LivingEntity entity);
-    @Shadow protected abstract boolean shouldShowJumpBar();
-
-    @ModifyVariable(method = "renderMountHealth", at = @At(value = "STORE"), ordinal = 2)
-    private int higherMountHealth(int y) {
-        return client.interactionManager.hasStatusBars() ? y - 10 : y;
-    }
-
-    @Redirect(method = "renderStatusBars", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;getHeartCount(Lnet/minecraft/entity/LivingEntity;)I"))
-    private int alwaysRenderFood(InGameHud inGameHud, LivingEntity entity) {
-        return 0;
-    }
-
-    @Inject(method = "getAirBubbleY", at = @At(value = "RETURN"), cancellable = true)
-    private void moveAirUp(int heartCount, int top, CallbackInfoReturnable<Integer> cir) {
-        LivingEntity entity = getRiddenEntity();
-        if (entity != null) cir.setReturnValue(cir.getReturnValue() - getHeartCount(entity));
-    }
-
-    @Redirect(method = "getCurrentBarType", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;getJumpingMount()Lnet/minecraft/entity/JumpingMount;"))
-    private JumpingMount showXp(ClientPlayerEntity player) {
-        return this.shouldShowJumpBar() || !client.interactionManager.hasExperienceBar() ? player.getJumpingMount() : null;
-    }
+    protected abstract boolean shouldShowJumpBar();
 
     @Inject(method = "getCurrentBarType", at = @At("HEAD"), cancellable = true)
     private void getCurrentBarType(CallbackInfoReturnable<InGameHud.BarType> cir) {
