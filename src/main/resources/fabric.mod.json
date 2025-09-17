@@ -3,23 +3,41 @@
   "id": "stfu",
   "version": "${version}",
   "name": "Stfu",
-  "description": "A mod that fixes some minor annoyances!",
-  "authors": [
-    "itsfelix5"
-  ],
+  "description": "A mod that fixes some annoyances!",
+  "icon": "assets/stfu/icon.png",
+  "authors": ["ItsFelix5"],
   "contact": {
-    "website": "https://modrinth.com/project/shuttfup",
-    "repo": "https://github.com/ItsFelix5/stfu"
+    "homepage": "https://modrinth.com/mod/shuttfup",
+    "issues": "https://github.com/ItsFelix5/stfu/issues",
+    "sources": "https://github.com/ItsFelix5/stfu"
+  },
+  "entrypoints": {
+    "main": ["stfu.Main"],
+    "modmenu": ["stfu.ModMenu"]
   },
   "license": "MIT",
-  "icon": "assets/stfu/icon.png",
   "environment": "client",
   "accessWidener": "stfu.accesswidener",
-  "mixins": [
-    "stfu.mixins.json"
-  ],
+  "mixins": ["stfu.mixins.json"],
   "depends": {
     "fabricloader": "*",
-    "minecraft": ">=1.20"
+    "minecraft": "*",
+    "fabric": "*",
+    "yet_another_config_lib_v3": "*"
+  },
+  "recommends": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "mc-publish": {
+      "modrinth": "Rg9WdvvR",
+      "curseforge": 1111802,
+      "loaders": ["fabric", "quilt"],
+      "dependencies": [
+        "fabric(required){modrinth:fabric-api}{curseforge:fabric-api}",
+        "yet_another_config_lib_v3(required){modrinth:yacl}{curseforge:yacl}",
+        "modmenu(recommended)"
+      ]
+    }
   }
 }

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TextFieldWidget.class)
-public abstract class TextFieldWidgetFix {
+public abstract class TextFieldWidgetMixin {
     @Shadow
     private int selectionStart;
 

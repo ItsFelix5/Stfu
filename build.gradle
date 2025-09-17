@@ -1,31 +1,40 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.11-SNAPSHOT'
     id 'maven-publish'
-    id "com.modrinth.minotaur" version "2.+"
 }
 
-version = project.mod_version
-group = project.maven_group
+version = System.getenv("GITHUB_REF")?.replace("refs/tags/", "") ?: "dev"
+group = "io.github.itsfelix5"
 
 base {
-    archivesName = project.archives_base_name
+    archivesName = "Stfu"
+}
+
+repositories {
+    maven {
+        url = 'https://maven.isxander.dev/releases'
+    }
+    maven {
+        url = "https://maven.terraformersmc.com/"
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    mappings "net.fabricmc:yarn:${project.minecraft_version}+build.${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:+"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}-fabric"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
     inputs.property "version", project.version
-    filteringCharset "UTF-8"
+    filteringCharset = "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version
     }
-
-    from "THIRD_PARTY_LICENSES"
 }
 
 loom {
@@ -34,35 +43,24 @@ loom {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
-    it.options.release.set(21)
+    it.options.release.set(17)
 }
 
 java {
-    if (JavaVersion.current() < JavaVersion.toVersion(21)) toolchain.languageVersion = JavaLanguageVersion.of(21)
+    if (JavaVersion.current() < JavaVersion.toVersion(17)) toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+        rename { "${it}_Stfu" }
     }
 }
 
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
-            artifactId = project.archives_base_name
+            artifactId = "Stfu"
             from components.java
         }
     }
 }
-
-modrinth {
-    token = System.getenv("MODRINTH_TOKEN")
-    projectId = "Rg9WdvvR"
-    uploadFile = remapJar
-    gameVersions = ["1.20.5", "1.20.6", "1.21", "1.21.1"]
-    loaders = ["fabric", "quilt"]
-    syncBodyFrom = rootProject.file("README.md").text
-}
-
-tasks.modrinth.dependsOn(tasks.modrinthSyncBody)

@@ -1,29 +1,36 @@
 # Stfu
-### A mod to fix some minor annoyances!
+### A mod to fix some annoyances and speed up your game!
+<span>
+<a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_fabricapi.svg"></a>
+<a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_modmenu.svg"></a>
+<a href="https://modrinth.com/mod/yacl"><img alt="Requires YACL" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_YACL.svg"></a>
+</span>
 
 #### Current changes:
-* Removed custom world "advice"
-* Disabled the narrator on first boot
-* Disabled the narrator shortcut and realms notifications by default
-* Removed the social interactions and recipes toasts
-* Removed multiplayer warning
-* Removed telemetry
+* Improved performance and loading times
+* Allowed disabling custom world advice, the tutorial, the multiplayer warning, chat signing warnings, telemetry and night vision/block light flicker
+* Disabled realms notifications and the narrator on startup and allowed rebinding the narrator key
+* Allowed toggling all kinds of toasts and opening the inventory in portals
 * Enabled the operator item tab by default
-* Removed the tutorial
-* Allows you to see all recipes without unlocking them
-* Disabled the chat command length limit
-* Added options to hide advancement broadcasts and command block output
-* Added an option to increase the maximum amount of chat messages
-* Removed the unsigned message indicators
-* Fixed tooltips running off the screen
-* Added an option to compact repetitive chat messages
+* Removed the chat command length limit
+* Added options to hide advancement broadcasts and command block output, compact chat spam and combine HUD bars
+* Added an option to increase the maximum amount of chat messages, to hide particles and stop block animations
+* Fixed tooltips running off the screen and model gaps
+* Added options that speed up minecraft/world (re)loading
+* Made it possible to get rid of the reloading screen and to bind a button to multiple keybinds
+* Set the default LAN port to 25565
+
+Looking for more client mods? Check out [Camera Tweaks](https://modrinth.com/mod/cameratweaks)!
 
 ### Faq
 #### I have a suggestion for this mod!
-If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5/Stfu/issues/new?&labels=Feature&template=feature_request.md&title=%5BSUGGESTION%5D+)!
+If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=Feature&template=feature_request.yml&title=%5BSUGGESTION%5D+)!
+### I found a bug!
+If you found a bug, please [report it](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=bug&template=bug_report.yml&title=%5BIBUG%5D+) so I can fix it asap!
 #### Is this mod compatible with X?
 Probably, I am trying to make this mod as compatible as I can. If there is a problematic conflict you can 
-[open an issue](https://github.com/ItsFelix5/Stfu/issues/new?labels=Incompatibility&template=bug_report.md&title=%5BINCOMPATIBILITY%5D+).
+[open an issue](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=Incompatibility&template=incompatibility.yml&title=%5BINCOMPATIBILITY%5D+).
+DO NOT OPEN AN ISSUE WHEN FABRIC SAYS IT IS INCOMPATIBLE, this means this mod fully includes all those features.
 #### Can I use this in my modpack?
 Yes, of course as long as it stays on modrinth or curseforge!
 #### Can I redistribute this mod?
@@ -31,4 +38,4 @@ No, you can't redistribute this mod without my permission. You can only link to 
 #### Why is this mod called "Stfu"?
 This is because the mod was originally created to remove the annoying new world advice and the narrator jumpscares.
 #### Can you port this to (Neo)Forge?
-No, but might be able to use [Sinytra Connector](https://modrinth.com/mod/connector).
+No.

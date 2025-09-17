@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChatScreen.class)
-public class ShutCommandLimit {
+public class ChatScreenMixin {
     @Shadow
     protected TextFieldWidget chatField;
     @Unique

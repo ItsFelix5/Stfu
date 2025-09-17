@@ -1,12 +1,81 @@
 {
-  "options.maxChatHistory": "Max chat history",
-  "options.announceAdvancements": "Announce advancements",
-  "options.adminChat": "Admin chat",
-  "options.adminChat.enabled": "Enabled",
-  "options.adminChat.only_players": "Only players",
-  "options.adminChat.disabled": "Disabled",
-  "options.compactChat": "Compact chat",
-  "options.compactChat.all": "Always",
-  "options.compactChat.only_consecutive": "Only consecutive",
-  "options.compactChat.never": "Never"
+  "yacl3.config.stfu:config.title": "STFU",
+  "yacl3.config.stfu:config.category.basic": "Basic",
+  "yacl3.config.stfu:config.category.advanced": "Advanced",
+  "yacl3.config.stfu:config.category.basic.group.chat": "Chat Settings",
+  "yacl3.config.stfu:config.category.basic.group.loading": "Loading",
+  "yacl3.config.stfu:config.category.basic.group.rendering": "Rendering",
+
+  "yacl3.config.stfu:config.maxChatHistory": "Max Chat History",
+  "yacl3.config.stfu:config.maxChatHistory.desc": "The maximum number of messages to keep in chat history.",
+
+  "yacl3.config.stfu:config.announceAdvancements": "Announce Advancements",
+  "yacl3.config.stfu:config.announceAdvancements.desc": "If minecraft shows advancements achieved in chat.",
+
+  "yacl3.config.stfu:config.advancementToasts": "Advancements Toasts",
+  "yacl3.config.stfu:config.advancementToasts.desc": "If minecraft shows advancements achieved as a toast.",
+
+  "yacl3.config.stfu:config.recipeToasts": "Recipe Toasts",
+  "yacl3.config.stfu:config.recipeToasts.desc": "If minecraft shows a toast when you unlock new recipes.",
+
+  "yacl3.config.stfu:config.adminChat": "Admin Chat",
+  "yacl3.config.stfu:config.adminChat.desc": "Whether you receive a message when an admin or command block runs a command.",
+  "yacl3.config.stfu:config.adminChat.enabled": "Enabled",
+  "yacl3.config.stfu:config.adminChat.only_players": "Only Players",
+  "yacl3.config.stfu:config.adminChat.disabled": "Disabled",
+
+  "yacl3.config.stfu:config.compactChat": "Compact Chat",
+  "yacl3.config.stfu:config.compactChat.desc": "When you receive multiple equal chat messages, compact them into one.",
+  "yacl3.config.stfu:config.compactChat.all": "Always",
+  "yacl3.config.stfu:config.compactChat.only_consecutive": "Only Consecutive",
+  "yacl3.config.stfu:config.compactChat.never": "Never",
+
+  "yacl3.config.stfu:config.disableWidgetFade": "Disable Loading Widget Fade",
+  "yacl3.config.stfu:config.disableWidgetFade.desc": "Disable the 2 seconds all buttons are invisible on the title screen after loading.",
+
+  "yacl3.config.stfu:config.disableFade": "Disable Loading Fade Animation",
+  "yacl3.config.stfu:config.disableFade.desc": "Disable the 2 second fade animation when the game or resources (re)load.",
+
+  "yacl3.config.stfu:config.disableSplash": "Disable Splash screen",
+  "yacl3.config.stfu:config.disableSplash.desc": "Get rid of the splash screens background whenever possible.",
+
+  "yacl3.config.stfu:config.disableLoadingTerrain": "Disable Loading Terrain Screen",
+  "yacl3.config.stfu:config.disableLoadingTerrain.desc.1": "Hide the loading terrain screen to speed up world loading.",
+  "yacl3.config.stfu:config.disableLoadingTerrain.desc.2": "This creates a small flicker and lag spike when loading.",
+
+  "yacl3.config.stfu:config.disableWorldAdvice": "Disable Custom World Advice",
+  "yacl3.config.stfu:config.disableWorldAdvice.desc": "Skip the warning screen for experimental settings and some datapacks.",
+
+  "yacl3.config.stfu:config.fixModelGaps": "Fix Gaps In Models",
+  "yacl3.config.stfu:config.fixModelGaps.desc.1": "Changes the item model generation code to prevent gaps.",
+  "yacl3.config.stfu:config.fixModelGaps.desc.3": "Requires a reload to take effect.",
+
+  "yacl3.config.stfu:config.nightVisionFlicker": "Night Vision Flicker",
+  "yacl3.config.stfu:config.nightVisionFlicker.desc": "When night vision runs out the entire world flickers for a few seconds, this allows you to disable this.",
+
+  "yacl3.config.stfu:config.disableParticles": "Disable Particles",
+  "yacl3.config.stfu:config.disableParticles.desc.1": "No particles.",
+  "yacl3.config.stfu:config.disableParticles.desc.2": "This improves performance.",
+
+  "yacl3.config.stfu:config.animateTextures": "Animate Textures",
+  "yacl3.config.stfu:config.animateTextures.desc": "If you disable this blocks like the nether portal will stop animating.",
+
+  "yacl3.config.stfu:config.renderWeather": "Render Weather",
+  "yacl3.config.stfu:config.renderWeather.desc": "Render Weather.",
+
+  "yacl3.config.stfu:config.renderThreadPriority": "Render Thread Priority",
+  "yacl3.config.stfu:config.renderThreadPriority.desc": "Thread priority for rendering. BIGGER IS NOT NECESSARILY BETTER!",
+
+  "yacl3.config.stfu:config.serverThreadPriority": "Server Thread Priority",
+  "yacl3.config.stfu:config.serverThreadPriority.desc": "Thread priority for the integrated server. BIGGER IS NOT NECESSARILY BETTER!",
+
+  "yacl3.config.stfu:config.ioThreadPriority": "Worker Thread Priority",
+  "yacl3.config.stfu:config.ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. BIGGER IS NOT NECESSARILY BETTER!",
+
+  "yacl3.config.stfu:config.debugUtilities": "Enable Debug Utilities",
+  "yacl3.config.stfu:config.debugUtilities.desc.1": "Enable some of mojang's debug utilities (mostly extra logs and keybinds).",
+  "yacl3.config.stfu:config.debugUtilities.desc.2": "THIS IS VERY UNSTABLE AND BUGS RELATED TO THIS WILL NOT BE FIXED.",
+  "yacl3.config.stfu:config.debugUtilities.desc.3": "Requires a restart.",
+
+  "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
 }

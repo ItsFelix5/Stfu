@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameOptions.class)
-abstract class BetterDefaultSettings {
+abstract class GameOptionMixin {
     @Shadow
     @Final
     private SimpleOption<Boolean> operatorItemsTab;
@@ -24,7 +24,6 @@ abstract class BetterDefaultSettings {
         GameOptions t = (GameOptions) (Object) this;
         t.onboardAccessibility = false;
         t.skipMultiplayerWarning = true;
-        t.hideBundleTutorial = true;
         t.tutorialStep = TutorialStep.NONE;
         t.joinedFirstServer = true;
         operatorItemsTab.setValue(true);

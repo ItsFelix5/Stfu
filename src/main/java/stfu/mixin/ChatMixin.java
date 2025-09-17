@@ -16,12 +16,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import stfu.Options;
+import stfu.Config;
 
 import java.util.List;
 
 @Mixin(ChatHud.class)
-public abstract class ShutChat {
+public abstract class ChatMixin {
     @Unique
     private static final Style OCCURRENCES = Style.EMPTY.withColor(Formatting.GRAY);
     @Shadow
@@ -34,7 +34,7 @@ public abstract class ShutChat {
     @ModifyExpressionValue(method = {"addToMessageHistory", "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V"}, at =
     @At(value = "CONSTANT", args = "intValue=100"))
     private int moreHistory(int original) {
-        return Options.maxChatHistory.getValue();
+        return Config.get().maxChatHistory;
     }
 
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;)V", at = @At("HEAD"), cancellable = true)
@@ -42,10 +42,10 @@ public abstract class ShutChat {
         if (!(message instanceof MutableText mutable && mutable.getContent() instanceof TranslatableTextContent translatable)) return;
 
         if (translatable.getKey().startsWith("chat.type.advancement")) {
-            if (!Options.announceAdvancements.getValue()) ci.cancel();
+            if (!Config.get().announceAdvancements) ci.cancel();
         } else if (translatable.getKey().equals("chat.type.admin")) {
-            Options.AdminChat adminChat = Options.adminChat.getValue();
-            if (adminChat == Options.AdminChat.DISABLED || (adminChat == Options.AdminChat.ONLY_PLAYERS && translatable.getArgs()[0].equals("@")))
+            Config.AdminChat adminChat = Config.get().adminChat;
+            if (adminChat == Config.AdminChat.DISABLED || (adminChat == Config.AdminChat.ONLY_PLAYERS && translatable.getArgs()[0].equals("@")))
                 ci.cancel();
         }
     }
@@ -56,7 +56,7 @@ public abstract class ShutChat {
             argsOnly = true
     )
     private Text compact(Text message) {
-        if (Options.compactChat.getValue() == Options.CompactChat.NEVER || messages.isEmpty()) return message;
+        if (Config.get().compactChat == Config.CompactChat.NEVER || messages.isEmpty()) return message;
         // Skip common separators
         boolean isSeparator = true;
         for (char c : message.getString().trim().toCharArray())
@@ -68,7 +68,7 @@ public abstract class ShutChat {
 
         // Find matching messages
         int matches = 0;
-        for (ChatHudLine other : Options.compactChat.getValue() == Options.CompactChat.ONLY_CONSECUTIVE ? List.of(messages.getFirst()) : messages) {
+        for (ChatHudLine other : Config.get().compactChat == Config.CompactChat.ONLY_CONSECUTIVE ? List.of(messages.get(0)) : messages) {
             Text content = other.content();
             if (!content.getContent().equals(message.getContent()) || !content.getStyle().equals(message.getStyle())) continue;
 
@@ -76,12 +76,12 @@ public abstract class ShutChat {
             List<Text> siblings = content.getSiblings();
             String o = null;
             if (!siblings.isEmpty()) {
-                Text last = siblings.getLast();
+                Text last = siblings.get(siblings.size() - 1);
                 if (last.getStyle() == OCCURRENCES) {
                     String raw = last.getString();
                     if (raw != null && raw.startsWith(" (") && raw.endsWith(")")) {
                         o = raw.substring(2, raw.length() - 1);
-                        siblings.removeLast();
+                        siblings.remove(siblings.size() - 1);
                     }
                 }
             }
@@ -100,9 +100,10 @@ public abstract class ShutChat {
             break; // Trust the previous message
         }
         // Append occurrences count
-        if (matches > 1) try {
-            ((MutableText) message).append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
-        } catch (UnsupportedOperationException e) {// MutableText is not always mutable? in this case use copy to assure it is backed by an arraylist
+        if (matches > 1) {
+            if(message instanceof MutableText mutable) try {
+                return mutable.append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
+            } catch (UnsupportedOperationException ignored) {} // MutableText is not always mutable? in this case use copy to assure it is backed by an arraylist
             return message.copy().append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
         }
         return message;
