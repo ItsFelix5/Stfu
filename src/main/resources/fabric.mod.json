@@ -11,33 +11,14 @@
     "issues": "https://github.com/ItsFelix5/stfu/issues",
     "sources": "https://github.com/ItsFelix5/stfu"
   },
-  "entrypoints": {
-    "main": ["stfu.Main"],
-    "modmenu": ["stfu.ModMenu"]
-  },
   "license": "MIT",
   "environment": "client",
-  "accessWidener": "stfu.accesswidener",
-  "mixins": ["stfu.mixins.json"],
+  "accessWidener": "${accesswidener}",
   "depends": {
-    "fabricloader": "*",
-    "minecraft": "*",
     "fabric": "*",
     "yet_another_config_lib_v3": "*"
   },
   "recommends": {
     "modmenu": "*"
-  },
-  "custom": {
-    "mc-publish": {
-      "modrinth": "Rg9WdvvR",
-      "curseforge": 1111802,
-      "loaders": ["fabric", "quilt"],
-      "dependencies": [
-        "fabric(required){modrinth:fabric-api}{curseforge:fabric-api}",
-        "yet_another_config_lib_v3(required){modrinth:yacl}{curseforge:yacl}",
-        "modmenu(recommended)"
-      ]
-    }
   }
 }

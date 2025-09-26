@@ -1,5 +1,5 @@
 # Stfu
-### A mod to fix some annoyances and speed up your game!
+### A mod to fix some annoyances!
 <span>
 <a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_fabricapi.svg"></a>
 <a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_modmenu.svg"></a>
@@ -30,7 +30,6 @@ If you found a bug, please [report it](https://github.com/ItsFelix5/Stfu/issues/
 #### Is this mod compatible with X?
 Probably, I am trying to make this mod as compatible as I can. If there is a problematic conflict you can 
 [open an issue](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=Incompatibility&template=incompatibility.yml&title=%5BINCOMPATIBILITY%5D+).
-DO NOT OPEN AN ISSUE WHEN FABRIC SAYS IT IS INCOMPATIBLE, this means this mod fully includes all those features.
 #### Can I use this in my modpack?
 Yes, of course as long as it stays on modrinth or curseforge!
 #### Can I redistribute this mod?

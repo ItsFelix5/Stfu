@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import org.spongepowered.asm.service.MixinService;
 import org.spongepowered.asm.util.Annotations;
+import stfu.config.MixinConfig;
 
 import java.util.List;
 import java.util.Set;
@@ -21,9 +22,11 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (MixinConfig.get(mixinClassName.substring(11))) return false;
+
         try {
             DisableIf annotation = Annotations.getValue(Annotations.getVisible(MixinService.getService().getBytecodeProvider().getClassNode(mixinClassName), DisableIf.class));
-            if(annotation != null) for (String mod : annotation.value()) if(FabricLoader.getInstance().isModLoaded(mod)) return false;
+            if (annotation != null) for (String mod : annotation.value()) if (FabricLoader.getInstance().isModLoaded(mod)) return false;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
