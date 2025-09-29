@@ -1,4 +1,5 @@
-package stfu.mixin;
+//? if < 1.21.8 {
+/*package stfu.mixin;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -13,3 +14,4 @@ public class AllowScreensInPortals {
         return true;
     }
 }
+*///?}

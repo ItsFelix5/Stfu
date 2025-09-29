@@ -1,4 +1,4 @@
-Made Stfu multiversion
-Added stfu-disable.txt (see https://github.com/ItsFelix5/Stfu/wiki/Features)
-Improved tooltips feature
-Fixed many bugs
+Ported to 1.21.9
+Changed startsWith to contains for stfu-disable.txt
+Improved Disable World Advice
+Removed ThreadExecutorMixin

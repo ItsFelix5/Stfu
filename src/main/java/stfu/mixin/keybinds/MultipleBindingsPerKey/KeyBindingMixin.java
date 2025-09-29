@@ -1,4 +1,5 @@
-package stfu.mixin.keybinds.MultipleBindingsPerKey;
+//? if < 1.21.8 {
+/*package stfu.mixin.keybinds.MultipleBindingsPerKey;
 
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -44,3 +45,4 @@ public class KeyBindingMixin {
         return KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent((InputUtil.Key) key, k -> new HashSet<>()).add((KeyBinding) value);
     }
 }
+*///?}

@@ -25,9 +25,9 @@ public abstract class SplashOverlayMixin {
     @Shadow @Final private Consumer<Optional<Throwable>> exceptionHandler;
     @Shadow @Final private MinecraftClient client;
 
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceReload;throwException()V"))
+    @Inject(method = {"render", "tick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceReload;throwException()V"))
     private void removeOverlay(CallbackInfo ci) {
-        if (Config.get().disableFade) client.setOverlay(null);
+        if (Config.get().disableFade || Config.get().disableSplash) client.setOverlay(null);
     }
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
@@ -44,7 +44,8 @@ public abstract class SplashOverlayMixin {
         this.progress = this.reload.getProgress();
         this.renderProgressBar(context, width / 2 - o, q - 5, width / 2 + o, q + 5, 1.0F);
 
-        if (this.reload.isComplete()) {
+        //? if < 1.21.8 {
+        /*if (this.reload.isComplete()) {
             try {
                 this.reload.throwException();
                 this.exceptionHandler.accept(Optional.empty());
@@ -56,7 +57,7 @@ public abstract class SplashOverlayMixin {
             if (this.client.currentScreen != null) {
                 this.client.currentScreen.init(this.client, context.getScaledWindowWidth(), context.getScaledWindowHeight());
             }
-        }
+        }*///?}
     }
 
     @Inject(method = "pausesGame", at = @At("HEAD"), cancellable = true)

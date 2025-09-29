@@ -1,4 +1,5 @@
-package stfu;
+//? if < 1.21.8 {
+/*package stfu;
 
 import com.google.common.collect.Maps;
 import net.minecraft.client.option.KeyBinding;
@@ -10,3 +11,4 @@ import java.util.Set;
 public class KeybindHolder {
     public static final Map<InputUtil.Key, Set<KeyBinding>> KEY_TO_BINDINGS = Maps.newHashMap();
 }
+*///?}

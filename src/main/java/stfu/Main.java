@@ -16,7 +16,7 @@ public class Main implements ModInitializer {
             "options.narrator_hotkey",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
-            "key.categories.misc"
+            /*? if < 1.21.9 {*//*"key.categories.misc"*//*?} else {*/KeyBinding.Category.MISC/*?}*/
     ));
 
     @Override

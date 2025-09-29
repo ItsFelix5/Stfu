@@ -36,8 +36,8 @@
   "yacl3.config.stfu:config.disableFade": "Disable Loading Fade Animation",
   "yacl3.config.stfu:config.disableFade.desc": "Disable the 2 second fade animation when the game or resources (re)load.",
 
-  "yacl3.config.stfu:config.disableSplash": "Disable Splash screen",
-  "yacl3.config.stfu:config.disableSplash.desc": "Get rid of the splash screens background whenever possible.",
+  "yacl3.config.stfu:config.disableSplash": "Disable Resource Reload Screen",
+  "yacl3.config.stfu:config.disableSplash.desc": "Get rid of the reload overlays background whenever possible.",
 
   "yacl3.config.stfu:config.disableLoadingTerrain": "Disable Loading Terrain Screen",
   "yacl3.config.stfu:config.disableLoadingTerrain.desc.1": "Hide the loading terrain and reconfiguring screen to speed up world loading.",

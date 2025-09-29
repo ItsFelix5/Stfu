@@ -22,7 +22,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (MixinConfig.get(mixinClassName.substring(11))) return false;
+        if (MixinConfig.get(mixinClassName)) return false;
 
         try {
             DisableIf annotation = Annotations.getValue(Annotations.getVisible(MixinService.getService().getBytecodeProvider().getClassNode(mixinClassName), DisableIf.class));

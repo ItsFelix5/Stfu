@@ -28,6 +28,6 @@ public class MixinConfig {
 
     public static boolean get(String name) {
         if (!loaded) load();
-        return DISABLED.stream().anyMatch(name::startsWith);
+        return DISABLED.stream().anyMatch(name::contains);
     }
 }

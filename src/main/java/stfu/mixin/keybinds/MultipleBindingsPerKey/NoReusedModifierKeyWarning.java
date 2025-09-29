@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.At;
 public class NoReusedModifierKeyWarning {
     @WrapOperation(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;isUnbound()Z"))
     private boolean shutReusedModifierKeys(KeyBinding instance, Operation<Boolean> original) {
-        return original.call(instance) || instance.getCategory().equals(KeyBinding.CREATIVE_CATEGORY);
+        return original.call(instance) || instance.getCategory().equals(/*? if < 1.21.9 {*//*KeyBinding.CREATIVE_CATEGORY*//*?} else {*/KeyBinding.Category.CREATIVE/*?}*/);
     }
 
     @WrapOperation(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;equals(Lnet/minecraft/client/option/KeyBinding;)Z"))
     private boolean shutReusedModifierKeys(KeyBinding instance, KeyBinding other, Operation<Boolean> original) {
-        return original.call(instance, other) && !other.getCategory().equals(KeyBinding.CREATIVE_CATEGORY)
+        return original.call(instance, other) && !other.getCategory().equals(/*? if < 1.21.9 {*//*KeyBinding.CREATIVE_CATEGORY*//*?} else {*/KeyBinding.Category.CREATIVE/*?}*/)
                 && !(instance.getCategory().equals(other.getCategory()) && instance.isDefault() && other.isDefault());
     }
 }

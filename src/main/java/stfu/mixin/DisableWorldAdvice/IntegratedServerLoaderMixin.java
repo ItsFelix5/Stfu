@@ -1,4 +1,4 @@
-package stfu.mixin;
+package stfu.mixin.DisableWorldAdvice;
 
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.client.MinecraftClient;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.config.Config;
 
 @Mixin(IntegratedServerLoader.class)
-abstract class DisableWorldAdvice {
+abstract class IntegratedServerLoaderMixin {
     @Inject(method = "tryLoad", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;setScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 1), cancellable = true)
     private static void tryLoad(MinecraftClient client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci) {
         if (Config.get().disableWorldAdvice) {

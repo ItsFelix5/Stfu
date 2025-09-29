@@ -20,7 +20,7 @@ import java.util.Queue;
 public class DisableParticles {
     @Shadow @Final private Map<ParticleTextureSheet, Queue<Particle>> particles;
 
-    @Inject(method = "renderParticles*", at = @At("HEAD"), cancellable = true)
+    @Inject(method = {"renderParticles*", "addToBatch"}, at = @At("HEAD"), cancellable = true)
     private void renderParticles(CallbackInfo ci) {
         if (particles.isEmpty() || Config.get().disableParticles) ci.cancel();
     }
@@ -43,10 +43,5 @@ public class DisableParticles {
     @Inject(method = "addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)
     private void addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ, CallbackInfoReturnable<Particle> cir) {
         if (Config.get().disableParticles) cir.setReturnValue(null);
-    }
-
-    @Inject(method = "addBlockBreakingParticles*", at = @At("HEAD"), cancellable = true)
-    private void addBlockBreakingParticles(CallbackInfo ci) {
-        if (Config.get().disableParticles) ci.cancel();
     }
 }

@@ -22,14 +22,14 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${stonecutter.current.version}")
-    mappings("net.fabricmc:yarn:${stonecutter.current.version}+build.${property("deps.yarn")}:v2")
+    minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
+    mappings("net.fabricmc:yarn:${property("deps.minecraft")}+build.${property("deps.yarn")}:v2")
     modImplementation("net.fabricmc:fabric-loader:+")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
     modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
-    modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
-    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:1.2.1")
+    //modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${property("deps.devauth")}")
 }
 
 val accessWidener = stonecutter.current.version + ".accesswidener"
@@ -76,7 +76,7 @@ fletchingTable {
 
 java {
     withSourcesJar()
-    val java = if (stonecutter.eval(stonecutter.current.version, ">=1.20.5"))
+    val java = if (stonecutter.eval(property("deps.minecraft") as String, ">=1.20.5"))
         JavaVersion.VERSION_21 else JavaVersion.VERSION_17
     targetCompatibility = java
     sourceCompatibility = java

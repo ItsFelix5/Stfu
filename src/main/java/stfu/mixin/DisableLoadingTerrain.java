@@ -1,7 +1,9 @@
 package stfu.mixin;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
+//? if < 1.21.8 {
+//import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
+//?}
 //? if > 1.21.6 {
 import net.minecraft.client.gui.screen.ReconfiguringScreen;
 import net.minecraft.network.ClientConnection;
@@ -24,10 +26,12 @@ public abstract class DisableLoadingTerrain {
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     public Screen setScreen(Screen screen) {
         if (!Config.get().disableLoadingTerrain) return screen;
-        if (screen instanceof DownloadingTerrainScreen) {
+        //? if < 1.21.8 {
+        /*if (screen instanceof DownloadingTerrainScreen) {
             if (world == null) return new Screen(Text.empty()) {};
             else return null;
         }
+        *///?}
         //? if > 1.21.6 {
         if (screen instanceof ReconfiguringScreen) {
             final ClientConnection connection = client.getNetworkHandler().getConnection();
