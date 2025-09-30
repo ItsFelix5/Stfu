@@ -1,67 +1,60 @@
 package stfu.mixin.RemoveOverlay;
 
-import net.minecraft.client.MinecraftClient;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+//? if >1.20.1 {
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+//?} else
+//import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.SplashOverlay;
-import net.minecraft.resource.ResourceReload;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import stfu.config.Config;
-
-import java.util.Optional;
-import java.util.function.Consumer;
 
 @Mixin(SplashOverlay.class)
 public abstract class SplashOverlayMixin {
     @Shadow @Final private boolean reloading;
-    @Shadow private float progress;
-    @Shadow @Final private ResourceReload reload;
-    @Shadow protected abstract void renderProgressBar(DrawContext context, int minX, int minY, int maxX, int maxY, float opacity);
-    @Shadow @Final private Consumer<Optional<Throwable>> exceptionHandler;
-    @Shadow @Final private MinecraftClient client;
 
-    @Inject(method = {"render", "tick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceReload;throwException()V"))
-    private void removeOverlay(CallbackInfo ci) {
-        if (Config.get().disableFade || Config.get().disableSplash) client.setOverlay(null);
-    }
-
-    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    public void render(DrawContext context, int mouseX, int mouseY, float deltaTicks, CallbackInfo ci) {
-        if (!Config.get().disableSplash || !reloading) return;
-        ci.cancel();
-        int width = context.getScaledWindowWidth();
-        int height = context.getScaledWindowHeight();
-
-        if (client.currentScreen != null) client.currentScreen.renderWithTooltip(context, 0, 0, deltaTicks);
-
-        int o = (int)(Math.min(width * 0.75, height) * 0.5);
-        int q = (int)(height * 0.8325);
-        this.progress = this.reload.getProgress();
-        this.renderProgressBar(context, width / 2 - o, q - 5, width / 2 + o, q + 5, 1.0F);
-
-        //? if < 1.21.8 {
-        /*if (this.reload.isComplete()) {
-            try {
-                this.reload.throwException();
-                this.exceptionHandler.accept(Optional.empty());
-            } catch (Throwable throwable) {
-                this.exceptionHandler.accept(Optional.of(throwable));
-            }
-
-            client.setOverlay(null);
-            if (this.client.currentScreen != null) {
-                this.client.currentScreen.init(this.client, context.getScaledWindowWidth(), context.getScaledWindowHeight());
-            }
-        }*///?}
+    @ModifyConstant(method = "render", constant = @Constant(floatValue = 2.0F))
+    private float disableFade(float progress) {
+        return Config.get().disableFade? 1F : progress;
     }
 
     @Inject(method = "pausesGame", at = @At("HEAD"), cancellable = true)
     private void pausesGame(CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(false);
+        if (Config.get().disableSplash) cir.setReturnValue(false);
     }
+
+    //? if >1.21.8 {
+    @Inject(method = "isInGracePeriod", at = @At("HEAD"), cancellable = true)
+    private void isInGracePeriod(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(true);
+    }
+    //?}
+    //? if >1.20.1 {
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;fill(IIIII)V"))
+    private void render(DrawContext instance, int x1, int y1, int x2, int y2, int color, Operation<Void> original) {
+        if (!Config.get().disableSplash || !reloading) original.call(instance, x1, y1, x2, y2, color);
+    }
+
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIFFIIIIIII)V"))
+    private void render(DrawContext instance, RenderPipeline pipeline, Identifier sprite, int x, int y, float u, float v, int width, int height, int regionWidth, int regionHeight, int textureWidth, int textureHeight, int color, Operation<Void> original) {
+        if (!Config.get().disableSplash || !reloading) original.call(instance, pipeline, sprite, x, y, u, v, width, height, regionWidth, regionHeight, textureWidth, textureHeight, color);
+    }
+    //?} else {
+    /*@WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;fill(Lnet/minecraft/client/render/RenderLayer;IIIII)V"))
+    private void render(DrawContext instance, RenderLayer layer, int x1, int y1, int x2, int y2, int color, Operation<Void> original) {
+        if (!Config.get().disableSplash || !reloading) original.call(instance, layer, x1, y1, x2, y2, color);
+    }
+
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIFFIIII)V"))
+    private void render(DrawContext instance, Identifier texture, int x, int y, int width, int height, float u, float v, int regionWidth, int regionHeight, int textureWidth, int textureHeight, Operation<Void> original) {
+        if (!Config.get().disableSplash || !reloading) original.call(instance, texture, x, y, width, height, u, v, regionWidth, regionHeight, textureWidth, textureHeight);
+    }
+    *///?}
 }
