@@ -1,4 +1,4 @@
-/*package stfu.config;
+package stfu.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
@@ -11,4 +11,3 @@ public class ModMenu implements ModMenuApi {
         return s->Config.HANDLER.generateGui().generateScreen(s);
     }
 }
-*/

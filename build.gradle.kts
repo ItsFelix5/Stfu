@@ -28,7 +28,7 @@ dependencies {
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
     modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
-    //modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
     modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${property("deps.devauth")}")
 }
 
