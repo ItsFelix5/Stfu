@@ -57,6 +57,10 @@ loom {
             configureEach {
                 vmArg("-javaagent:$mixinJarFile")
                 vmArg("-XX:+AllowEnhancedClassRedefinition")
+                vmArg("-DMC_DEBUG_ENABLED")
+                vmArg("-DMC_DEBUG_HOTKEYS")
+                vmArg("-DMC_DEBUG_VERBOSE_COMMAND_ERRORS")
+                vmArg("-DMC_DEBUG_DEV_COMMANDS")
             }
         }
     }

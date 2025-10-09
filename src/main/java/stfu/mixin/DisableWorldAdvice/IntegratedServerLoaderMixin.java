@@ -14,7 +14,7 @@ import stfu.config.Config;
 
 @Mixin(IntegratedServerLoader.class)
 abstract class IntegratedServerLoaderMixin {
-    @Inject(method = "tryLoad", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;setScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 1), cancellable = true)
+    @Inject(method = "tryLoad", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;setScreen(Lnet/minecraft/client/gui/screen/Screen;)V", ordinal = 0), cancellable = true)
     private static void tryLoad(MinecraftClient client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci) {
         if (Config.get().disableWorldAdvice) {
             loader.run();

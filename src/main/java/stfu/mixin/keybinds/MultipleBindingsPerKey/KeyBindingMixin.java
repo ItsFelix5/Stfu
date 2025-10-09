@@ -1,4 +1,4 @@
-//? if < 1.21.8 {
+//? if <= 1.21.8 {
 /*package stfu.mixin.keybinds.MultipleBindingsPerKey;
 
 import net.minecraft.client.option.KeyBinding;

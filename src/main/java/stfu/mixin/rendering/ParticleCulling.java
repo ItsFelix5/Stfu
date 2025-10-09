@@ -1,4 +1,4 @@
-//? if < 1.21.8 {
+//? if <= 1.21.8 {
 /*package stfu.mixin.rendering;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -15,7 +15,7 @@ import static stfu.Main.client;
 public class ParticleCulling {
 //? if > 1.21 {
     @WrapWithCondition(method = "renderParticles(Lnet/minecraft/client/render/Camera;FLnet/minecraft/client/render/VertexConsumerProvider$Immediate;Lnet/minecraft/client/particle/ParticleTextureSheet;Ljava/util/Queue;)V", at = @At(value = "INVOKE", target = "net/minecraft/client/particle/Particle.render(Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/Camera;F)V"))
-//? } else
+//?} else
 //  @WrapWithCondition(method = "renderParticles", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/Particle;buildGeometry(Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/client/render/Camera;F)V"))
 
     private static boolean renderParticles(Particle instance, VertexConsumer vertexConsumer, Camera camera, float tickDelta) {

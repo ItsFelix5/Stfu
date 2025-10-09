@@ -1,4 +1,4 @@
-//? if < 1.21.8 {
+//? if <= 1.21.8 {
 /*package stfu;
 
 import com.google.common.collect.Maps;

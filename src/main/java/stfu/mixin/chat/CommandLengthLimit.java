@@ -1,4 +1,4 @@
-package stfu.mixin.chat.CommandLengthLimit;
+package stfu.mixin.chat;
 
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChatScreen.class)
-public class ChatScreenMixin {
+public class CommandLengthLimit {
     @Shadow
     protected TextFieldWidget chatField;
 
@@ -27,7 +27,6 @@ public class ChatScreenMixin {
             //? if > 1.21 {
             if(chatField.getCursor() > 256) chatField.setCursor(256, false);
             chatField.setMaxLength(256);
-            //chatField.setSelectionStart(chatField.getCursor());
             //?} else {
             /*if(chatField.getCursor() > 256) chatField.setCursor(256);
             chatField.setMaxLength(256);
