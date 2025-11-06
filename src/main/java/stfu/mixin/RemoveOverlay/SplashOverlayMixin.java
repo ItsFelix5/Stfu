@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //? if >1.20.1 {
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 //?} else
-//import net.minecraft.client.render.RenderLayer;
+/*import net.minecraft.client.render.RenderLayer;*/
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.SplashOverlay;
 import net.minecraft.util.Identifier;
@@ -27,7 +27,7 @@ public abstract class SplashOverlayMixin {
 
     @Inject(method = "pausesGame", at = @At("HEAD"), cancellable = true)
     private void pausesGame(CallbackInfoReturnable<Boolean> cir) {
-        if (Config.get().disableSplash) cir.setReturnValue(false);
+        if (Config.get().disableSplash && reloading) cir.setReturnValue(false);
     }
 
     //? if >1.21.8 {

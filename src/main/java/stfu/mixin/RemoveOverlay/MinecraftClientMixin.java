@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MinecraftClientMixin {
     @Redirect(method = "tick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;overlay:Lnet/minecraft/client/gui/screen/Overlay;" /*? if >1.21.8 {*/, ordinal = 2/*?}*/))
     private Overlay overlay(MinecraftClient instance){
-        return null;
+        Overlay overlay = instance.getOverlay();
+        return overlay != null && overlay.pausesGame()? overlay : null;
     }
 }
