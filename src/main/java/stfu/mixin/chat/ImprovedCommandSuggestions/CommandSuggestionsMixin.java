@@ -2,8 +2,8 @@ package stfu.mixin.chat.ImprovedCommandSuggestions;
 
 import com.mojang.brigadier.suggestion.Suggestion;
 import com.mojang.brigadier.suggestion.Suggestions;
-import net.minecraft.client.gui.screen.ChatInputSuggestor;
-import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.components.CommandSuggestions;
+import net.minecraft.client.gui.components.EditBox;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,22 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@Mixin(ChatInputSuggestor.class)
-public abstract class ChatInputSuggestorMixin {
+@Mixin(CommandSuggestions.class)
+public abstract class CommandSuggestionsMixin {
     @Shadow
     @Final
-    TextFieldWidget textField;
+    EditBox input;
 
     @Shadow
-    private static int getStartOfCurrentWord(String input) {
+    private static int getLastWordIndex(String input) {
         return 0;
     }
 
     @Inject(method = "sortSuggestions", at = @At("HEAD"), cancellable = true)
     private void sortSuggestions(Suggestions suggestions, CallbackInfoReturnable<List<Suggestion>> cir) {
-        String string = this.textField.getText().substring(0, this.textField.getCursor());
+        String string = this.input.getValue().substring(0, this.input.getCursorPosition());
         if(string.startsWith("/")) string = string.substring(1);
-        string = string.substring(getStartOfCurrentWord(string)).toLowerCase(Locale.ROOT);
+        string = string.substring(getLastWordIndex(string)).toLowerCase(Locale.ROOT);
         if(string.startsWith("#")) string = string.substring(1);
         if(string.contains(":")) string = string.substring(string.indexOf(':') + 1);
 

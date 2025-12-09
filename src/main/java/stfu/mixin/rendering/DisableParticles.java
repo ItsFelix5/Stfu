@@ -1,9 +1,9 @@
 package stfu.mixin.rendering;
 
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.particle.ParticleTextureSheet;
-import net.minecraft.particle.ParticleEffect;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.core.particles.ParticleOptions;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,11 +16,11 @@ import stfu.config.Config;
 import java.util.Map;
 import java.util.Queue;
 
-@Mixin(ParticleManager.class)
+@Mixin(ParticleEngine.class)
 public class DisableParticles {
-    @Shadow @Final private Map<ParticleTextureSheet, Queue<Particle>> particles;
+    @Shadow @Final private Map<ParticleRenderType, Queue<Particle>> particles;
 
-    @Inject(method = {"renderParticles*", "addToBatch"}, at = @At("HEAD"), cancellable = true)
+    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void renderParticles(CallbackInfo ci) {
         if (particles.isEmpty() || Config.get().disableParticles) ci.cancel();
     }
@@ -30,18 +30,18 @@ public class DisableParticles {
         if (Config.get().disableParticles) ci.cancel();
     }
 
-    @Inject(method = "addEmitter*", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "createTrackingEmitter*", at = @At("HEAD"), cancellable = true)
     private void addEmitter(CallbackInfo ci) {
         if (Config.get().disableParticles) ci.cancel();
     }
 
-    @Inject(method = "addParticle(Lnet/minecraft/client/particle/Particle;)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "add(Lnet/minecraft/client/particle/Particle;)V", at = @At("HEAD"), cancellable = true)
     private void addParticle(CallbackInfo ci) {
         if (Config.get().disableParticles) ci.cancel();
     }
 
-    @Inject(method = "addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)
-    private void addParticle(ParticleEffect parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ, CallbackInfoReturnable<Particle> cir) {
+    @Inject(method = "createParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)
+    private void addParticle(ParticleOptions parameters, double x, double y, double z, double velocityX, double velocityY, double velocityZ, CallbackInfoReturnable<Particle> cir) {
         if (Config.get().disableParticles) cir.setReturnValue(null);
     }
 }

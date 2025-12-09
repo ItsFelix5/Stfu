@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "2.2.10"
-    id("com.google.devtools.ksp") version "2.2.10-2.0.2"
+    kotlin("jvm") version "2.2.21"
+    id("com.google.devtools.ksp") version "2.3.3"
     `maven-publish`
     id("fabric-loom")
     id("me.modmuss50.mod-publish-plugin")
-    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.17"
+    id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 version = "${property("mod.version")}-${stonecutter.current.version}"
@@ -18,18 +18,16 @@ repositories {
     }
     maven("https://maven.isxander.dev/releases")
     strictMaven("https://maven.terraformersmc.com/", "Terraformers MC", "com.terraformersmc")
-    strictMaven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1", "DJTheRedstoner", "me.djtheredstoner")
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
-    mappings("net.fabricmc:yarn:${property("deps.minecraft")}+build.${property("deps.yarn")}:v2")
+    mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:+")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
     modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
     modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
-    modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${property("deps.devauth")}")
 }
 
 val accessWidener = stonecutter.current.version + ".accesswidener"
@@ -55,7 +53,7 @@ loom {
             }.files.first()
 
             configureEach {
-                vmArg("-javaagent:$mixinJarFile")
+                //vmArg("-javaagent:$mixinJarFile")
                 vmArg("-XX:+AllowEnhancedClassRedefinition")
                 vmArg("-DMC_DEBUG_ENABLED")
                 vmArg("-DMC_DEBUG_HOTKEYS")

@@ -1,7 +1,7 @@
 package stfu.mixin.chat;
 
-import net.minecraft.client.gui.screen.ChatScreen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.screens.ChatScreen;
+import net.minecraft.client.gui.components.EditBox;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,29 +13,29 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChatScreen.class)
 public class CommandLengthLimit {
     @Shadow
-    protected TextFieldWidget chatField;
+    protected EditBox input;
 
     @Inject(method = "init", at = @At(value = "RETURN"))
     private void init(CallbackInfo ci) {
-        chatField.setMaxLength(Integer.MAX_VALUE);
+        input.setMaxLength(Integer.MAX_VALUE);
     }
 
-    @Inject(method = "onChatFieldUpdate", at = @At(value = "HEAD"))
+    @Inject(method = "onEdited", at = @At(value = "HEAD"))
     private void onChatFieldUpdate(String chatText, CallbackInfo ci) {
-        if (chatText.startsWith("/") || chatText.isEmpty()) chatField.setMaxLength(Integer.MAX_VALUE);
+        if (chatText.startsWith("/") || chatText.isEmpty()) input.setMaxLength(Integer.MAX_VALUE);
         else {
-            //? if > 1.21 {
-            if(chatField.getCursor() > 256) chatField.setCursor(256, false);
-            chatField.setMaxLength(256);
-            //?} else {
-            /*if(chatField.getCursor() > 256) chatField.setCursor(256);
-            chatField.setMaxLength(256);
-            chatField.setSelectionEnd(chatField.getCursor());
-            *///?}
+            //? > 1.21 {
+            /*if(input.getCursorPosition() > 256) input.moveCursorTo(256, false);
+            input.setMaxLength(256);
+            *///?} else {
+            if(input.getCursorPosition() > 256) input.setCursorPosition(256);
+            input.setMaxLength(256);
+            input.setHighlightPos(input.getCursorPosition());
+            //?}
         }
     }
 
-    @Inject(method = "normalize", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "normalizeChatMessage", at = @At(value = "HEAD"), cancellable = true)
     private void normalize(String chatText, CallbackInfoReturnable<String> cir) {
         if (chatText.startsWith("/"))
             cir.setReturnValue(StringUtils.normalizeSpace(chatText.trim()));

@@ -1,12 +1,12 @@
 accessWidener v2 named
-accessible field net/minecraft/client/gui/tooltip/OrderedTextTooltipComponent text Lnet/minecraft/text/OrderedText;
-accessible field net/minecraft/client/option/KeyBinding timesPressed I
-accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/client/util/InputUtil$Key;
-accessible class net/minecraft/client/render/model/json/GeneratedItemModel$Frame
-accessible class net/minecraft/client/render/model/json/GeneratedItemModel$Side
-accessible method net/minecraft/client/render/model/json/GeneratedItemModel$Side isVertical ()Z
-accessible field net/minecraft/client/render/WorldRenderer frustum Lnet/minecraft/client/render/Frustum;
-accessible field net/minecraft/client/render/model/json/ModelElement from Lorg/joml/Vector3fc;
-accessible field net/minecraft/client/render/model/json/ModelElement to Lorg/joml/Vector3fc;
-accessible field net/minecraft/client/render/model/json/ModelElement faces Ljava/util/Map;
-accessible class net/minecraft/client/gui/hud/InGameHud$BarType
+accessible field net/minecraft/client/gui/screens/inventory/tooltip/ClientTextTooltip text Lnet/minecraft/util/FormattedCharSequence;
+accessible field net/minecraft/client/KeyMapping clickCount I
+accessible field net/minecraft/client/KeyMapping key Lcom/mojang/blaze3d/platform/InputConstants$Key;
+accessible class net/minecraft/client/renderer/block/model/ItemModelGenerator$Span
+accessible class net/minecraft/client/renderer/block/model/ItemModelGenerator$SpanFacing
+accessible method net/minecraft/client/renderer/block/model/ItemModelGenerator$SpanFacing isHorizontal ()Z
+accessible field net/minecraft/client/renderer/LevelRenderer cullingFrustum Lnet/minecraft/client/renderer/culling/Frustum;
+accessible field net/minecraft/client/renderer/block/model/BlockElement from Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/renderer/block/model/BlockElement to Lorg/joml/Vector3fc;
+accessible field net/minecraft/client/renderer/block/model/BlockElement faces Ljava/util/Map;
+accessible class net/minecraft/client/gui/Gui$ContextualInfo

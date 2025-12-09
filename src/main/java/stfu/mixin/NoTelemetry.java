@@ -4,18 +4,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//? if > 1.21 {
-import net.minecraft.client.session.telemetry.TelemetryManager;
-import net.minecraft.client.session.telemetry.TelemetrySender;
-//?} else {
-/*import net.minecraft.client.util.telemetry.TelemetryManager;
-import net.minecraft.client.util.telemetry.TelemetrySender;
-*///?}
+import net.minecraft.client.telemetry.ClientTelemetryManager;
+import net.minecraft.client.telemetry.TelemetryEventSender;
 
-@Mixin(TelemetryManager.class)
+@Mixin(ClientTelemetryManager.class)
 abstract class NoTelemetry {
-    @Inject(method = "getSender", at = @At("HEAD"), cancellable = true)
-    private void NoopSender(CallbackInfoReturnable<TelemetrySender> cir) {
-        cir.setReturnValue(TelemetrySender.NOOP);
+    @Inject(method = "getOutsideSessionSender", at = @At("HEAD"), cancellable = true)
+    private void NoopSender(CallbackInfoReturnable<TelemetryEventSender> cir) {
+        cir.setReturnValue(TelemetryEventSender.DISABLED);
     }
 }

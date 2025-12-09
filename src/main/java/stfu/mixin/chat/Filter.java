@@ -1,20 +1,20 @@
 package stfu.mixin.chat;
 
-import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.config.Config;
 
-@Mixin(ChatHud.class)
+@Mixin(ChatComponent.class)
 public abstract class Filter {
-    @Inject(method = "addMessage(Lnet/minecraft/text/Text;)V", at = @At("HEAD"), cancellable = true)
-    private void filter(Text message, CallbackInfo ci) {
-        if (!(message instanceof MutableText mutable && mutable.getContent() instanceof TranslatableTextContent translatable)) return;
+    @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;)V", at = @At("HEAD"), cancellable = true)
+    private void filter(Component message, CallbackInfo ci) {
+        if (!(message instanceof MutableComponent mutable && mutable.getContents() instanceof TranslatableContents translatable)) return;
 
         if (translatable.getKey().startsWith("chat.type.advancement")) {
             if (!Config.get().announceAdvancements) ci.cancel();

@@ -1,17 +1,17 @@
-//? if <= 1.21.8 {
-/*package stfu.mixin;
+//? <= 1.21.8 {
+package stfu.mixin;
 
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.LocalPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(LocalPlayer.class)
 public class AllowScreensInPortals {
-    @Redirect(method = {"tickNausea", "updateNausea"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;shouldPause()Z"))
+    @Redirect(method = {"handlePortalTransitionEffect", "handleNetherPortalClient"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/Screen;isPauseScreen()Z"))
     public boolean tickNausea(Screen instance) {
         return true;
     }
 }
-*///?}
+//?}

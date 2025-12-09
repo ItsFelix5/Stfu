@@ -1,53 +1,53 @@
 package stfu.mixin.rendering;
 
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.network.packet.s2c.play.AdvancementUpdateS2CPacket;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.protocol.game.ClientboundServerDataPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.config.Config;
-//? if > 1.21 {
-import org.objectweb.asm.Opcodes;
-import net.minecraft.network.packet.s2c.play.RecipeBookAddS2CPacket;
-//?} else {
-/*import net.minecraft.network.packet.s2c.play.ServerMetadataS2CPacket;
-import net.minecraft.recipe.Recipe;
-*///?}
+import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
+//? > 1.21 {
+/*import org.objectweb.asm.Opcodes;
+import net.minecraft.network.protocol.game.ClientboundRecipeBookAddPacket;
+*///?} else {
+import net.minecraft.world.item.crafting.Recipe;
+//?}
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 abstract class DisableToasts {
-    //? if > 1.21 {
-    @Redirect(method = "onGameJoin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;displayedUnsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
-    private boolean onGameJoin(ClientPlayNetworkHandler instance) {
+    //? > 1.21 {
+    /*@Redirect(method = "handleLogin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;seenInsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
+    private boolean onGameJoin(ClientPacketListener instance) {
         return true;
     }
 
     @Redirect(
-            method = "onRecipeBookAdd",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/network/packet/s2c/play/RecipeBookAddS2CPacket$Entry;shouldShowNotification()Z")
+            method = "handleRecipeBookAdd",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundRecipeBookAddPacket$Entry;notification()Z")
     )
-    private boolean disableRecipeToasts(RecipeBookAddS2CPacket.Entry instance) {
-        return Config.get().recipeToasts && instance.shouldShowNotification();
+    private boolean disableRecipeToasts(ClientboundRecipeBookAddPacket.Entry instance) {
+        return Config.get().recipeToasts && instance.notification();
     }
-//?} else {
-    /*@Redirect(method = "onServerMetadata", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/packet/s2c/play/ServerMetadataS2CPacket;isSecureChatEnforced()Z", ordinal = 1))
-    private boolean isSecureChatEnforced(ServerMetadataS2CPacket instance) {
+*///?} else {
+    @Redirect(method = "handleServerData", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;enforcesSecureChat()Z", ordinal = 1))
+    private boolean isSecureChatEnforced(ClientboundServerDataPacket instance) {
         return true;
     }
 
     @Redirect(
             method = "method_34011",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/recipe/Recipe;showNotification()Z")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/Recipe;showNotification()Z")
     )
     private boolean disableRecipeToasts(Recipe<?> instance) {
         return Config.get().recipeToasts && instance.showNotification();
     }
-*///?}
+//?}
 
-    @Inject(method = "onAdvancements", at = @At("HEAD"), cancellable = true)
-    private void disableAdvancementToasts(AdvancementUpdateS2CPacket packet, CallbackInfo ci) {
+    @Inject(method = "handleUpdateAdvancementsPacket", at = @At("HEAD"), cancellable = true)
+    private void disableAdvancementToasts(ClientboundUpdateAdvancementsPacket packet, CallbackInfo ci) {
         if (!Config.get().advancementToasts) ci.cancel();
     }
 }

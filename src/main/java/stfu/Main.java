@@ -3,20 +3,20 @@ package stfu;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.KeyMapping;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.lwjgl.glfw.GLFW;
 import stfu.config.Config;
 
 @Entrypoint("main")
 public class Main implements ModInitializer {
-    public static final MinecraftClient client = MinecraftClient.getInstance();
-    public static final KeyBinding NARRATOR_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+    public static final Minecraft client = Minecraft.getInstance();
+    public static final KeyMapping NARRATOR_KEY = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "options.narrator_hotkey",
-            InputUtil.Type.KEYSYM,
+            InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
-            /*? if < 1.21.9 {*//*"key.categories.misc"*//*?} else {*/KeyBinding.Category.MISC/*?}*/
+            /*? < 1.21.9 {*/"key.categories.misc"/*?} else {*//*KeyMapping.Category.MISC*//*?}*/
     ));
 
     @Override

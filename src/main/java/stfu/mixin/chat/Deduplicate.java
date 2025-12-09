@@ -1,11 +1,11 @@
 package stfu.mixin.chat;
 
-import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.hud.ChatHudLine;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.client.GuiMessage;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,24 +16,24 @@ import stfu.config.Config;
 
 import java.util.List;
 
-@Mixin(ChatHud.class)
+@Mixin(ChatComponent.class)
 public abstract class Deduplicate {
     @Unique
-    private static final Style OCCURRENCES = Style.EMPTY.withColor(Formatting.GRAY);
+    private static final Style OCCURRENCES = Style.EMPTY.withColor(ChatFormatting.GRAY);
     @Shadow
     @Final
-    private List<ChatHudLine> messages;
+    private List<GuiMessage> allMessages;
 
-    @Shadow
-    protected abstract void refresh();
+    @Shadow(aliases = {"refreshTrimmedMessage"})
+    protected abstract void refreshTrimmedMessages();
 
     @ModifyVariable(
-            method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V",
+            method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
             at = @At("HEAD"),
             argsOnly = true
     )
-    private Text compact(Text message) {
-        if (Config.get().compactChat == Config.CompactChat.NEVER || messages.isEmpty()) return message;
+    private Component compact(Component message) {
+        if (Config.get().compactChat == Config.CompactChat.NEVER || allMessages.isEmpty()) return message;
         // Skip common separators
         boolean isSeparator = true;
         for (char c : message.getString().trim().toCharArray())
@@ -45,15 +45,15 @@ public abstract class Deduplicate {
 
         // Find matching messages
         int matches = 0;
-        for (ChatHudLine other : Config.get().compactChat == Config.CompactChat.ONLY_CONSECUTIVE ? List.of(messages.get(0)) : messages) {
-            Text content = other.content();
-            if (!content.getContent().equals(message.getContent()) || !content.getStyle().equals(message.getStyle())) continue;
+        for (GuiMessage other : Config.get().compactChat == Config.CompactChat.ONLY_CONSECUTIVE ? List.of(allMessages.get(0)) : allMessages) {
+            Component content = other.content();
+            if (!content.getContents().equals(message.getContents()) || !content.getStyle().equals(message.getStyle())) continue;
 
             // Check siblings without occurrences count
-            List<Text> siblings = content.getSiblings();
+            List<Component> siblings = content.getSiblings();
             String o = null;
             if (!siblings.isEmpty()) {
-                Text last = siblings.get(siblings.size() - 1);
+                Component last = siblings.get(siblings.size() - 1);
                 if (last.getStyle() == OCCURRENCES) {
                     String raw = last.getString();
                     if (raw != null && raw.startsWith(" (") && raw.endsWith(")")) {
@@ -72,16 +72,16 @@ public abstract class Deduplicate {
                 continue;
             }
             // remove previous message
-            messages.remove(other);
-            refresh();
+            allMessages.remove(other);
+            refreshTrimmedMessages();
             break; // Trust the previous message
         }
         // Append occurrences count
         if (matches > 1) {
-            if (message instanceof MutableText mutable) try {
-                return mutable.append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
+            if (message instanceof MutableComponent mutable) try {
+                return mutable.append(Component.literal(" (" + matches + ")").setStyle(OCCURRENCES));
             } catch (UnsupportedOperationException ignored) {} // MutableText is not always mutable? in this case use copy to assure it is backed by an arraylist
-            return message.copy().append(Text.literal(" (" + matches + ")").setStyle(OCCURRENCES));
+            return message.copy().append(Component.literal(" (" + matches + ")").setStyle(OCCURRENCES));
         }
         return message;
     }

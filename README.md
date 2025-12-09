@@ -21,10 +21,10 @@
 * Set the default LAN port to 25565
 * [**Full list**](https://github.com/ItsFelix5/Stfu/wiki/Features)
 
-| ✅ Supported | 1.20.1   | 1.21.8 | 1.21.9 |
-|-------------|----------|--------|--------|
-| ⚠️ LTS      | 1.21.1-5 |        |        |
-| 🛑 Legacy   | 1.20.2-6 | 1.21   |        |
+| ✅ Supported | 1.20.1   | 1.21.8-10 |
+|-------------|----------|-----------|
+| ⚠️ LTS      | 1.21.1-5 |           |
+| 🛑 Legacy   | 1.20.2-6 | 1.21      |
 
 Looking for more client mods? Check out [Camera Tweaks](https://modrinth.com/mod/cameratweaks)!
 

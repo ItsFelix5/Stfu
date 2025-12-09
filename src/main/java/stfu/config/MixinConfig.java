@@ -1,11 +1,11 @@
 package stfu.config;
 
-import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class MixinConfig {
@@ -15,7 +15,7 @@ public class MixinConfig {
     private static void load() {
         File file = FabricLoader.getInstance().getConfigDir().resolve("stfu-disable.txt").toFile();
         if (file.exists()) {
-            try(BufferedReader reader = Files.newReader(file, Charsets.UTF_8)) {
+            try(BufferedReader reader = Files.newReader(file, StandardCharsets.UTF_8)) {
                 reader.lines().forEach(line -> {
                     if (!line.startsWith("#")) DISABLED.add(line);
                 });

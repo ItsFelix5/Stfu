@@ -9,12 +9,12 @@ import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
-            .id(Identifier.of("stfu", "config"))
+            .id(/*? > 1.21 {*//*Identifier.fromNamespaceAndPath*//*?}else{*/new ResourceLocation/*?}*/("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("stfu.json5"))
                     .setJson5(true)
@@ -139,8 +139,8 @@ public class Config {
         DISABLED;
 
         @Override
-        public Text getDisplayName() {
-            return Text.translatable("yacl3.config.stfu:config.adminChat." + name().toLowerCase());
+        public Component getDisplayName() {
+            return Component.translatable("yacl3.config.stfu:config.adminChat." + name().toLowerCase());
         }
     }
 
@@ -150,8 +150,8 @@ public class Config {
         NEVER;
 
         @Override
-        public Text getDisplayName() {
-            return Text.translatable("yacl3.config.stfu:config.compactChat." + name().toLowerCase());
+        public Component getDisplayName() {
+            return Component.translatable("yacl3.config.stfu:config.compactChat." + name().toLowerCase());
         }
     }
 }

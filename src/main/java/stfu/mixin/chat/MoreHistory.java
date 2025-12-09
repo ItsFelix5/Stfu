@@ -1,14 +1,14 @@
 package stfu.mixin.chat;
 
-import net.minecraft.client.gui.hud.ChatHud;
+import net.minecraft.client.gui.components.ChatComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import stfu.config.Config;
 
-@Mixin(ChatHud.class)
+@Mixin(ChatComponent.class)
 public abstract class MoreHistory {
-    @ModifyConstant(method = {"addMessage(Lnet/minecraft/text/Text;)V", "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;ILnet/minecraft/client/gui/hud/MessageIndicator;Z)V", "addVisibleMessage"},
+    @ModifyConstant(method = {"addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", "addMessageToQueue", "addMessageToDisplayQueue"},
             constant = @Constant(intValue = 100))
     private int moreHistory(int original) {
         return Config.get().maxChatHistory;

@@ -2,14 +2,14 @@ package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
-import net.minecraft.client.gui.tooltip.TooltipComponent;
-import net.minecraft.client.gui.tooltip.TooltipPositioner;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.StringVisitable;
-import net.minecraft.text.Style;
-import net.minecraft.util.Language;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
+import net.minecraft.locale.Language;
 import org.joml.Vector2i;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,43 +24,43 @@ import java.util.Optional;
 
 import static stfu.Main.client;
 
-@Mixin(DrawContext.class)
+@Mixin(GuiGraphics.class)
 @DisableIf({"legacy", "legendarytooltips"})
 public abstract class Tooltips {
-    @Shadow public abstract int getScaledWindowWidth();
+    @Shadow public abstract int guiWidth();
 
-    @ModifyVariable(method = {"drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V", "drawTooltipImmediately"},
+    @ModifyVariable(method = /*? > 1.21 {*//*"renderTooltip"*//*?}else{*/"renderTooltipInternal"/*?}*/,
             at = @At("HEAD"), index = 2, argsOnly = true)
-    private List<TooltipComponent> wrapLines(List<TooltipComponent> original) {
-        ArrayList<TooltipComponent> components = new ArrayList<>();
+    private List<ClientTooltipComponent> wrapLines(List<ClientTooltipComponent> original) {
+        ArrayList<ClientTooltipComponent> components = new ArrayList<>();
 
-        for (TooltipComponent tooltipComponent : original) {
-            if (!(tooltipComponent instanceof OrderedTextTooltipComponent component)) {
+        for (ClientTooltipComponent tooltipComponent : original) {
+            if (!(tooltipComponent instanceof ClientTextTooltip component)) {
                 components.add(tooltipComponent);
                 continue;
             }
             final int length = components.size();
-            client.textRenderer.getTextHandler().wrapLines(new StringVisitable() {
+            client.font.getSplitter().splitLines(new FormattedText() {
                 @Override
-                public <T> Optional<T> visit(Visitor<T> visitor) {
+                public <T> Optional<T> visit(ContentConsumer<T> visitor) {
                     return visit((s, t)->visitor.accept(t), Style.EMPTY);
                 }
 
                 @Override
-                public <T> Optional<T> visit(StyledVisitor<T> visitor, Style s) {
-                    component.text.accept((index, style, codePoint) -> visitor.accept(style.withParent(s), new String(Character.toChars(codePoint))).isEmpty());
+                public <T> Optional<T> visit(StyledContentConsumer<T> visitor, Style s) {
+                    component.text.accept((index, style, codePoint) -> visitor.accept(style.applyTo(s), new String(Character.toChars(codePoint))).isEmpty());
                     return Optional.empty();
                 }
-            }, getScaledWindowWidth() - 12, Style.EMPTY, (t, lastLineWrapped) -> components.add(TooltipComponent.of(Language.getInstance().reorder(t))));
-            if (components.size() == length) components.add(TooltipComponent.of(OrderedText.empty()));
+            }, guiWidth() - 12, Style.EMPTY, (t, lastLineWrapped) -> components.add(ClientTooltipComponent.create(Language.getInstance().getVisualOrder(t))));
+            if (components.size() == length) components.add(ClientTooltipComponent.create(FormattedCharSequence.composite()));
         }
 
         return components;
     }
 
-    @WrapOperation(method = {"drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V", "drawTooltipImmediately"},
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/tooltip/TooltipPositioner;getPosition(IIIIII)Lorg/joml/Vector2ic;"))
-    private Vector2ic reposition(TooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
+    @WrapOperation(method = /*? > 1.21 {*//*"renderTooltip"*//*?}else{*/"renderTooltipInternal"/*?}*/,
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;positionTooltip(IIIIII)Lorg/joml/Vector2ic;"))
+    private Vector2ic reposition(ClientTooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
         Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, mouseX, mouseY, width, height);
         int x = Math.max(6, Math.min(vector2ic.x(), screenWidth - width - 6));
         int y = Math.max(6, Math.min(vector2ic.y(), screenHeight - height - 6));
