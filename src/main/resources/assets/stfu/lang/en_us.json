@@ -69,13 +69,13 @@
     "combineBars.desc": "Combine the jump, experience and locator bars.",
   
     "renderThreadPriority": "Render Thread Priority",
-    "renderThreadPriority.desc": "Thread priority for rendering. BIGGER IS NOT NECESSARILY BETTER!",
+    "renderThreadPriority.desc": "Thread priority for rendering. Warning: Bigger is not necessarily better",
   
     "serverThreadPriority": "Server Thread Priority",
-    "serverThreadPriority.desc": "Thread priority for the integrated server. BIGGER IS NOT NECESSARILY BETTER!",
+    "serverThreadPriority.desc": "Thread priority for the integrated server. Warning: Bigger is not necessarily better",
   
     "ioThreadPriority": "Worker Thread Priority",
-    "ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. BIGGER IS NOT NECESSARILY BETTER!"
+    "ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. Warning: Bigger is not necessarily better"
   },
 
   "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
