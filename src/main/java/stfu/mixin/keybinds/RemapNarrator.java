@@ -1,4 +1,4 @@
-/*? <1.21.11 {*/package stfu.mixin.keybinds;
+package stfu.mixin.keybinds;
 
 import net.minecraft.client.KeyboardHandler;
 import org.lwjgl.glfw.GLFW;
@@ -14,4 +14,3 @@ public abstract class RemapNarrator {
         return Main.NARRATOR_KEY.key.getValue();
     }
 }
-/*? } */

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.config.Config;
 //? < 1.21 {
-import net.minecraft.client.renderer.LevelRenderer;
+/*import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 
 @Mixin(LevelRenderer.class)
@@ -22,16 +22,16 @@ public abstract class DisableWeather {
         if (!Config.get().renderWeather) ci.cancel();
     }
 }
-//?} else {
+*///?} else {
 
-/*import net.minecraft.client.renderer.WeatherEffectRenderer;
+import net.minecraft.client.renderer.WeatherEffectRenderer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.server.level.ParticleStatus;
 
 @Mixin(WeatherEffectRenderer.class)
 public class DisableWeather {
     @Inject(method = "tickRainParticles", at = @At("HEAD"), cancellable = true)
-    private void addParticlesAndSound(ClientLevel clientLevel, Camera camera, int ticks, ParticleStatus particleStatus, /^? >= 1.21.11{^/ /^int j,^//^?}^/ CallbackInfo ci){
+    private void addParticlesAndSound(ClientLevel clientLevel, Camera camera, int ticks, ParticleStatus particleStatus, /*? >= 1.21.11{*/ int j,/*?}*/ CallbackInfo ci){
         if (!Config.get().renderWeather) ci.cancel();
     }
 
@@ -40,4 +40,4 @@ public class DisableWeather {
         if (!Config.get().renderWeather) ci.cancel();
     }
 }
-*///?}
+//?}

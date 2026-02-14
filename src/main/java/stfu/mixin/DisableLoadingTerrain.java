@@ -2,13 +2,16 @@ package stfu.mixin;
 
 import net.minecraft.client.Minecraft;
 //? <= 1.21.8 {
+/*import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
-//?}
+*///?}
 //? > 1.21.6 {
-/*import net.minecraft.client.gui.screens.multiplayer.ServerReconfigScreen;
+import net.minecraft.client.gui.screens.multiplayer.ServerReconfigScreen;
 import net.minecraft.network.Connection;
 import static stfu.Main.client;
-*///?}
+//?}
+//? <1.21.9
+//import net.minecraft.client.gui.screens.ReceivingLevelScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
@@ -27,13 +30,13 @@ public abstract class DisableLoadingTerrain {
     public Screen setScreen(Screen screen) {
         if (!Config.get().disableLoadingTerrain) return screen;
         //? <= 1.21.8 {
-        if (screen instanceof LevelLoadingScreen) {
+        /*if (screen instanceof /^? >1.21.9{^/LevelLoadingScreen/^?}else{^//^ReceivingLevelScreen^//^?}^/) {
             if (level == null) return new Screen(Component.empty()) {};
             else return null;
         }
-        //?}
+        *///?}
         //? > 1.21.6 {
-        /*if (screen instanceof ServerReconfigScreen) {
+        if (screen instanceof ServerReconfigScreen) {
             final Connection connection = client.getConnection().getConnection();
             return new Screen(Component.empty()) {
                 @Override
@@ -43,7 +46,7 @@ public abstract class DisableLoadingTerrain {
                 }
             };
         }
-        *///?}
+        //?}
         return screen;
     }
 }

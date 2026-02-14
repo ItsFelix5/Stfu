@@ -1,5 +1,5 @@
 //? > 1.21.6 {
-/*package stfu.mixin;
+package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -58,4 +58,4 @@ public abstract class CombineBars {
         }
     }
 }
-*///?}
+//?}

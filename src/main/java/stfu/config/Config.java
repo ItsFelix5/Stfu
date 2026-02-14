@@ -3,18 +3,16 @@ package stfu.config;
 import dev.isxander.yacl3.api.NameableEnum;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
-import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
-import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
-            .id(/*? > 1.21 {*//*Identifier.fromNamespaceAndPath*//*?}else{*/new ResourceLocation/*?}*/("stfu", "config"))
+            .id(/*? > 1.21 {*/Identifier.fromNamespaceAndPath/*?}else{*//*new Identifier*//*?}*/("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("stfu.json5"))
                     .setJson5(true)
@@ -84,12 +82,12 @@ public class Config {
     @AutoGen(category = basic, group = loading)
     @Boolean
     @SerialEntry
-    public boolean disableWorldAdvice = false;
+    public boolean disableWorldAdvice = true;
 
-    @AutoGen(category = basic)
+    /*? <1.21.11 {*//*@AutoGen(category = basic)
     @Boolean
     @SerialEntry
-    public boolean fixModelGaps = true;
+    public boolean fixModelGaps = true;*//*? } */
 
     @AutoGen(category = basic)
     @Boolean
@@ -115,6 +113,16 @@ public class Config {
     @Boolean
     @SerialEntry
     public boolean combineBars = false;
+
+    @AutoGen(category = basic)
+    @Boolean
+    @SerialEntry
+    public boolean deleteToTrash = true;
+
+    @AutoGen(category = basic)
+    @FloatSlider(min = 0, max = 1, step = 0.01F)
+    @SerialEntry
+    public float unfocusedVolume = 1F;
 
 
 

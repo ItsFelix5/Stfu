@@ -14,7 +14,7 @@ public class NoNightVisionFlicker {
     @Inject(method = "getNightVisionScale", at = @At("HEAD"), cancellable = true)
     private static void getNightVisionScale(LivingEntity entity, float tickProgress, CallbackInfoReturnable<Float> cir) {
         if (Config.get().nightVisionFlicker) return;
-        float statusEffectInstance = ((float) entity.getEffect(MobEffects.NIGHT_VISION).getDuration() - tickProgress) / 20F;
-        cir.setReturnValue(statusEffectInstance == -1 ? 1F : Math.min(statusEffectInstance, 1F));
+        float statusEffectDuration = entity.getEffect(MobEffects.NIGHT_VISION).getDuration();
+        cir.setReturnValue(statusEffectDuration == -1 ? 1F : Math.min((statusEffectDuration - tickProgress) / 20F, 1F));
     }
 }

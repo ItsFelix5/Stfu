@@ -10,16 +10,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.config.Config;
 import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
 //? > 1.21 {
-/*import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Opcodes;
 import net.minecraft.network.protocol.game.ClientboundRecipeBookAddPacket;
-*///?} else {
-import net.minecraft.world.item.crafting.Recipe;
-//?}
+//?} else {
+/*import net.minecraft.world.item.crafting.Recipe;
+*///?}
 
 @Mixin(ClientPacketListener.class)
 abstract class DisableToasts {
     //? > 1.21 {
-    /*@Redirect(method = "handleLogin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;seenInsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
+    @Redirect(method = "handleLogin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/multiplayer/ClientPacketListener;seenInsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
     private boolean onGameJoin(ClientPacketListener instance) {
         return true;
     }
@@ -31,8 +31,8 @@ abstract class DisableToasts {
     private boolean disableRecipeToasts(ClientboundRecipeBookAddPacket.Entry instance) {
         return Config.get().recipeToasts && instance.notification();
     }
-*///?} else {
-    @Redirect(method = "handleServerData", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;enforcesSecureChat()Z", ordinal = 1))
+//?} else {
+    /*@Redirect(method = "handleServerData", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;enforcesSecureChat()Z", ordinal = 1))
     private boolean isSecureChatEnforced(ClientboundServerDataPacket instance) {
         return true;
     }
@@ -44,7 +44,7 @@ abstract class DisableToasts {
     private boolean disableRecipeToasts(Recipe<?> instance) {
         return Config.get().recipeToasts && instance.showNotification();
     }
-//?}
+*///?}
 
     @Inject(method = "handleUpdateAdvancementsPacket", at = @At("HEAD"), cancellable = true)
     private void disableAdvancementToasts(ClientboundUpdateAdvancementsPacket packet, CallbackInfo ci) {

@@ -1,4 +1,4 @@
-package stfu.mixin.DisableWorldAdvice;
+package stfu.mixin;
 
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.client.Minecraft;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.config.Config;
 
 @Mixin(WorldOpenFlows.class)
-abstract class WorldOpenFlowsMixin {
+abstract class DisableWorldAdvice {
     @Inject(method = "confirmWorldCreation", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;setScreen(Lnet/minecraft/client/gui/screens/Screen;)V", ordinal = 0), cancellable = true)
     private static void confirmWorldCreation(Minecraft client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci) {
         if (Config.get().disableWorldAdvice) {

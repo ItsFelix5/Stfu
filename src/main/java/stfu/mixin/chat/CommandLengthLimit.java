@@ -25,13 +25,13 @@ public class CommandLengthLimit {
         if (chatText.startsWith("/") || chatText.isEmpty()) input.setMaxLength(Integer.MAX_VALUE);
         else {
             //? > 1.21 {
-            /*if(input.getCursorPosition() > 256) input.moveCursorTo(256, false);
+            if(input.getCursorPosition() > 256) input.moveCursorTo(256, false);
             input.setMaxLength(256);
-            *///?} else {
-            if(input.getCursorPosition() > 256) input.setCursorPosition(256);
+            //?} else {
+            /*if(input.getCursorPosition() > 256) input.setCursorPosition(256);
             input.setMaxLength(256);
             input.setHighlightPos(input.getCursorPosition());
-            //?}
+            *///?}
         }
     }
 

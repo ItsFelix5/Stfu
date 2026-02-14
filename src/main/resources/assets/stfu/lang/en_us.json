@@ -67,16 +67,31 @@
   
     "combineBars": "Combine Bars",
     "combineBars.desc": "Combine the jump, experience and locator bars.",
-  
+
+    "deleteToTrash": "Delete Worlds To Trash",
+    "deleteToTrash.desc": "Tries to move worlds to the recycle bin instead of deleting them.",
+
     "renderThreadPriority": "Render Thread Priority",
-    "renderThreadPriority.desc": "Thread priority for rendering. Warning: Bigger is not necessarily better",
+    "renderThreadPriority.desc": "Thread priority for rendering. Warning: Bigger is not necessarily better!",
   
     "serverThreadPriority": "Server Thread Priority",
-    "serverThreadPriority.desc": "Thread priority for the integrated server. Warning: Bigger is not necessarily better",
+    "serverThreadPriority.desc": "Thread priority for the integrated server. Warning: Bigger is not necessarily better!",
   
     "ioThreadPriority": "Worker Thread Priority",
-    "ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. Warning: Bigger is not necessarily better"
-  },
+    "ioThreadPriority.desc": "Thread priority for IO and miscellaneous async operations. Warning: Bigger is not necessarily better!",
 
-  "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
+    "unfocusedVolume": "Unfocused Volume",
+    "unfocusedVolume.desc": "What to multiply the volume by when the window is not focused."
+  },
+  "key.stfu": {
+    "narrator_hotkey": "Toggle Narrator (+Ctrl)",
+    "skip_music": "Next Background Music Track",
+    "toggle_music": "Pause Background Music"
+  },
+  "msg.stfu": {
+    "skip_music": "Skipped song",
+    "pause_music": "Paused background music",
+    "resume_music": "Resumed background music"
+  },
+  "selectWorld.trashWarning": "'%s' will be moved to trash"
 }

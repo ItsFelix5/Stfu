@@ -29,7 +29,7 @@ import static stfu.Main.client;
 public abstract class Tooltips {
     @Shadow public abstract int guiWidth();
 
-    @ModifyVariable(method = /*? > 1.21 {*//*"renderTooltip"*//*?}else{*/"renderTooltipInternal"/*?}*/,
+    @ModifyVariable(method = /*? > 1.21 {*/"renderTooltip"/*?}else{*//*"renderTooltipInternal"*//*?}*/,
             at = @At("HEAD"), index = 2, argsOnly = true)
     private List<ClientTooltipComponent> wrapLines(List<ClientTooltipComponent> original) {
         ArrayList<ClientTooltipComponent> components = new ArrayList<>();
@@ -58,7 +58,7 @@ public abstract class Tooltips {
         return components;
     }
 
-    @WrapOperation(method = /*? > 1.21 {*//*"renderTooltip"*//*?}else{*/"renderTooltipInternal"/*?}*/,
+    @WrapOperation(method = /*? > 1.21 {*/"renderTooltip"/*?}else{*//*"renderTooltipInternal"*//*?}*/,
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;positionTooltip(IIIIII)Lorg/joml/Vector2ic;"))
     private Vector2ic reposition(ClientTooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
         Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, mouseX, mouseY, width, height);

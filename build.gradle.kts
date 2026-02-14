@@ -39,7 +39,6 @@ loom {
 
     runConfigs.all {
         if (environment == "client") ideConfigGenerated(true)
-        runDir = "../../run"
     }
 
     accessWidenerPath = file("../../src/main/resources/$accessWidener")
@@ -53,7 +52,7 @@ loom {
             }.files.first()
 
             configureEach {
-                //vmArg("-javaagent:$mixinJarFile")
+                vmArg("-javaagent:$mixinJarFile")
                 vmArg("-XX:+AllowEnhancedClassRedefinition")
                 vmArg("-DMC_DEBUG_ENABLED")
                 vmArg("-DMC_DEBUG_HOTKEYS")
