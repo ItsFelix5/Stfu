@@ -20,7 +20,7 @@ import java.util.Queue;
 public class DisableParticles {
     @Shadow @Final private Map<ParticleRenderType, Queue<Particle>> particles;
 
-    @Inject(method = "render", at = @At("HEAD"), cancellable = true)
+    @Inject(method = {"render", "extract"}, at = @At("HEAD"), cancellable = true)
     private void renderParticles(CallbackInfo ci) {
         if (particles.isEmpty() || Config.get().disableParticles) ci.cancel();
     }

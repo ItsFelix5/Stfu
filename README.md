@@ -23,7 +23,7 @@ TODO
 * Set the default LAN port to 25565
 * [**Full list**](https://github.com/ItsFelix5/Stfu/wiki/Features)
 
-Only 1.20.1 and 1.21.8-11 are actively supported at this time, older versions might work but will have some missing features or bugs.
+Only 1.20.1, 1.21.1, 1.21.8-11 and 26.1 are actively supported at this time, older versions might work but will have some missing features or bugs.
 
 Looking for more client mods? Check out [Camera Tweaks](https://modrinth.com/mod/cameratweaks)!
 

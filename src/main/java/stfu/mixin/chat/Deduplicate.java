@@ -1,7 +1,10 @@
 package stfu.mixin.chat;
 
 import net.minecraft.client.gui.components.ChatComponent;
-import net.minecraft.client.GuiMessage;
+//? if > 1.21.11 {
+/*import net.minecraft.client.multiplayer.chat.GuiMessage;
+*///? } else
+ import net.minecraft.client.GuiMessage;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.Component;
@@ -28,7 +31,7 @@ public abstract class Deduplicate {
     protected abstract void /*? >1.21{*/refreshTrimmedMessages/*?}else{*//*refreshTrimmedMessage*//*?}*/();
 
     @ModifyVariable(
-            method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
+            method = {"addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V", "Lnet/minecraft/client/gui/components/ChatComponent;addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V"},
             at = @At("HEAD"),
             argsOnly = true
     )

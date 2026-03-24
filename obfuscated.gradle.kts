@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.2.21"
     id("com.google.devtools.ksp") version "2.3.3"
     `maven-publish`
-    id("net.fabricmc.fabric-loom")
+    id("fabric-loom")
     id("me.modmuss50.mod-publish-plugin")
     id("dev.kikugie.fletching-table.fabric") version "+"
 }
@@ -16,17 +16,18 @@ repositories {
         forRepository { maven(url) { name = alias } }
         filter { groups.forEach(::includeGroup) }
     }
+    maven("https://maven.isxander.dev/releases")
     strictMaven("https://maven.terraformersmc.com/", "Terraformers MC", "com.terraformersmc")
-    mavenCentral()
 }
 
 dependencies {
     minecraft("com.mojang:minecraft:${property("deps.minecraft")}")
-    implementation("net.fabricmc:fabric-loader:+")
+    mappings(loom.officialMojangMappings())
+    modImplementation("net.fabricmc:fabric-loader:+")
 
-    implementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
-    implementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
-    implementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
+    modImplementation("dev.isxander:yet-another-config-lib:${property("deps.yacl")}-fabric")
+    modImplementation("com.terraformersmc:modmenu:${property("deps.modmenu")}")
 }
 
 val accessWidener = stonecutter.current.version + ".accesswidener"
@@ -76,8 +77,10 @@ fletchingTable {
 
 java {
     withSourcesJar()
-    targetCompatibility = JavaVersion.VERSION_25
-    sourceCompatibility = JavaVersion.VERSION_25
+    val java = if (stonecutter.eval(property("deps.minecraft") as String, ">=1.20.5"))
+        JavaVersion.VERSION_21 else JavaVersion.VERSION_17
+    targetCompatibility = java
+    sourceCompatibility = java
 }
 
 tasks {
@@ -92,14 +95,15 @@ tasks {
 
     register<Copy>("buildAndCollect") {
         group = "build"
-        from(jar.map { it.archiveFile })
+        from(remapJar.map { it.archiveFile }, remapSourcesJar.map { it.archiveFile })
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
     }
 }
 
 publishMods {
-    file = tasks.jar.get().archiveFile
+    file = tasks.remapJar.get().archiveFile
+    additionalFiles.from(tasks.remapSourcesJar.get().archiveFile)
     displayName = "${property("mod.version")} for ${stonecutter.current.version}"
     changelog = rootProject.file("CHANGELOG.md").readText()
     type = STABLE
@@ -120,15 +124,15 @@ publishMods {
         optional("modmenu")
     }
 
-//    curseforge {
-//        projectId = "1111802"
-//        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-//        minecraftVersions.addAll((property("version.targets") as String).split(" "))
-//
-//        requires("fabric-api")
-//        requires("yacl")
-//        optional("modmenu")
-//    }
+    curseforge {
+        projectId = "1111802"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.addAll((property("version.targets") as String).split(" "))
+
+        requires("fabric-api")
+        requires("yacl")
+        optional("modmenu")
+    }
 }
 
 publishing {

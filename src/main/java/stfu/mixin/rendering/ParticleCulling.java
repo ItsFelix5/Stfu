@@ -1,5 +1,5 @@
 //? <= 1.21.8 {
-/*package stfu.mixin.rendering;
+package stfu.mixin.rendering;
 
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,4 +22,4 @@ public class ParticleCulling {
         return client.levelRenderer.cullingFrustum.isVisible(instance.getBoundingBox());
     }
 }
-*///?}
+//?}

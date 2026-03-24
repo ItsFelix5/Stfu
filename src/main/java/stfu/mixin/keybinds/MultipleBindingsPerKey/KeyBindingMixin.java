@@ -1,5 +1,5 @@
 //? <= 1.21.8 {
-/*package stfu.mixin.keybinds.MultipleBindingsPerKey;
+package stfu.mixin.keybinds.MultipleBindingsPerKey;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
@@ -45,4 +45,4 @@ public class KeyBindingMixin {
         return KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent((InputConstants.Key) key, k -> new HashSet<>()).add((KeyMapping) value);
     }
 }
-*///?}
+//?}

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.audio.Channel;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client./*?if <26.1{*/keybinding/*?}else >>'.'*//*keymapping*/.v1.KeyBindingHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -24,19 +24,19 @@ public class Main implements ModInitializer {
             "key.stfu.narrator_hotkey",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
-            /*? < 1.21.9 {*//*"key.categories.misc"*//*?} else {*/KeyMapping.Category.MISC/*?}*/
+            /*? < 1.21.9 {*/"key.categories.misc"/*?} else {*//*KeyMapping.Category.MISC*//*?}*/
     ));
     private static final KeyMapping SKIP_MUSIC_KEY = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.stfu.skip_music",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
-            /*? < 1.21.9 {*//*"key.categories.misc"*//*?} else {*/KeyMapping.Category.MISC/*?}*/
+            /*? < 1.21.9 {*/"key.categories.misc"/*?} else {*//*KeyMapping.Category.MISC*//*?}*/
     ));
     private static final KeyMapping TOGGLE_MUSIC_KEY = KeyBindingHelper.registerKeyBinding(new KeyMapping(
             "key.stfu.toggle_music",
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
-            /*? < 1.21.9 {*//*"key.categories.misc"*//*?} else {*/KeyMapping.Category.MISC/*?}*/
+            /*? < 1.21.9 {*/"key.categories.misc"/*?} else {*//*KeyMapping.Category.MISC*//*?}*/
     ));
     public static boolean musicPaused = false;
 
@@ -45,6 +45,7 @@ public class Main implements ModInitializer {
         Config.HANDLER.load();
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (SKIP_MUSIC_KEY.consumeClick()) {
+                //$ overlay_message '"msg.stfu.skip_music"'
                 client.player.displayClientMessage(Component.translatable("msg.stfu.skip_music"), true);
                 client.getMusicManager().stopPlaying();
                 client.getMusicManager().startPlaying(client.getSituationalMusic());
@@ -56,11 +57,13 @@ public class Main implements ModInitializer {
                     for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : client.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
                         if (entry.getKey().getSource() == SoundSource.MUSIC) entry.getValue().execute(Channel::pause);
                     }
+                    //$ overlay_message '"msg.stfu.pause_music"'
                     client.player.displayClientMessage(Component.translatable("msg.stfu.pause_music"), true);
                 } else {
                     for (Map.Entry<SoundInstance, ChannelAccess.ChannelHandle> entry : client.getSoundManager().soundEngine.instanceToChannel.entrySet()) {
                         if (entry.getKey().getSource() == SoundSource.MUSIC) entry.getValue().execute(Channel::unpause);
                     }
+                    //$ overlay_message '"msg.stfu.resume_music"'
                     client.player.displayClientMessage(Component.translatable("msg.stfu.resume_music"), true);
                 }
             }

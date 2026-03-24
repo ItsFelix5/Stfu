@@ -10,7 +10,7 @@ import stfu.config.Config;
 
 @Mixin(Minecraft.class)
 public abstract class DisableTextureAnimation {
-    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/texture/TextureManager;tick()V"))
+    @WrapOperation(method = /*?if <26.1{*/"tick"/*?}else >>','*//*"runTick"*/, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/texture/TextureManager;tick()V"))
     private void shouldTickTextures(TextureManager instance, Operation<Void> original) {
         if (Config.get().animateTextures) original.call(instance);
     }

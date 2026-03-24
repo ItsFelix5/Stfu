@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(MouseHandler.class)
 public class MouseHandlerMixin {
-    @Redirect(method = {"onPress", "onScroll", "handleAccumulatedMovement"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;getOverlay()Lnet/minecraft/client/gui/screens/Overlay;"))
+    @Redirect(method = {"onButton", "onPress", "onScroll", "handleAccumulatedMovement"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;getOverlay()Lnet/minecraft/client/gui/screens/Overlay;"))
     private Overlay getOverlay(Minecraft instance) {
         return null;
     }
