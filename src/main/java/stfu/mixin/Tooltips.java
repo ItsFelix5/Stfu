@@ -2,7 +2,7 @@ package stfu.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTextTooltip;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
@@ -24,12 +24,12 @@ import java.util.Optional;
 
 import static stfu.Main.client;
 
-@Mixin(GuiGraphics.class)
+@Mixin(GuiGraphicsExtractor.class)
 @DisableIf({"legacy", "legendarytooltips"})
 public abstract class Tooltips {
     @Shadow public abstract int guiWidth();
 
-    @ModifyVariable(method = /*? > 1.21.11 {*//*"tooltip"*//*? } else >1.21.1 {*//*"renderTooltip"*//*?}else{*/"renderTooltipInternal"/*?}*/,
+    @ModifyVariable(method = /*? > 1.21.11 {*/"tooltip"/*? } else >1.21.1 {*//*"renderTooltip"*//*?}else{*//*"renderTooltipInternal"*//*?}*/,
             at = @At("HEAD"), index = 2, argsOnly = true)
     private List<ClientTooltipComponent> wrapLines(List<ClientTooltipComponent> original) {
         ArrayList<ClientTooltipComponent> components = new ArrayList<>();
@@ -58,7 +58,7 @@ public abstract class Tooltips {
         return components;
     }
 
-    @WrapOperation(method = /*? > 1.21.11 {*//*"tooltip"*//*? } else > 1.21.1 {*//*"renderTooltip"*//*?}else{*/"renderTooltipInternal"/*?}*/,
+    @WrapOperation(method = /*? > 1.21.11 {*/"tooltip"/*? } else > 1.21.1 {*//*"renderTooltip"*//*?}else{*//*"renderTooltipInternal"*//*?}*/,
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;positionTooltip(IIIIII)Lorg/joml/Vector2ic;"))
     private Vector2ic reposition(ClientTooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
         Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, mouseX, mouseY, width, height);

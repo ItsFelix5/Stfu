@@ -120,15 +120,15 @@ publishMods {
         optional("modmenu")
     }
 
-//    curseforge {
-//        projectId = "1111802"
-//        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-//        minecraftVersions.addAll((property("version.targets") as String).split(" "))
-//
-//        requires("fabric-api")
-//        requires("yacl")
-//        optional("modmenu")
-//    }
+    curseforge {
+        projectId = "1111802"
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.addAll((property("version.targets") as String).split(" "))
+
+        requires("fabric-api")
+        requires("yacl")
+        optional("modmenu")
+    }
 }
 
 publishing {

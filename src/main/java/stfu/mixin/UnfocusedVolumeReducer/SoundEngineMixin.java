@@ -1,5 +1,5 @@
 //? > 1.21.8 {
-/*package stfu.mixin.UnfocusedVolumeReducer;
+package stfu.mixin.UnfocusedVolumeReducer;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -17,4 +17,4 @@ public class SoundEngineMixin {
         return original.call(f, soundSource) * (!client.isWindowActive()? Config.get().unfocusedVolume : 1F);
     }
 }
-*///?}
+//?}

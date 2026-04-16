@@ -15,20 +15,20 @@ import stfu.config.Config;
 
 import static stfu.Main.client;
 
-@Mixin(/*?if <26.1{*/Minecraft/*?}else >>'.'*//*Window*/.class)
+@Mixin(/*?if <26.1{*//*Minecraft*//*?}else >>'.'*/Window.class)
 public class WindowActiveListenerMixin {
     /*?if <26.1{*/
-    @Inject(method = "setWindowActive", at = @At("TAIL"))
+    /*@Inject(method = "setWindowActive", at = @At("TAIL"))
     private void setWindowActive(boolean bl, CallbackInfo ci) {
         if(client.getSoundManager() != null)
         //? if >1.21.10 {
-            /*client.getSoundManager().refreshCategoryVolume(SoundSource.MASTER);
-        *///? }else
-            client.getSoundManager().updateSourceVolume(SoundSource.MASTER/*? if <=1.21.8{*/, client.options.getSoundSourceVolume(SoundSource.MASTER) * (!bl? Config.get().unfocusedVolume : 1F)/*?}*/);
-    }/*?}else{*/
-    /*@Inject(method = "onFocus", at = @At("TAIL"))
+            client.getSoundManager().refreshCategoryVolume(SoundSource.MASTER);
+        //? }else
+            //client.getSoundManager().updateSourceVolume(SoundSource.MASTER/^? if <=1.21.8{^//^, client.options.getSoundSourceVolume(SoundSource.MASTER) * (!bl? Config.get().unfocusedVolume : 1F)^//^?}^/);
+    }*//*?}else{*/
+    @Inject(method = "onFocus", at = @At("TAIL"))
     private void onFocus(long handle, boolean focused, CallbackInfo ci) {
         client.getSoundManager().refreshCategoryVolume(SoundSource.MASTER);
     }
-    *//*?}*/
+    /*?}*/
 }

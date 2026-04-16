@@ -8,11 +8,11 @@ import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class Config {
     public static final ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
-            .id(/*? > 1.21 {*/ResourceLocation.fromNamespaceAndPath/*?}else{*//*new ResourceLocation*//*?}*/("stfu", "config"))
+            .id(/*? > 1.21 {*/Identifier.fromNamespaceAndPath/*?}else{*//*new Identifier*//*?}*/("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("stfu.json5"))
                     .setJson5(true)
@@ -84,10 +84,10 @@ public class Config {
     @SerialEntry
     public boolean disableWorldAdvice = true;
 
-    /*? <1.21.11 {*/@AutoGen(category = basic)
+    /*? <1.21.11 {*//*@AutoGen(category = basic)
     @Boolean
     @SerialEntry
-    public boolean fixModelGaps = true;/*? } */
+    public boolean fixModelGaps = true;*//*? } */
 
     @AutoGen(category = basic)
     @Boolean

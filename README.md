@@ -1,11 +1,9 @@
 # Stfu
-### A mod to fix some annoyances!
 <span>
 <a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_fabricapi.svg"></a>
 <a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_modmenu.svg"></a>
 <a href="https://modrinth.com/mod/yacl"><img alt="Requires YACL" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/1.21.5/.github/badges/requires_YACL.svg"></a>
 </span>
-TODO
 
 #### Current changes:
 * Improved performance and loading times

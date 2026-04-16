@@ -2,7 +2,7 @@ package stfu.mixin.ThreadPriorities;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft/*? >1.21.9 {*//*.util*//*?}*/.Util;
+import net.minecraft/*? >1.21.9 {*/.util/*?}*/.Util;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import stfu.config.Config;

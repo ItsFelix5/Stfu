@@ -11,10 +11,10 @@ import stfu.config.Config;
 import net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket;
 import org.objectweb.asm.Opcodes;
 //? > 1.21.1 {
-//import net.minecraft.network.protocol.game.ClientboundRecipeBookAddPacket;
+import net.minecraft.network.protocol.game.ClientboundRecipeBookAddPacket;
 //?} else {
-import net.minecraft.world.item.crafting.Recipe;
-//?}
+/*import net.minecraft.world.item.crafting.Recipe;
+*///?}
 
 @Mixin(ClientPacketListener.class)
 abstract class DisableToasts {
@@ -24,28 +24,28 @@ abstract class DisableToasts {
         return true;
     }
     //?} else {
-/*  @Redirect(method = "handleServerData", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;enforcesSecureChat()Z", ordinal = 1))
+  /*@Redirect(method = "handleServerData", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;enforcesSecureChat()Z", ordinal = 1))
     private boolean isSecureChatEnforced(ClientboundServerDataPacket instance) {
         return true;
     }
 *///?}
 //? > 1.21.1 {
-    /*@Redirect(
+    @Redirect(
             method = "handleRecipeBookAdd",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/network/protocol/game/ClientboundRecipeBookAddPacket$Entry;notification()Z")
     )
     private boolean disableRecipeToasts(ClientboundRecipeBookAddPacket.Entry instance) {
         return Config.get().recipeToasts && instance.notification();
-    }*/
+    }
     //?} else {
-    @Redirect(
+    /*@Redirect(
             method = "method_34011",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/crafting/Recipe;showNotification()Z")
     )
     private boolean disableRecipeToasts(Recipe<?> instance) {
         return Config.get().recipeToasts && instance.showNotification();
     }
-//?}
+*///?}
 
     @Inject(method = "handleUpdateAdvancementsPacket", at = @At("HEAD"), cancellable = true)
     private void disableAdvancementToasts(ClientboundUpdateAdvancementsPacket packet, CallbackInfo ci) {

@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.At;
 public class NoReusedModifierKeyWarning {
     @WrapOperation(method = "refreshEntry", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;isUnbound()Z"))
     private boolean shutReusedModifierKeys(KeyMapping instance, Operation<Boolean> original) {
-        return original.call(instance) || instance.getCategory().equals(/*? < 1.21.9 {*/KeyMapping.CATEGORY_CREATIVE/*?} else {*//*KeyMapping.Category.CREATIVE*//*?}*/);
+        return original.call(instance) || instance.getCategory().equals(/*? < 1.21.9 {*//*KeyMapping.CATEGORY_CREATIVE*//*?} else {*/KeyMapping.Category.CREATIVE/*?}*/);
     }
 
     @WrapOperation(method = "refreshEntry", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;same(Lnet/minecraft/client/KeyMapping;)Z"))
     private boolean shutReusedModifierKeys(KeyMapping instance, KeyMapping other, Operation<Boolean> original) {
-        return original.call(instance, other) && !other.getCategory().equals(/*? < 1.21.9 {*/KeyMapping.CATEGORY_CREATIVE/*?} else {*//*KeyMapping.Category.CREATIVE*//*?}*/)
+        return original.call(instance, other) && !other.getCategory().equals(/*? < 1.21.9 {*//*KeyMapping.CATEGORY_CREATIVE*//*?} else {*/KeyMapping.Category.CREATIVE/*?}*/)
                 && !(instance.getCategory().equals(other.getCategory()) && instance.isDefault() && other.isDefault());
     }
 }

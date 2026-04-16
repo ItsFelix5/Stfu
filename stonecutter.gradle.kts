@@ -1,11 +1,11 @@
 plugins {
     id("dev.kikugie.stonecutter")
-    id("fabric-loom") version "+" apply false
-    id("net.fabricmc.fabric-loom") version "+" apply false
+    id("fabric-loom") version "1.16-SNAPSHOT" apply false
+    id("net.fabricmc.fabric-loom") version "1.16-SNAPSHOT" apply false
     id("me.modmuss50.mod-publish-plugin") version "+" apply false
 }
 
-stonecutter active "1.21.1"
+stonecutter active "26.1"
 
 stonecutter parameters {
     replacements.string {

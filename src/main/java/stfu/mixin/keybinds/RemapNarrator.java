@@ -11,6 +11,6 @@ import stfu.Main;
 public abstract class RemapNarrator {
     @ModifyConstant(method = "keyPress", constant = @Constant(intValue = GLFW.GLFW_KEY_B))
     private int shutNarrator(int key) {
-        return Main.NARRATOR_KEY.key.getValue();
+        return Main.NARRATOR_KEY.key.getValue() == -1? -2 : Main.NARRATOR_KEY.key.getValue();
     }
 }

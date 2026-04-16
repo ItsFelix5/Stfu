@@ -1,8 +1,8 @@
-/*? <1.21.11 {*/package stfu.mixin.rendering.ModelGaps;
+/*? <1.21.11 {*//*package stfu.mixin.rendering.ModelGaps;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,11 +12,11 @@ import stfu.config.Config;
 
 @Mixin(TextureAtlasSprite.class)
 public abstract class SpriteMixin {
-    @Shadow @Final private ResourceLocation atlasLocation;
-    @Unique private static final ResourceLocation blockAtlas = /*? > 1.21 {*/ResourceLocation.fromNamespaceAndPath/*?}else{*//*new ResourceLocation*//*?}*/("minecraft", "textures/atlas/blocks.png");
+    @Shadow @Final private Identifier atlasLocation;
+    @Unique private static final Identifier blockAtlas = /^? > 1.21 {^/Identifier.fromNamespaceAndPath/^?}else{^//^new Identifier^//^?}^/("minecraft", "textures/atlas/blocks.png");
 
     @ModifyReturnValue(method = "uvShrinkRatio", at = @At("RETURN"))
     private float uvShrinkRatio(float original) {
         return Config.get().fixModelGaps && atlasLocation.equals(blockAtlas)? 0 : original;
     }
-}/*?}*/
+}*//*?}*/

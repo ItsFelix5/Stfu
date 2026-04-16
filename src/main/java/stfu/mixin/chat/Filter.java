@@ -1,10 +1,10 @@
 package stfu.mixin.chat;
 
 //? >1.21.11 {
-/*import net.minecraft.client.multiplayer.chat.GuiMessageSource;
+import net.minecraft.client.multiplayer.chat.GuiMessageSource;
 import net.minecraft.client.multiplayer.chat.GuiMessageTag;
-*///? } else
-import net.minecraft.client.GuiMessageTag;
+//? } else
+//import net.minecraft.client.GuiMessageTag;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.network.chat.MessageSignature;
 import net.minecraft.network.chat.MutableComponent;
@@ -18,8 +18,8 @@ import stfu.config.Config;
 
 @Mixin(ChatComponent.class)
 public abstract class Filter {
-    @Inject(method = {"addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V", "Lnet/minecraft/client/gui/components/ChatComponent;addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V"}, at = @At("HEAD"), cancellable = true)
-    private void filter(Component message, MessageSignature messageSignature, /*? >1.21.11 >>'GuiMessageTag'*//*GuiMessageSource source, */GuiMessageTag tag, CallbackInfo ci) {
+    @Inject(method = {"addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V", "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V"}, at = @At("HEAD"), cancellable = true)
+    private void filter(Component message, MessageSignature messageSignature, /*? >1.21.11 >>'GuiMessageTag'*/GuiMessageSource source, GuiMessageTag tag, CallbackInfo ci) {
         if (!(message instanceof MutableComponent mutable && mutable.getContents() instanceof TranslatableContents translatable)) return;
 
         if (translatable.getKey().startsWith("chat.type.advancement")) {

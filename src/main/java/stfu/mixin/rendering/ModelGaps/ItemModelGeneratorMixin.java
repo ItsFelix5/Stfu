@@ -1,4 +1,4 @@
-/*? <1.21.11 {*/package stfu.mixin.rendering.ModelGaps;
+/*? <1.21.11 {*//*package stfu.mixin.rendering.ModelGaps;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -43,9 +43,9 @@ public class ItemModelGeneratorMixin {
     }
 
     @WrapOperation(method = "createOrExpandSpan", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/model/ItemModelGenerator$Span;getAnchor()I"))
-    private /*? > 1.21 {*/ static/*?}*/ int createOrExpandSpan(ItemModelGenerator.Span instance, Operation<Integer> original, @Local(argsOnly = true) ItemModelGenerator.SpanFacing side, @Local(argsOnly = true, ordinal = 0) int i, @Local(argsOnly = true, ordinal = 1) int j) {
+    private /^? > 1.21 {^/ static/^?}^/ int createOrExpandSpan(ItemModelGenerator.Span instance, Operation<Integer> original, @Local(argsOnly = true) ItemModelGenerator.SpanFacing side, @Local(argsOnly = true, ordinal = 0) int i, @Local(argsOnly = true, ordinal = 1) int j) {
         if (Config.get().fixModelGaps && instance.getMax() != (side.isHorizontal() ? i : j) - 1) return -1;
         return original.call(instance);
     }
 }
-/*? } */
+*//*? } */
