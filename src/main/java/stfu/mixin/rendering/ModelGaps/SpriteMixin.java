@@ -17,6 +17,6 @@ public abstract class SpriteMixin {
 
     @ModifyReturnValue(method = "uvShrinkRatio", at = @At("RETURN"))
     private float uvShrinkRatio(float original) {
-        return Config.get().fixModelGaps && atlasLocation.equals(blockAtlas)? 0 : original;
+        return Config.get().fixModelGaps && atlasLocation != null && atlasLocation.equals(blockAtlas)? 0 : original;
     }
 }*//*?}*/

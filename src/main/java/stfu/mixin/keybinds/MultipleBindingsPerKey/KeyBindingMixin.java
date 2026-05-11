@@ -3,7 +3,9 @@
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -16,6 +18,13 @@ import java.util.Set;
 
 @Mixin(KeyMapping.class)
 public class KeyBindingMixin {
+    @Shadow
+    public InputConstants.Key key;
+
+    @Shadow
+    @Final
+    private static Map<String, KeyMapping> ALL;
+
     @Inject(method = "click", at = @At("HEAD"), order = 1001, cancellable = true)
     private static void onKeyPressed(InputConstants.Key key, CallbackInfo ci) {
         ci.cancel();
@@ -28,21 +37,17 @@ public class KeyBindingMixin {
         KeybindHolder.KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.setDown(pressed));
     }
 
-    @Redirect(method = "resetMapping", at = @At(value = "INVOKE", target = "Ljava/util/Map;clear()V"))
-    private static void clearMap(Map<?, ?> instance) {
+    @Inject(method = "resetMapping", at = @At("HEAD"))
+    private static void clearMap(CallbackInfo ci) {
         KeybindHolder.KEY_TO_BINDINGS.clear();
+        for (KeyMapping keyMapping : ALL.values()) {
+            KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent(keyMapping.key, unused -> new HashSet<>()).add(keyMapping);
+        }
     }
 
-    @Redirect(method = "resetMapping", at = @At(value = "INVOKE", target = "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"))
-    private static <K, V> V addBinding(Map<K, V> instance, K k, V v) {
-        KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent((InputConstants.Key) k, unused -> new HashSet<>()).add((KeyMapping) v);
-        return v;
-    }
-
-    @Redirect(method = "<init>(Ljava/lang/String;Lcom/mojang/blaze3d/platform/InputConstants$Type;ILjava/lang/String;)V", at = @At(value = "INVOKE", target =
-            "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", ordinal = 1))
-    private Object add(Map<?, ?> instance, Object key, Object value) {
-        return KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent((InputConstants.Key) key, k -> new HashSet<>()).add((KeyMapping) value);
+    @Inject(method = "<init>(Ljava/lang/String;Lcom/mojang/blaze3d/platform/InputConstants$Type;ILjava/lang/String;)V", at = @At("TAIL"))
+    private void add(String string, InputConstants.Type type, int i, String string2, CallbackInfo ci) {
+        KeybindHolder.KEY_TO_BINDINGS.computeIfAbsent(key, k -> new HashSet<>()).add((KeyMapping) (Object) this);
     }
 }
 *///?}
