@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
-@Mixin(Gui.class)
+@Mixin(/*?if<26.2{*//*Gui*//*?}else{*/net.minecraft.client.gui.Hud/*?}*/.class)
 public abstract class FixTitleSize {
     @Shadow public abstract Font getFont();
     @Shadow private @Nullable Component title;

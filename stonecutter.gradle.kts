@@ -5,7 +5,7 @@ plugins {
     id("me.modmuss50.mod-publish-plugin") version "+" apply false
 }
 
-stonecutter active "26.1"
+stonecutter active "26.2"
 
 stonecutter parameters {
     replacements.string {
